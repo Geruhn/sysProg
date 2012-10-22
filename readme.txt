@@ -17,15 +17,14 @@ Jedes Teilprojekt hat die Verzeichnisstruktur:
 
 Das Makefile im obersten Verzeichnis loescht alle shared libraries und erstellt alle neu.
 
+
+
 Aufbau des Makefiles
 	Definition der Variablen
 	
 	Targets zum Bauen des Tests
 	
 	Targets zum Erstellen der shared library
-	
-
-In der View "Make Targets" erscheinen die Targets der einzelnen Makefiles, die dann mit einem Doppelklick ausgefuehrt werden können.
 
 
 Aufbau der Targets
