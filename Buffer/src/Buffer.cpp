@@ -12,11 +12,14 @@
 
 Buffer::Buffer(char* source) {
 	bufferLength = 512;
-	posix_memalign((void**) &(this->leftSide),512,bufferLength );
-	posix_memalign((void**) &(this->rightSide),512,bufferLength );
 
 	leftSide = new char[bufferLength+1];
 	rightSide = new char[bufferLength+1];
+
+	//Speicher für die 2 Buffer holen
+	posix_memalign((void**) &(this->leftSide),512,bufferLength );
+	posix_memalign((void**) &(this->rightSide),512,bufferLength );
+
 	baseLeft= current = next = &leftSide[0];
 	baseRight = &rightSide[0];
 	isLeft = true;
@@ -27,7 +30,6 @@ Buffer::Buffer(char* source) {
 }
 
 Buffer::~Buffer() {
-
 	delete leftSide;
 	delete rightSide;
 }
@@ -35,16 +37,16 @@ Buffer::~Buffer() {
 char Buffer::getChar(){
 	current = next; //nimm das zuletzt als nächstes Zeichen gesetzt, als neues aktuelles Zeichen
 
-	if(true){
+	if((&current < &leftSide[0]) && (&current > &leftSide[511])){ //abfangen ob current außerhalb des Speichers der 2 buffer ist
 		if(current == baseRight + bufferLength){ //wenn wir uns im letzten Zeichen befinden an
-			fillBuffer();						// Anfang von anderem Array wechseln und Buffer füllen
+			isLeft = true;
+			fillBuffer();						//Linke Seite neu befüllen
 			next = baseLeft;
-			isLeft = !isLeft;
 		}
-		if(current == baseLeft + bufferLength){ //wenn wir uns im letzten Zeiche befinden an
-			fillBuffer();                      //Anfang von anderem Array wechseln und Buffer füllen
+		if(current == baseLeft + bufferLength){ //wenn wir uns im letzten Zeichen befinden an
+			isLeft = false;
+			fillBuffer();                      //Rechte Seite neu befüllen
 			next = baseRight;
-			isLeft = !isLeft;
 		}
 		else{
 			next++;							  //Aktuelles Zeichen befindet sich iwo mitten im Buffer
@@ -56,19 +58,16 @@ char Buffer::getChar(){
 
 void Buffer::ungetChar(){
 
-		if(current == baseRight){
+		if(current == baseRight){ //current steht am anfang von rechts
 			next = &leftSide[bufferLength];
 			isLeft = !isLeft;
-		}
-		else{
-			if( current == baseLeft){
+		}else if( current == baseLeft){ //current steht am anfang von links
 				next = &rightSide[bufferLength];
 				isLeft = !isLeft;
-			}
-			else{
-				next = next - 2;
-			}
+		}else{	//current steht irgendwo in der mitte
+				next = next--;		//current eine stelle zurückgestellt
 		}
+
 }
 
 
@@ -81,19 +80,11 @@ void Buffer::openFile(){
 
 
 void Buffer::fillBuffer(){
-	//int i, r;
-	openFile();
+
 	if(isLeft){
-		//for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
-		//		rightSide[i] = r;
-		//}
-		readVar = read(fd ,&leftSide,512);
-		int illl=0;
+		readVar = read(fd ,&leftSide,512);//evtl noch hochzählen also ein vielfaches von 512, für die nächsten 512 zeichen
 	}
 	else{
-		//for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
-		//	leftSide[i] = r;
-		//}
-		readVar = read(fd ,&rightSide,512);
+		readVar = read(fd ,&rightSide,512);//siehe oben
 	}
 }

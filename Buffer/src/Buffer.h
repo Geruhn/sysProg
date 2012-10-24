@@ -34,6 +34,7 @@ private:
 	int readVar;
 	unsigned int bufferLength;
 
+
 public:
 	Buffer(char* source);
 	virtual ~Buffer();
