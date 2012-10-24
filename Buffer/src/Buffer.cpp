@@ -75,7 +75,6 @@ void Buffer::ungetChar(){
 void Buffer::openFile(){
 
 	fd = open(sourceFile, O_DIRECT);
-	stream = fdopen(fd, "r+");
 	readVar = read(fd ,&leftSide,512);
 
 }
@@ -88,10 +87,13 @@ void Buffer::fillBuffer(){
 		//for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
 		//		rightSide[i] = r;
 		//}
+		readVar = read(fd ,&leftSide,512);
+		int illl=0;
 	}
 	else{
 		//for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
 		//	leftSide[i] = r;
 		//}
+		readVar = read(fd ,&rightSide,512);
 	}
 }

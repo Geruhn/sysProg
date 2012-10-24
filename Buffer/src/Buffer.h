@@ -33,15 +33,14 @@ private:
 	int fd;
 	int readVar;
 	unsigned int bufferLength;
-	void openFile();
-	void fillBuffer();
-
 
 public:
 	Buffer(char* source);
 	virtual ~Buffer();
 	char getChar();
 	void ungetChar();
+	void openFile();
+	void fillBuffer();
 };
 
 #endif /* BUFFER_H_ */
