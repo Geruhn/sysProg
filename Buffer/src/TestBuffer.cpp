@@ -4,7 +4,8 @@
 int main(int argc, char **argv) {
 
 	Buffer*  buffer;
-
-	buffer = new Buffer();
+	char string[] = "/home/max/myfile.txt";
+	buffer = new Buffer(string);
+	buffer->getChar();
 
 }

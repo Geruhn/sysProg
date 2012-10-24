@@ -14,6 +14,7 @@
 //#include <fildes.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 
 
@@ -30,12 +31,14 @@ private:
 	bool isLeft;
 	FILE* stream;
 	int fd;
+	int readVar;
 	unsigned int bufferLength;
 	void openFile();
 	void fillBuffer();
 
+
 public:
-	Buffer(char *sourceFile);
+	Buffer(char* source);
 	virtual ~Buffer();
 	char getChar();
 	void ungetChar();

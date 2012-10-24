@@ -9,15 +9,18 @@
 #include "Buffer.h"
 
 
-Buffer::Buffer(char *source) {
 
+Buffer::Buffer(char* source) {
 	bufferLength = 512;
+	posix_memalign((void**) &(this->leftSide),512,bufferLength );
+	posix_memalign((void**) &(this->rightSide),512,bufferLength );
+
 	leftSide = new char[bufferLength+1];
 	rightSide = new char[bufferLength+1];
 	baseLeft= current = next = &leftSide[0];
 	baseRight = &rightSide[0];
 	isLeft = true;
-
+	readVar = 0;
 	stream = 0;
 	fd = 0;
 	sourceFile = source;
@@ -73,20 +76,22 @@ void Buffer::openFile(){
 
 	fd = open(sourceFile, O_DIRECT);
 	stream = fdopen(fd, "r+");
+	readVar = read(fd ,&leftSide,512);
+
 }
 
 
 void Buffer::fillBuffer(){
-	int i, r;
+	//int i, r;
 	openFile();
 	if(isLeft){
-		for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
-				rightSide[i] = r;
-		}
+		//for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
+		//		rightSide[i] = r;
+		//}
 	}
 	else{
-		for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
-			leftSide[i] = r;
-		}
+		//for (i = 0; ((r = getc(stream)) != -1 && i < bufferLength); i++){
+		//	leftSide[i] = r;
+		//}
 	}
 }
