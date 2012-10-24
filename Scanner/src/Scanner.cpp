@@ -15,3 +15,5 @@ Scanner::Scanner() {
 Scanner::~Scanner() {
 	// TODO Auto-generated destructor stub
 }
+
+

@@ -14,14 +14,14 @@
         </df>
       </df>
       <df name="Buffer">
-        <df name="debug">
-        </df>
-        <df name="lib">
-        </df>
-        <df name="src">
+        <df name="Buffer">
           <in>Buffer.cpp</in>
           <in>Buffer.h</in>
           <in>TestBuffer.cpp</in>
+        </df>
+        <df name="debug">
+        </df>
+        <df name="lib">
         </df>
       </df>
       <df name="Scanner">
@@ -80,10 +80,6 @@
         </ccTool>
       </item>
       <item path="Automat/src/TestAutomat.cpp" ex="true" tool="1" flavor2="0">
-      </item>
-      <item path="Buffer/src/Buffer.h" ex="true" tool="3" flavor2="0">
-      </item>
-      <item path="Buffer/src/TestBuffer.cpp" ex="true" tool="1" flavor2="0">
       </item>
       <item path="Scanner/src/Scanner.cpp" ex="true" tool="1" flavor2="0">
       </item>

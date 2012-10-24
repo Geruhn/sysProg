@@ -1,0 +1,9 @@
+	//  http://phoenix.goucher.edu/~kelliher/cs43/mar26.html
+	//  http://en.wikipedia.org/wiki/C_file_input/output
+	// http://en.cppreference.com/w/cpp/io/basic_fstream/open
+	// http://de.wikibooks.org/wiki/C-Programmierung:_Dateien
+	// http://www.stellingwerff.com/?page_id=13
+	// http://comments.gmane.org/gmane.comp.debugging.valgrind/12403
+	// http://www.delorie.com/gnu/docs/glibc/libc_31.html
+http://www.mail-archive.com/valgrind-users@lists.sourceforge.nemsg03794.html
+	// http://pubs.opengroup.org/onlinepubs/009695399/functions/posix_memalign.html
