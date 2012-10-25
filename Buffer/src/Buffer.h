@@ -42,6 +42,7 @@ public:
 	void ungetChar();
 	void openFile();
 	void fillBuffer();
+	void writeFile(char* outputFile);
 };
 
 #endif /* BUFFER_H_ */

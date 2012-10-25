@@ -37,7 +37,7 @@ Buffer::~Buffer() {
 char Buffer::getChar(){
 	current = next; //nimm das zuletzt als nächstes Zeichen gesetzt, als neues aktuelles Zeichen
 
-	if((&current < &leftSide[0]) && (&current > &leftSide[511])){ //abfangen ob current außerhalb des Speichers der 2 buffer ist
+	if(true){ //abfangen ob current außerhalb des Speichers der 2 buffer ist (&current < &leftSide[0]) && (&current > &leftSide[511])
 		if(current == baseRight + bufferLength){ //wenn wir uns im letzten Zeichen befinden an
 			isLeft = true;
 			fillBuffer();						//Linke Seite neu befüllen
@@ -65,7 +65,7 @@ void Buffer::ungetChar(){
 				next = &rightSide[bufferLength];
 				isLeft = !isLeft;
 		}else{	//current steht irgendwo in der mitte
-				next = next--;		//current eine stelle zurückgestellt
+				next--;		//current eine stelle zurückgestellt
 		}
 
 }
@@ -74,7 +74,18 @@ void Buffer::ungetChar(){
 void Buffer::openFile(){
 
 	fd = open(sourceFile, O_DIRECT);
-	readVar = read(fd ,&leftSide,512);
+	//readVar = read(fd ,&leftSide,512);
+
+}
+
+//
+//	schreibt den Buffer in eine Textdatei
+//	noch nicht ganz
+void Buffer::writeFile(char* outputFile){
+	int fdWr;
+	fdWr = creat(outputFile, O_DIRECT );
+	write(fdWr,&this->leftSide,512);
+	//close(fdWr);
 
 }
 
