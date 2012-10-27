@@ -8,15 +8,14 @@
 #ifndef BUFFER_H_
 #define BUFFER_H_
 
-//#include <io.h>
 #include <stdio.h>
 #include <fcntl.h>
-//#include <fildes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-
+//nur zum Testen eingefügt -Reinsch
+#include <iostream>
+using namespace std;
 
 class Buffer {
 
@@ -28,21 +27,25 @@ private:
 	char* leftSide;
 	char* rightSide;
 	char* sourceFile;
+	int fdRe;
+	int fdWr;
+	int eof;
+	bool isEOF;
 	bool isLeft;
-	FILE* stream;
-	int fd;
-	int readVar;
+	bool isFileOpen;
 	unsigned int bufferLength;
-
+	void fillBuffer();
+	void createFile();
+	void openFile();
 
 public:
 	Buffer(char* source);
 	virtual ~Buffer();
 	char getChar();
 	void ungetChar();
-	void openFile();
-	void fillBuffer();
-	void writeFile(char* outputFile);
+	void putChar(char c);
+	bool hasNext();
+
 };
 
 #endif /* BUFFER_H_ */
