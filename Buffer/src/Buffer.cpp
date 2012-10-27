@@ -48,7 +48,7 @@ char Buffer::getChar() {
 		fillBuffer();
 	}
 
-	if(*current == eof){ //Testen ob Datei zuende ist. - Reinsch
+	if(*current == eof){ //Testen ob Datei zuende ist. -Reinsch
 		isEOF = true;
 		return *current;
 		close(fdRe);
@@ -76,13 +76,13 @@ char Buffer::getChar() {
 }
 
 void Buffer::ungetChar() {
-	if (current == baseRight) { //current steht am anfang von rechts
+	if (current == baseRight) { //current steht am anfang von rechts -max
 		next = &leftSide[bufferLength - 1];
 		isLeft = true;
-	} else if (current == baseLeft) { //current steht am anfang von links
+	} else if (current == baseLeft) { //current steht am anfang von links -max
 		next = &rightSide[bufferLength - 1];
 		isLeft = false;
-	} else { //current steht irgendwo in der mitte
+	} else { //current steht irgendwo in der mitte -max
 		next--;
 	}
 	current = next;
@@ -171,4 +171,9 @@ void Buffer::putChar(char c){
 
 bool Buffer::hasNext(){
 	return !isEOF;
+}
+
+void Buffer::closeFiles(){ //schließt die geöffneten Dateien wieder -max
+	close(fdRe);
+	close(fdWr);
 }

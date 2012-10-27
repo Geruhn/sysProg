@@ -20,5 +20,6 @@ int main(int argc, char **argv) {
 			cout << zeichen;
 		}
 	}
+	inBuffer->closeFiles(); //Dateien wieder schließen --max
 	return 0;
 }

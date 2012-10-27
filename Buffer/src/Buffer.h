@@ -45,6 +45,7 @@ public:
 	void ungetChar();
 	void putChar(char c);
 	bool hasNext();
+	void closeFiles();
 
 };
 
