@@ -8,6 +8,9 @@
 #ifndef SCANNER_H_
 #define SCANNER_H_
 
+#include"Buffer.h"
+#include"Automat.h"
+
 class Scanner {
 public:
 	Scanner();

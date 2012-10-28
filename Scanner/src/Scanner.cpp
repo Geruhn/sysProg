@@ -23,8 +23,10 @@ void Scanner::runScanner(){
 		char stringInput[] = "../lib/inputFile.txt";
 		char stringOutput[] = "../lib/outputFile.txt";
 
-		Buffer* buffer = new Buffer(stringInput);
-		Automat* automat = new Automat();
+		Buffer* buffer;
+		buffer = new Buffer(stringInput);
+		Automat* automat;
+		automat = new Automat();
 
 		while(!buffer->isEOF){ //holt die Zeichen aus dem Buffer und gibt sie dem automaten -max
 			zeichen = buffer->getChar();
