@@ -7,13 +7,13 @@
 
 #ifndef STATE_H
 #define	STATE_H
-#include "../lib/autoContainer.h"
+#include "autoContainer.h"
 
 class State {
 public:
     State* mkState();
     virtual ~State();
-    virtual autoContainer* readChar(Automat* autom, char c) = 0;
+    virtual autoContainer* readChar(Automat* autom, char c);
 private:
     State();
 
