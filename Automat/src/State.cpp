@@ -10,9 +10,6 @@
 State::State() {
 }
 
-State::State(const State& orig) {
-}
-
 State::~State() {
 }
 
