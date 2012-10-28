@@ -16,6 +16,7 @@ int main(int argc, char **argv) {
 			cout << zeichen << endl;
 			x++;
 		}
+		//teststesttesestestset
 		else{
 			cout << zeichen;
 		}
