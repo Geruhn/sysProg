@@ -1,13 +1,15 @@
-/*
- * Automat.cpp
- *
+/* 
+ * File:   Automat.cpp
+ * Author: andy
+ * 
+ * Created on 26. Oktober 2012, 14:00
  */
 
 #include "Automat.h"
 
 
 Automat::Automat() {
-	// TODO Auto-generated constructor stub
+    this->current = new z0();
 
 }
 

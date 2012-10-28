@@ -1,17 +1,29 @@
 /*
  * Automat.h
  *
- *  Created on: Jul 5, 2012
- *      Author: knad0001
+ *  Created on: Oct 26, 2012
+ *      Author: Andy Perdana
  */
 
 #ifndef Automat_H_
 #define Automat_H_
 
+#include "State.h"
+
+
 class Automat {
+private:
+    State* current;
 public:
 	Automat();
 	virtual ~Automat();
+        read(char c) {
+            current->readChar(this, c);
+        }
+        
+        setState(State* nextState) {
+            current = nextState;                    
+        }
 };
 
 #endif /* Automat_H_ */
