@@ -4,8 +4,8 @@ int main(int argc, char **argv) {
 	int x = 1;
 	int ascii = 0;
 	char zeichen;
-	char stringInput[] = "/home/andy/sysProg/rnd.txt";
-	char stringOutput[] = "/home/andy/sysProg/writeFile.txt";
+	char stringInput[] = "/home/max/myFile.txt";
+	char stringOutput[] = "/home/max/writeFile.txt";
 	Buffer* inBuffer = new Buffer(stringInput);
 	Buffer* outBuffer = new Buffer(stringOutput);
 
