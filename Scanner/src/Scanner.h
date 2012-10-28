@@ -10,6 +10,7 @@
 
 #include"Buffer.h"
 #include"Automat.h"
+#include"Symboltable.h"
 
 class Scanner {
 public:

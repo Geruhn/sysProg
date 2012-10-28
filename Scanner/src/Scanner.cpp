@@ -18,19 +18,20 @@ Scanner::~Scanner() {
 
 void Scanner::runScanner(){
 
-	void* autoContainer; //zeiger
+		void* autoContainer; //zeiger auf den container, container enthält informationen über zeile,spalte identifier -max
 		char zeichen;
 		char stringInput[] = "../lib/inputFile.txt";
 		char stringOutput[] = "../lib/outputFile.txt";
 
-		Buffer* buffer;
-		buffer = new Buffer(stringInput);
-		Automat* automat;
-		automat = new Automat();
+		Buffer* buffer = new Buffer(stringInput);
+		Automat* automat = new Automat();
+		Symboltable* symbolTable = new Symboltable();
 
-		while(!buffer->isEOF){ //holt die Zeichen aus dem Buffer und gibt sie dem automaten -max
-			zeichen = buffer->getChar();
-			autoContainer = automat->readChar(zeichen);
+
+		while(!buffer->isEOF){ //holt die Zeichen aus dem Buffer und gibt sie dem automaten, anschließend wirds in die symboltabelle gepackt -max
+
+			autoContainer = automat->readChar(buffer->getChar()); //autocontainer enthält informationen über die zeile, spalte, identifier -max
+			//symbloTable->add(autoContainer);
 
 		}
 }
