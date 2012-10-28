@@ -50,8 +50,8 @@ char Buffer::getChar() {
 
 	if(*current == eof){ //Testen ob Datei zuende ist. -Reinsch
 		isEOF = true;
-		return *current;
 		close(fdRe);
+		return *current;
 	}
 
 	if (true) { //abfangen ob current außerhalb des Speichers der 2 buffer ist "!((&current < &leftSide[0]) && (&current > &leftSide[bufferLength - 1]))"
@@ -89,7 +89,7 @@ void Buffer::ungetChar() {
 }
 
 void Buffer::openFile() {
-	cout << endl << "in Buffer::openFile()" << endl;
+	//cout << endl << "in Buffer::openFile()" << endl;
 	fdRe = open(sourceFile, O_DIRECT);
 	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
@@ -101,14 +101,13 @@ void Buffer::createFile() {
 	fdWr = creat(sourceFile, O_DIRECT);
 	if(fdWr != -1){
 		isFileOpen = true;
-		return;
 	}else{
 		cout << endl << "!!! FEHLER BEIM ERSTELLEN DER DATEI FD: " << fdWr << " !!!" << endl;
 	}
 }
 
 void Buffer::fillBuffer() {
-	cout << endl << "in Buffer::fillBuffer()" << endl;
+	//cout << endl << "in Buffer::fillBuffer()" << endl;
 	if (isLeft) {
 		read(fdRe, baseLeft, 512); //evtl noch hochzählen also ein vielfaches von 512, für die nächsten 512 zeichen -Max
 	} else {
@@ -120,6 +119,7 @@ void Buffer::fillBuffer() {
 void Buffer::putChar(char c){
 	current = next;
 
+	//cout << *current << endl;
 	if(!isFileOpen){
 		createFile();
 	}
@@ -127,13 +127,13 @@ void Buffer::putChar(char c){
 	if(c == eof){ //Letztes Zeiches
 		*current = c; //Rest in Datei schreiben
 		if(isLeft){ //Schauen das Reihenfolge beim schreiben stimmt.
-			if(baseRight != NULL){
+			if(*baseRight != NULL){
 				write(fdWr, baseRight, bufferLength);
 			}
 			write(fdWr, baseLeft, bufferLength);
 		}
 		else{
-			if(baseLeft){
+			if(*baseLeft){
 				write(fdWr, baseLeft, bufferLength);
 			}
 			write(fdWr, baseRight, bufferLength);
@@ -147,25 +147,30 @@ void Buffer::putChar(char c){
 	else{
 		//Fülle so lange linkes Array bis es voll ist. Danach das Rechte. Ist das voll wird das Linke geschrieben usw.
 		if(current == baseLeft + (bufferLength -1)){
-			if(baseRight != NULL){ //das kein leeres Array in Datei geschrieben wird
+			if(*baseRight != NULL){ //das kein leeres Array in Datei geschrieben wird
 				write(fdWr, baseRight, bufferLength);
 			}
+			cout << "Linke Seite voll" << endl;
 			next = baseRight;
 			isLeft = false;
 			*current = c;
+			cout << *current;
 			return;
 		}
 		if(current == baseRight + (bufferLength -1)){
-			if(baseLeft != NULL){ //das kein leeres Array in Datei geschrieben wird
+			if(*baseLeft != NULL){ //das kein leeres Array in Datei geschrieben wird
 				write(fdWr, baseLeft, bufferLength);
 			}
+			cout << "Rechte Seite voll" << endl;
 			next = baseLeft;
 			isLeft = true;
 			*current = c;
+			cout << *current;
 			return;
 		}
 		next++;
 		*current = c;
+		cout <<  *current;
 	}
 }
 
