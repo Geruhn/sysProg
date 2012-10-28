@@ -127,13 +127,13 @@ void Buffer::putChar(char c){
 	if(c == eof){ //Letztes Zeiches
 		*current = c; //Rest in Datei schreiben
 		if(isLeft){ //Schauen das Reihenfolge beim schreiben stimmt.
-			if(*baseRight != NULL){
+			if(*(baseRight + (bufferLength - 1)) != NULL){
 				write(fdWr, baseRight, bufferLength);
 			}
 			write(fdWr, baseLeft, bufferLength);
 		}
 		else{
-			if(*baseLeft){
+			if(*(baseLeft + (bufferLength -1)) != NULL ){
 				write(fdWr, baseLeft, bufferLength);
 			}
 			write(fdWr, baseRight, bufferLength);
