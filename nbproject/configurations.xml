@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="84">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df name="sysProg" root=".">
+    <df name="Systemnahes Programmieren" root=".">
       <df name="Automat">
         <df name="debug">
         </df>
         <df name="lib">
         </df>
         <df name="src">
+          <df name="states">
+            <in>z0.cpp</in>
+            <in>z0.h</in>
+          </df>
           <in>Automat.cpp</in>
           <in>Automat.h</in>
+          <in>State.cpp</in>
+          <in>State.h</in>
           <in>TestAutomat.cpp</in>
         </df>
       </df>
@@ -22,6 +28,11 @@
         <df name="debug">
         </df>
         <df name="lib">
+        </df>
+        <df name="src">
+          <in>Buffer.cpp</in>
+          <in>Buffer.h</in>
+          <in>TestBuffer.cpp</in>
         </df>
       </df>
       <df name="Scanner">
