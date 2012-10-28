@@ -119,7 +119,6 @@ void Buffer::fillBuffer() {
 void Buffer::putChar(char c){
 	current = next;
 
-	//cout << *current << endl;
 	if(!isFileOpen){
 		createFile();
 	}
@@ -127,21 +126,26 @@ void Buffer::putChar(char c){
 	if(c == eof){ //Letztes Zeiches
 		*current = c; //Rest in Datei schreiben
 		if(isLeft){ //Schauen das Reihenfolge beim schreiben stimmt.
+			for(int i = 0; current != (baseLeft + (bufferLength - 1 - i)); i++){ //rest des Speichers mit Leerzeichen füllen
+				*(baseLeft + (bufferLength - 1 - i)) = 32;
+			}
 			if(*(baseRight + (bufferLength - 1)) != NULL){
 				write(fdWr, baseRight, bufferLength);
 			}
 			write(fdWr, baseLeft, bufferLength);
 		}
 		else{
+			for(int i = 0; current != (baseRight + (bufferLength - 1 - i)); i++){ //rest des Speichers mit Leerzeichen füllen
+							*(baseRight + (bufferLength - 1 - i)) = 32;
+			}
 			if(*(baseLeft + (bufferLength -1)) != NULL ){
 				write(fdWr, baseLeft, bufferLength);
 			}
 			write(fdWr, baseRight, bufferLength);
 		}
 		cout << endl << "Close File" << endl;
-		int test = close(fdWr);
-		if(test == -1){
-			cout << "fehler beim schließen der Datei";
+		if(close(fdWr) == -1){
+			cout << "Fehler beim schließen der Datei";
 		}
 	}
 	else{
