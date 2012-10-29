@@ -1,6 +1,6 @@
 /* 
  * File:   State.h
- * Author: andy
+ * Author: Andy Perdana
  *
  * Created on 26. Oktober 2012, 14:00
  */
@@ -8,14 +8,15 @@
 #ifndef STATE_H
 #define	STATE_H
 #include "autoContainer.h"
+class Automat;
 
 class State {
 public:
     State* mkState();
     virtual ~State();
-    virtual autoContainer* readChar(Automat* autom, char c);
-private:
+    autoContainer* readChar(Automat* autom, char c);
     State();
+private:
 
 };
 

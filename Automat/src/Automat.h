@@ -9,6 +9,7 @@
 #define Automat_H_
 
 
+#include "State.h"
 
 class Automat {
 private:
@@ -16,11 +17,11 @@ private:
 public:
 	Automat();
 	virtual ~Automat();
-        read(char c) {
+        void read(char c) {
             current->readChar(this, c);
         };
         
-        setState(State* nextState) {
+        void setState(State* nextState) {
             current = nextState;                    
         };
 };

@@ -13,7 +13,10 @@ SHAREDLIB = ../sharedlib
 ## darauf achten, dass letzte Zeile ohne "\" eingetragen wird
 
 OBJS = $(OBJDIR)/Automat.o \
-	$(OBJDIR)/TestAutomat.o  #\
+	$(OBJDIR)/TestAutomat.o  \
+	$(OBJDIR)/State.o  \
+	$(OBJDIR)/states/z0.o \
+	$(OBJDIR)/states/z1.o #\
 	#$(OBJDIR)/xx1.o \
 	#$(OBJDIR)/xxn.o
 
@@ -25,7 +28,7 @@ OBJSFORAUTOMATLIB =  \
 #
 #		Targets zum Bauen des Tests
 #
-
+.PHONY: clean cleanAutomat all
 
 makeTestAutomat: $(OBJS)
 	g++ -g $^ -o $(BINDIR)/AutomatTest
@@ -45,9 +48,10 @@ $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp
 # loeschen aller files im verzeichnis $(OBJDIR)
 
 cleanAutomat:
-	rm -rf $(OBJDIR)/*
-	rm -rf $(LIBDIR)/*
-	$(MAKE) TestAutomat
+	rm -f $(OBJDIR)/*
+	rm -f $(LIBDIR)/*
+	rm -f $(OBJDIR)/states/*
+	#$(MAKE) TestAutomat
 	
 	
 #
@@ -63,3 +67,6 @@ $(LIBDIR)/%.o :  $(SRCDIR)/%.cpp
 	@echo "g++ $*.cpp"
 	g++ -g  -c -fPIC  -o $@  $<
 
+clean: cleanAutomat
+	
+all: AutomatLib	
