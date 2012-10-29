@@ -8,7 +8,6 @@
 #ifndef Automat_H_
 #define Automat_H_
 
-#include "State.h"
 
 
 class Automat {
@@ -19,11 +18,11 @@ public:
 	virtual ~Automat();
         read(char c) {
             current->readChar(this, c);
-        }
+        };
         
         setState(State* nextState) {
             current = nextState;                    
-        }
+        };
 };
 
 #endif /* Automat_H_ */

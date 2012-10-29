@@ -47,7 +47,7 @@ $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp
 cleanAutomat:
 	rm -rf $(OBJDIR)/*
 	rm -rf $(LIBDIR)/*
-	$(MAKE) makeTestAutomat
+	$(MAKE) TestAutomat
 	
 	
 #

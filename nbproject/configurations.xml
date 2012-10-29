@@ -11,12 +11,16 @@
           <df name="states">
             <in>z0.cpp</in>
             <in>z0.h</in>
+            <in>z1.cpp</in>
+            <in>z1.h</in>
           </df>
           <in>Automat.cpp</in>
           <in>Automat.h</in>
           <in>State.cpp</in>
           <in>State.h</in>
           <in>TestAutomat.cpp</in>
+          <in>autoContainer.cpp</in>
+          <in>autoContainer.h</in>
         </df>
       </df>
       <df name="Buffer">
@@ -31,7 +35,7 @@
         </df>
       </df>
       <df name="Scanner">
-        <df name="debug">
+        <df name="lib">
         </df>
         <df name="src">
           <in>Scanner.cpp</in>
