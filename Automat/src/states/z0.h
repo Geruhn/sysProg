@@ -8,7 +8,9 @@
 #ifndef Z0_H
 #define	Z0_H
 
-class z0 {
+#include "../State.h"
+
+class z0:public State {
 public:
     z0();
     z0(const z0& orig);

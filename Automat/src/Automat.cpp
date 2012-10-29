@@ -1,12 +1,12 @@
 /* 
  * File:   Automat.cpp
- * Author: andy
+ * Author: Andy Perdana
  * 
  * Created on 26. Oktober 2012, 14:00
  */
 
-#include "State.h"
 #include "Automat.h"
+#include "states/z0.h"
 
 
 Automat::Automat() {

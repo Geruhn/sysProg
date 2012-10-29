@@ -1,6 +1,6 @@
 /* 
  * File:   autoContainer.h
- * Author: andy
+ * Author: Andy Perdana
  *
  * Created on 28. Oktober 2012, 14:08
  */
