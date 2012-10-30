@@ -32,6 +32,7 @@ void Scanner::runScanner(){
 
 			autoContainer = automat->readChar(buffer->getChar()); //autocontainer enthält informationen über die zeile, spalte, identifier -max
 			//symbloTable->add(autoContainer);
+			//test
 
 		}
 }
