@@ -7,23 +7,21 @@
 
 #ifndef Automat_H_
 #define Automat_H_
-
-
 #include "State.h"
 
 class Automat {
 private:
-    State* current;
+    int current, statesLength;
+    State* states;
 public:
 	Automat();
 	virtual ~Automat();
         void read(char c) {
-            current->readChar(this, c);
+            (states + current)->readChar(this, c);
         };
         
-        void setState(State* nextState) {
-            current = nextState;                    
-        };
+        void setState(State* nextState);
+        int findState(State* toBeFound);
 };
 
 #endif /* Automat_H_ */

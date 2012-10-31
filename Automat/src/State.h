@@ -12,9 +12,9 @@ class Automat;
 
 class State {
 public:
-    State* mkState();
+    virtual State* mkState();
     virtual ~State();
-    autoContainer* readChar(Automat* autom, char c);
+    virtual autoContainer* readChar(Automat* autom, char c);
     State();
 private:
 
