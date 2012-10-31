@@ -13,8 +13,8 @@ State::State() {
 State::~State() {
 }
 
-State* State::mkState() {
-    return 0;
+virtual State* State::mkState() {
+
 }
 
 autoContainer* State::readChar(Automat* autom, char c) {

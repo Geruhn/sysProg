@@ -9,6 +9,7 @@
 #define	Z1_H
 
 #include "../State.h"
+<<<<<<< HEAD
 
 class z1:public State {
 public:
@@ -20,3 +21,17 @@ private:
 };
 
 #endif	/* Z1_H */
+=======
+#include "z0.h"
+
+class z1:public State {
+public:
+    static State* mkState();
+    autoContainer* readChar(Automat* autom, char c);
+private:
+    z1();
+    static State *theStateZ1;
+};
+
+#endif	/* Z1_H */
+>>>>>>> maxbauer
