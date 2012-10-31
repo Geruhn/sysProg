@@ -8,6 +8,12 @@
 #ifndef AUTOCONTAINER_H
 #define	AUTOCONTAINER_H
 
+/*
+ * The variable type indicates if the container contains an identifier or a key
+ * word (=1), a value (=2), a symbol (=3) of if a failure occured and the 
+ * automat tried to submit something unknown (=0). 
+ */
+
 class autoContainer {
 public:
     autoContainer(int line, int col, int length, int nameLength, char* name, int type) {
@@ -20,14 +26,18 @@ public:
             this->name[i] = name[i];
         }
         name[nameLength] = '\0';
-        this->type = type;
+        if(type>0 || type<4) {
+            this->type = type;
+        } else {
+            this->type = 0;
+        }
     };
     virtual ~autoContainer();
-    int getLine() {
-        return this->line;
-    };
     int getCol() {
         return this->col;
+    };
+    int getLine() {
+        return this->line;
     };
     int getLength() {
         return this->length;
@@ -35,12 +45,12 @@ public:
     int getNameLength() {
         return this->nameLenght;
     }
-    char* getName() {
-        return this->name;
-    }
     int getType() {
         return this->type;
     };
+    char* getName() {
+        return this->name;
+    }
     
 private:
     int col, line, length, nameLenght, type;
