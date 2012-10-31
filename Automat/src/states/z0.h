@@ -13,11 +13,10 @@
 class z0:public State {
 public:
     z0();
-    z0(const z0& orig);
-    virtual ~z0();
+    State* mkState();
+    autoContainer* readChar(Automat* autom, char c);
 private:
 
 };
 
 #endif	/* Z0_H */
-
