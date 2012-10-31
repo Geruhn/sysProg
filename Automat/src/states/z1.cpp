@@ -14,22 +14,23 @@ z1::z1() {
 
 
 State* z1::mkState() {
-    if (z1 == NULL) {
-    	this = new z1();
-
+    if (theStateZ1 == NULL) {
+    	this->theStateZ1 = new z1();
     }
-    return z0;
+    return theStateZ1;
 }
 
 autoContainer* z1::readChar(Automat* autom, char c) {
 
-	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
+	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){ //buchstabe bekommen -max
 		autom->increaseCol();
 		autom->increaseLength();
 		//in z1 bleiben
 	}
-	if(c=='\n'){
+	if(c=='\n'){						//neue zeile -max
 		autom->increaseLine();
+		autom->resetCol();
+		autom->resetLength();
 	}
     return 0;
 }

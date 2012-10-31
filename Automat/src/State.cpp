@@ -14,7 +14,7 @@ State::~State() {
 }
 
 State* State::mkState() {
-    return 0;
+
 }
 
 autoContainer* State::readChar(Automat* autom, char c) {

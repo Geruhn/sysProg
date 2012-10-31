@@ -14,8 +14,9 @@
 class Automat {
 
 private:
-    int current, statesLength;
+    int statesLength;
     int line, col,length;
+    State *current;
     State* states;
 
 public:
@@ -31,11 +32,9 @@ public:
 
 	Automat();
 	virtual ~Automat();
-    void read(char c) {
-    	(states + current)->readChar(this, c);
-    };
-    void setState(State* nextState);
-    int findState(State* toBeFound);
+    void read(char c);
+    void setState(State *nextState);
+    int findState(State *toBeFound);
 
 };
 

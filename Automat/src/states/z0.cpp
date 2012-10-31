@@ -28,7 +28,7 @@ autoContainer* z0::readChar(Automat* autom, char c) {
 		autom->increaseCol();
 		autom->increaseLength();
 		//in z1 gehen
-		z1->mk
+		autom->setState(z1->mkState());
 	}
 	if(c=='\n'){
 		autom->increaseLine();

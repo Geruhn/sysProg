@@ -19,6 +19,8 @@ public:
 
 private:
     z0();
+    static State *theStateZ0;
+    State z1;
 };
 
 #endif	/* Z0_H */

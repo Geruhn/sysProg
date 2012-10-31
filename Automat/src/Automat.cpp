@@ -8,22 +8,25 @@
 //#include "State.h"
 #include "Automat.h"
 
-
+/*
+ * Current soll Pointer sein. Zustand legt neuen Zustand in demensprechenden Übergang fest und gibt dem Automaten per setState()
+ * einen Pointer auf den neuen Zustand der in Current gespeichert wird zum weiterarbeiten.
+ */
 
 Automat::Automat() {
     this->states = new State[1];
     this->current = 0;
-    statesLength=10;
+    statesLength=1;
 }
 
 Automat::~Automat() {
 	// TODO Auto-generated destructor stub
 }
 
-void Automat::setState(State* nextState) {
+void Automat::setState(State *nextState) {
     current = findState(nextState);
     if (current == -1) {
-        if (statesLength == 0) {
+        if (statesLength == 1) {
             states[0] = new z0();
         } else {
             states[1] = new z1();
@@ -31,7 +34,7 @@ void Automat::setState(State* nextState) {
     }
 }       
 
-int Automat::findState(State* toBeFound) {
+int Automat::findState(State *toBeFound) {
     int found = -1;
     for (int i = 0; i < statesLength; i++) {
         if ((states + i) == toBeFound) {
@@ -39,6 +42,10 @@ int Automat::findState(State* toBeFound) {
         }
     }
     return found;
+}
+
+void Automat::read(char c){
+	current->readChar(this, c);
 }
 
 void Automat::increaseLine(){

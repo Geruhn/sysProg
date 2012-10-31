@@ -16,6 +16,7 @@ public:
     virtual ~State();
     virtual autoContainer* readChar(Automat* autom, char c);
     State();
+
 private:
 
 };
