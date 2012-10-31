@@ -13,25 +13,10 @@
 
 class z0:public State {
 public:
-<<<<<<< HEAD
-    z0();
-    State* mkState();
     autoContainer* readChar(Automat* autom, char c);
-private:
-=======
->>>>>>> maxbauer
-
+private:  
     static State* mkState();
-    autoContainer* readChar(Automat* autom, char c);
-
-private:
     z0();
-    static State *Startzustand;
-    State z1;
 };
 
-<<<<<<< HEAD
 #endif	/* Z0_H */
-=======
-#endif	/* Z0_H */
->>>>>>> maxbauer

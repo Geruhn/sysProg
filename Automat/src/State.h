@@ -12,11 +12,7 @@ class Automat;
 
 class State {
 public:
-<<<<<<< HEAD
     virtual State* mkState();
-=======
-	virtual State* mkState();
->>>>>>> maxbauer
     virtual ~State();
     virtual autoContainer* readChar(Automat* autom, char c);
     State();

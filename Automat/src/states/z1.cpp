@@ -5,9 +5,6 @@
  * Created on 30. Oktober 2012, 11:36
  */
 
-<<<<<<< HEAD
-#include "z1.h"
-=======
 #include "z1.h"
 
 
@@ -37,5 +34,3 @@ autoContainer* z1::readChar(Automat* autom, char c) {
 	}
     return 0;
 }
-
->>>>>>> maxbauer

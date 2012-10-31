@@ -13,25 +13,12 @@ z0::z0() {
 
 }
 
-<<<<<<< HEAD
-
-State* z0::mkState() {
+static State* z0::mkState() {
 //    if (z0 == 0) {
         //        this = new z0();
 //    }
     
     return 0;
-}
-autoContainer* z0::readChar(Automat* autom, char c) {
-    
-=======
-
-static State* z0::mkState() {
-    if (z0 == NULL) {
-    	this = new z0();
-
-    }
-    return z0;
 }
 
 autoContainer* z0::readChar(Automat* autom, char c) {
@@ -45,7 +32,7 @@ autoContainer* z0::readChar(Automat* autom, char c) {
 	if(c=='\n'){
 		autom->increaseLine();
 	}
->>>>>>> maxbauer
+
     return 0;
 }
 
