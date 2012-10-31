@@ -7,23 +7,36 @@
 
 #ifndef Automat_H_
 #define Automat_H_
-
-
 #include "State.h"
+#include "states/z0.h"
+#include "states/z1.h"
 
 class Automat {
+
 private:
-    State* current;
+    int current, statesLength;
+    int line, col,length;
+    State* states;
+
 public:
+
+    void increaseLine();
+    void increaseCol();
+    void increaseLength();
+    void decreaseLine();
+    void decreaseCol();
+    void decreaseLength();
+    void resetCol();
+    void resetLength();
+
 	Automat();
 	virtual ~Automat();
-        void read(char c) {
-            current->readChar(this, c);
-        };
-        
-        void setState(State* nextState) {
-            current = nextState;                    
-        };
+    void read(char c) {
+    	(states + current)->readChar(this, c);
+    };
+    void setState(State* nextState);
+    int findState(State* toBeFound);
+
 };
 
 #endif /* Automat_H_ */

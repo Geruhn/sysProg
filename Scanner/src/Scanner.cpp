@@ -30,9 +30,8 @@ void Scanner::runScanner(){
 
 		while(!buffer->isEOF){ //holt die Zeichen aus dem Buffer und gibt sie dem automaten, anschließend wirds in die symboltabelle gepackt -max
 
-			autoContainer = automat->readChar(buffer->getChar()); //autocontainer enthält informationen über die zeile, spalte, identifier -max
+			autoContainer = automat->read(buffer->getChar()); //autocontainer enthält informationen über die zeile, spalte, identifier -max
 			//symbloTable->add(autoContainer);
-			//test
 
 		}
 }

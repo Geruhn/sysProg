@@ -9,15 +9,16 @@
 #define	Z0_H
 
 #include "../State.h"
+#include "z1.h"
 
 class z0:public State {
 public:
-    z0();
-    z0(const z0& orig);
-    virtual ~z0();
-private:
 
+    State* mkState();
+    autoContainer* readChar(Automat* autom, char c);
+
+private:
+    z0();
 };
 
 #endif	/* Z0_H */
-
