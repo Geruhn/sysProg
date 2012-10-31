@@ -13,7 +13,7 @@ State::State() {
 State::~State() {
 }
 
-State* State::mkState() {
+virtual State* State::mkState() {
 
 }
 

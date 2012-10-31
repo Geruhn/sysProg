@@ -13,7 +13,7 @@ z1::z1() {
 }
 
 
-State* z1::mkState() {
+static State* z1::mkState() {
     if (theStateZ1 == NULL) {
     	this->theStateZ1 = new z1();
     }

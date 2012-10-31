@@ -13,7 +13,7 @@
 
 class z1:public State {
 public:
-    State* mkState();
+    static State* mkState();
     autoContainer* readChar(Automat* autom, char c);
 private:
     z1();

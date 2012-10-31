@@ -14,7 +14,7 @@ z0::z0() {
 }
 
 
-State* z0::mkState() {
+static State* z0::mkState() {
     if (z0 == NULL) {
     	this = new z0();
 
@@ -28,7 +28,7 @@ autoContainer* z0::readChar(Automat* autom, char c) {
 		autom->increaseCol();
 		autom->increaseLength();
 		//in z1 gehen
-		autom->setState(z1->mkState());
+		autom->setState(z1::mkState());
 	}
 	if(c=='\n'){
 		autom->increaseLine();

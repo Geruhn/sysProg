@@ -14,12 +14,12 @@
 class z0:public State {
 public:
 
-    State* mkState();
+    static State* mkState();
     autoContainer* readChar(Automat* autom, char c);
 
 private:
     z0();
-    static State *theStateZ0;
+    static State *Startzustand;
     State z1;
 };
 
