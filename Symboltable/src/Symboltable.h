@@ -8,6 +8,8 @@
 #ifndef SYMBOLTABLE_H_
 #define SYMBOLTABLE_H_
 
+
+
 class Symboltable {
 public:
 	Symboltable();
