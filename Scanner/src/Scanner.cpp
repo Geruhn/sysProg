@@ -28,13 +28,14 @@ void Scanner::runScanner() {
 	Automat* automat = new Automat();
 	Symboltable* symbolTable = new Symboltable();
 	Hashtable* hashTable = new Hashtable(10000);
+	Buffer bufferz = new Buffer(stringInput);
 
 	while (!buffer->isEOF) { //holt die Zeichen aus dem Buffer und gibt sie dem automaten, anschließend wirds in die symboltabelle gepackt -max
 
 		autoContainer = automat->read(buffer->getChar()); //autocontainer enthält informationen über die zeile, spalte, identifier -max
-		//symbloTable->add(autoContainer);
-	hashTable->
+		//symbloTable->add(autoContainer/lexem);
 
-}
+	}
+
 }
 
