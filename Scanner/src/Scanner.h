@@ -15,7 +15,7 @@
 class Scanner {
 public:
 	Scanner();
-	void  runScanner();
+	void runScanner();
 	virtual ~Scanner();
 };
 

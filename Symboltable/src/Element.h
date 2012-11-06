@@ -2,10 +2,10 @@
 #define __ELEMENT__H__
 
 /**
-*Element der Liste
-*
-*/
-template <class type>
+ *Element der Liste
+ *
+ */
+template<class type>
 class Element {
 public:
 	type value;
@@ -17,53 +17,53 @@ public:
 		this->next = 0;
 		this->previous = 0;
 	}
-	
+
 	~Element() {
-		
+
 	}
-	
-	void setNextElement(Element* next){
+
+	void setNextElement(Element* next) {
 		this->next = next;
 	}
-	
-	void setPreviousElement(Element* previous){
+
+	void setPreviousElement(Element* previous) {
 		this->previous = previous;
 	}
-	
-	Element* getNextElement(){
+
+	Element* getNextElement() {
 		return this->next;
 	}
-	
-	Element* getPreviousElement(){
+
+	Element* getPreviousElement() {
 		return this->previous;
 	}
-	
-	type getValueAt(int index, int offset){
-		if (index == offset){
+
+	type getValueAt(int index, int offset) {
+		if (index == offset) {
 			return this->value;
 		} else {
 			return this->next->getValueAt(index, offset + 1);
 		}
 	}
-	
-	void removeElementAt(int index, int offset){
-		if (index-1 == offset){
+
+	void removeElementAt(int index, int offset) {
+		if (index - 1 == offset) {
 			Element* temp = this->next;
 			this->next = temp->getNextElement();
 			temp->next->setPreviousElement(this);
 			temp->setNextElement(0);
 			temp->setPreviousElement(0);
 			delete temp;
-		} else{
-			this->next->removeElementAt(index, offset+1);
+		} else {
+			this->next->removeElementAt(index, offset + 1);
 		}
 	}
-		
-	void setValue(int index, int offset, type value){
-		if(index == offset){
+
+	void setValue(int index, int offset, type value) {
+		if (index == offset) {
 			this->value = value;
-		} else{
-			this->next->setValue(index, offset+1, value);
+		} else {
+			this->next->setValue(index, offset + 1, value);
 		}
 	}
 };
