@@ -13,17 +13,19 @@ stateStart::stateStart() {
 
 }
 
-autoContainer* stateStart::readChar(Automat* autom, char c) {
-    
-	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
-		autom->increaseCol();
-		autom->increaseLength();
-		//in z1 gehen
-		autom->setState(z1::mkState());
-	}
-	if(c=='\n'){
-		autom->increaseLine();
-	}
+autoContainer* stateStart::readChar(Automat* autom, char c) {    
+    if(current == 0) {
+        current = new autoContainer();
+    } else {
+        if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
+            this->current->length += 1;
+                //in z1 gehen
+                autom->setState(z1::mkState());
+        }
+        if(c=='\n'){
+                autom->increaseLine();
+        }
+    }
 
     return 0;
 }

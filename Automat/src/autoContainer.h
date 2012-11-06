@@ -17,6 +17,7 @@
 class autoContainer {
     friend class State;
 public:
+    autoContainer();/*
     autoContainer(int line, int col, int length, int nameLength, char* name, int type) {
         this->line = line;
         this->col = col;
@@ -32,7 +33,7 @@ public:
         } else {
             this->type = 0;
         }
-    };
+    };*/
     virtual ~autoContainer();
     int getCol() {
         return this->col;

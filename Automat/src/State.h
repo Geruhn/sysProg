@@ -23,11 +23,23 @@ public:
     void startState(State* states, int arrayLength);
     //virtual State* mkState();
     virtual ~State();
+    /**
+     * Frägt vorm Einlesen eines chars, ob der Zustand schon startbereit ist 
+     * (started == true), 
+     * @param autom Der zugehörige Automat
+     * @param c Der einzulesende char.
+     * @return Info-Container, s. autoContainer-Doku
+     */
     virtual autoContainer* readChar(Automat* autom, char c);
 
 private:
     State* states;
     int arrayLength;
+    /**
+     * Gibt an, ob der Zustand schon startbereit ist, ist dies nicht so, soll
+     * die readChar-Funktion einen Fehler werfen.
+     */
+    bool started;
 };
 
 #endif	/* STATE_H */

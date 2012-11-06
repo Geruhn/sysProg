@@ -16,7 +16,7 @@ OBJS = $(OBJDIR)/Automat.o \
 	$(OBJDIR)/TestAutomat.o  \
 	$(OBJDIR)/State.o  \
 	$(OBJDIR)/states/stateStart.o \
-	$(OBJDIR)/states/z1.o #\
+	$(OBJDIR)/states/stateIdentifier.o #\
 	#$(OBJDIR)/xx1.o \
 	#$(OBJDIR)/xxn.o
 
