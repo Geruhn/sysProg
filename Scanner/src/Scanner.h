@@ -10,12 +10,12 @@
 
 #include"Buffer.h"
 #include"Automat.h"
-#include"Symboltable.h"
+#include"Hashtable.h"
 
 class Scanner {
 public:
 	Scanner();
-	void  runScanner();
+	void runScanner();
 	virtual ~Scanner();
 };
 

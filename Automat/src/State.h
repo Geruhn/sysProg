@@ -32,6 +32,7 @@ public:
      */
     virtual autoContainer* readChar(Automat* autom, char c);
 
+
 private:
     State* states;
     int arrayLength;
