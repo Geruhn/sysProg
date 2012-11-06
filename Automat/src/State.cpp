@@ -8,15 +8,16 @@
 #include "State.h"
 
 State::State() {
+    
+}
+
+void State::startState(State* states, int arrayLength) {
+    this->arrayLength = arrayLength;
+    this->states = new State[arrayLength];
+    for(int i = 0; i < arrayLength; i++) {
+        this->states[i] = states[i];
+    }
 }
 
 State::~State() {
-}
-
-virtual State* State::mkState() {
-
-}
-
-autoContainer* State::readChar(Automat* autom, char c) {
-    return 0;
 }

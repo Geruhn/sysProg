@@ -15,6 +15,7 @@
  */
 
 class autoContainer {
+    friend class State;
 public:
     autoContainer(int line, int col, int length, int nameLength, char* name, int type) {
         this->line = line;

@@ -5,22 +5,14 @@
  * Created on 30. Oktober 2012, 11:36
  */
 
-#include "z1.h"
+#include "stateIdentifier.h"
 
 
-z1::z1() {
+stateIdentifier::stateIdentifier() {
 
 }
 
-
-static State* z1::mkState() {
-    if (theStateZ1 == NULL) {
-    	this->theStateZ1 = new z1();
-    }
-    return theStateZ1;
-}
-
-autoContainer* z1::readChar(Automat* autom, char c) {
+autoContainer* stateIdentifier::readChar(Automat* autom, char c) {
 
 	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){ //buchstabe bekommen -max
 		autom->increaseCol();

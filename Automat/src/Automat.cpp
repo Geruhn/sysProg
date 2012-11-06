@@ -5,7 +5,9 @@
  * Created on 26. Oktober 2012, 14:00
  */
 
-//#include "State.h"
+#include "State.h"
+#include "states/stateStart.h"
+#include "states/stateIdentifier.h"
 #include "Automat.h"
 
 /*
@@ -14,7 +16,11 @@
  */
 
 Automat::Automat() {
-    this->current = 0;
+    this->states = new State[STATES];
+    this->states[0] = new stateStart();
+    this->states[1] = new stateIdentifier();
+    
+    this->current = this->states;
 }
 
 Automat::~Automat() {
@@ -22,20 +28,13 @@ Automat::~Automat() {
 }
 
 void Automat::setState(State *nextState) {
-    current = findState(nextState);
-    if (current == -1) {
-        if (statesLength == 1) {
-            states[0] = new z0();
-        } else {
-            states[1] = new z1();
-        }
-    }
+    this->current = nextState;    
 }
 
 void Automat::read(char c){
 	current->readChar(this, c);
 }
-
+/*
 void Automat::increaseLine(){
 	line++;
 }
@@ -64,3 +63,4 @@ void Automat::resetCol(){
 void Automat::resetLength(){
 	length=0;
 }
+*/

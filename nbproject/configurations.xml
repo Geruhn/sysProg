@@ -7,22 +7,28 @@
           <df name="states">
           </df>
         </df>
+        <df name="lib">
+          <df name="states">
+          </df>
+        </df>
         <df name="src">
           <df name="states">
-            <in>z0.cpp</in>
-            <in>z0.h</in>
+            <in>stateIdentifier.cpp</in>
+            <in>stateIdentifier.h</in>
+            <in>stateStart.cpp</in>
+            <in>stateStart.h</in>
           </df>
           <in>Automat.cpp</in>
           <in>Automat.h</in>
           <in>State.cpp</in>
           <in>State.h</in>
           <in>TestAutomat.cpp</in>
+          <in>autoContainer.cpp</in>
+          <in>autoContainer.h</in>
         </df>
       </df>
       <df name="Buffer">
         <df name="debug">
-        </df>
-        <df name="lib">
         </df>
         <df name="src">
           <in>Buffer.cpp</in>
@@ -90,9 +96,9 @@
       </item>
       <item path="Automat/src/TestAutomat.cpp" ex="true" tool="1" flavor2="0">
       </item>
-      <item path="Automat/src/states/z0.cpp" ex="true" tool="1" flavor2="0">
+      <item path="Automat/src/states/stateStart.cpp" ex="true" tool="1" flavor2="0">
       </item>
-      <item path="Automat/src/states/z0.h" ex="true" tool="3" flavor2="0">
+      <item path="Automat/src/states/stateStart.h" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Buffer/src/Buffer.cpp" ex="true" tool="1" flavor2="0">
       </item>

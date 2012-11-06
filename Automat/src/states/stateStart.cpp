@@ -1,27 +1,19 @@
 /* 
- * File:   z0.cpp
+ * File:   stateStart.cpp
  * Author: Andy Perdana
  * 
  * Created on 26. Oktober 2012, 14:15
  */
 
 
+//#include "../State.h"
+#include "stateStart.h"
 
-#include "z0.h"
-
-z0::z0() {
+stateStart::stateStart() {
 
 }
 
-static State* z0::mkState() {
-//    if (z0 == 0) {
-        //        this = new z0();
-//    }
-    
-    return 0;
-}
-
-autoContainer* z0::readChar(Automat* autom, char c) {
+autoContainer* stateStart::readChar(Automat* autom, char c) {
     
 	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
 		autom->increaseCol();

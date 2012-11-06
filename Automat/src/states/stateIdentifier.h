@@ -5,19 +5,17 @@
  * Created on 30. Oktober 2012, 11:36
  */
 
-#ifndef Z1_H
-#define	Z1_H
+#ifndef STATEIDENTIFIER_H
+#define	STATEIDENTIFIER_H
 
 #include "../State.h"
-#include "z0.h"
+#include "stateStart.h"
 
-class z1:public State {
+class stateIdentifier:public State {
 public:
-    static State* mkState();
     autoContainer* readChar(Automat* autom, char c);
 private:
-    z1();
-    static State *theStateZ1;
+    stateIdentifier();
 };
 
-#endif	/* Z1_H */
+#endif	/* STATEIDENTIFIER_H */
