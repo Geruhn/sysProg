@@ -26,7 +26,10 @@ Automat::Automat() {
 Automat::~Automat() {
 	// TODO Auto-generated destructor stub
 }
-
+/*
+ * Funktion zum setzen des aktuellen Zustandes.
+ * @param *nextState Pointer auf den aktuellen Zustand.
+ */
 void Automat::setState(State *nextState) {
     this->current = nextState;    
 }
