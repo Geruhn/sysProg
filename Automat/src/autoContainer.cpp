@@ -6,4 +6,10 @@
  */
 
 #include "autoContainer.h"
-
+autoContainer::autoContainer() {
+    this->col = 1;
+    this->line = 1;
+    this->length = 0;
+    this->nameLenght = 0;
+    this->type = 0;
+}

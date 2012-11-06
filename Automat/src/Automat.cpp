@@ -14,13 +14,21 @@
  * Current soll Pointer sein. Zustand legt neuen Zustand in demensprechenden Übergang fest und gibt dem Automaten per setState()
  * einen Pointer auf den neuen Zustand der in Current gespeichert wird zum weiterarbeiten.
  */
-
+/**
+ * In STATES steht die aktuelle Anzahl aller Zustände drin, sie muss vor dem
+ * make-Befehl aktualisiert werden, falls sich die Anzahl der möglichen 
+ * Zustände ändert. Und ins Array eingespeichert werden.
+ */
 Automat::Automat() {
-    this->states = new State[STATES];
-    this->states[0] = new stateStart();
-    this->states[1] = new stateIdentifier();
+    this->states = new State[this->STATES];
+    (states + 0) = new stateStart();
+    (states + 1) = new stateIdentifier();
     
     this->current = this->states;
+    
+    for(int i = 0; i < STATES; i++) {
+        this->states[i].startState();
+    }
 }
 
 Automat::~Automat() {

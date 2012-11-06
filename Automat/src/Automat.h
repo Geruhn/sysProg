@@ -25,7 +25,7 @@ class Automat {
 
 private:
     //int line, col,length;
-    const int STATES = 2;
+    const static int STATES = 2;
     State *current;
     State *states;
 public:/*
@@ -38,7 +38,7 @@ public:/*
     void resetCol();
     void resetLength();*/
 
-    void Automat();
+    Automat();
     virtual ~Automat();
     void setState(State* nextState);
     void read(char c);
