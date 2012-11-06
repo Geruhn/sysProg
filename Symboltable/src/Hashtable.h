@@ -13,33 +13,34 @@ using namespace std;
 
 template <class type>
 class Hashtable {
-  List<Pair<type>* >* table;	 	
+
+  List<List<Pair<type>*> >* table;
   int size;							
 
-  //berechnet den Hashcode
-  unsigned int hashcode(string key) {
 
-	  unsigned int result = 0;
-	  for(int i = 0; i < key.size(); i++) {
+  //berechnet den Hashcode
+int hashcode(char* key, int lengthLexem) {
+	  int result = 0;
+	  for(int i = 0; i < lengthLexem; i++) {
 		  result += (result * 42 + key[i]);
 	  }
-	  return (result%size);
+	  return (result % this->size);
   }
 
 public:
 // Konstruktor
   Hashtable(int nsize) {
 	  this->size = nsize;
-	  table = new List<Pair<type>* >[size];
+	  table = new List<List<Pair<type>*> >[this->size];
   }
 
   //Destruktor
   ~Hashtable() {
-	  delete[] table;
+	  delete[] this->table;
   }
 
-  bool put(string key, type value){
-	  int index = hashcode(key);
+  bool put(char* key, type value, int lengthLexem){
+	  int index = hashcode(key,lengthLexem);
 	  Pair<type>* pair;
 
 	  //l�uft bis zum Index
@@ -58,8 +59,8 @@ public:
 	  return false;
   }		
 
-  type get(string key) {
-	  int index = hashcode(key);
+  type get(char* key, int lengthLexem) {
+	  int index = hashcode(key,lengthLexem);
 	  Pair<type>* pair;
 
 	  //L�uft die Liste durch bis zum index wo der Wert liegen sollte
@@ -75,8 +76,8 @@ public:
 	  throw "Key nicht vorhanden";
   }
 
-  bool remove(string key) {
-	  int index = hashcode(key);
+  bool remove(char* key, int lengthLexem) {
+	  int index = hashcode(key,lengthLexem);
 	  Pair<type>* pair;
 
 	  for(int i = 0; i < table[index].getSize(); i++) {
@@ -90,8 +91,8 @@ public:
 	  return false;
   }
 
-  bool contains(string key) { //entspricht lookup
-	  int index = hashcode(key);
+  bool contains(char* key, int lengthLexem) { //entspricht lookup
+	  int index = hashcode(key,lengthLexem);
 	  Pair<type>* pair;
 
 	  for(int i = 0; i < table[index].getSize(); i++) {
@@ -102,6 +103,7 @@ public:
 	  }
 	  return false;
   }
-};
 
-#endif // __HASHTABLE__INCLUDED__
+
+};
+#endif  __HASHTABLE__INCLUDED__

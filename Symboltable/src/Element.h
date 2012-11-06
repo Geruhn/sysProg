@@ -13,7 +13,9 @@ public:
 	Element* previous;
 
 	Element(type value) {
-		this->value=value;
+		this->value = value;
+		this->next = 0;
+		this->previous = 0;
 	}
 	
 	~Element() {
@@ -65,4 +67,4 @@ public:
 		}
 	}
 };
-#endif // __ELEMENT__H__
+#endif  __ELEMENT__H__
