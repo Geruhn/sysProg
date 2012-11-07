@@ -5,24 +5,20 @@
  * Created on 30. Oktober 2012, 11:36
  */
 
-#include "stateIdentifier.h"
+#include "./stateIdentifier.h"
 
 
 stateIdentifier::stateIdentifier() {
 
 }
 
-autoContainer* stateIdentifier::readChar(Automat* autom, char c) {
-
-	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){ //buchstabe bekommen -max
-		autom->increaseCol();
-		autom->increaseLength();
-		//in z1 bleiben
+autoContainer* stateIdentifier::readChar(Automat* autom, autoContainer* con, char c) {
+	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
+		con->increaseCol();
 	}
-	if(c=='\n'){						//neue zeile -max
-		autom->increaseLine();
-		autom->resetCol();
-		autom->resetLength();
+	else{
+		//iwie beim scanner ungetChar machen.
+		//autom->setState(iwie in startzustand gehen)
 	}
     return 0;
 }

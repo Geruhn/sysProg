@@ -13,7 +13,7 @@
 
 class stateIdentifier:public State {
 public:
-    autoContainer* readChar(Automat* autom, char c);
+    autoContainer* readChar(Automat* autom, autoContainer* con, char c);
 private:
     stateIdentifier();
 };

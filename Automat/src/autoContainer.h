@@ -16,8 +16,9 @@
 
 class autoContainer {
     friend class State;
+
 public:
-    autoContainer();/*
+    /*
     autoContainer(int line, int col, int length, int nameLength, char* name, int type) {
         this->line = line;
         this->col = col;
@@ -33,29 +34,32 @@ public:
         } else {
             this->type = 0;
         }
-    };*/
+    };
+    */
+    autoContainer();
+    autoContainer(int line, int col);
     virtual ~autoContainer();
-    int getCol() {
-        return this->col;
-    };
-    int getLine() {
-        return this->line;
-    };
-    int getLength() {
-        return this->length;
-    }
+
+    int getCol();
+    int getLine();
+    int getType();
+    int getLength();
+    char* getName();
+
+    void increaseCol();
+    void increaseLine();
+
+    void setType(int type);
+
+    /*
     int getNameLength() {
         return this->nameLenght;
-    }
-    int getType() {
-        return this->type;
-    };
-    char* getName() {
-        return this->name;
-    }
+    };*/
+
     
+
 private:
-    int col, line, length, nameLenght, type;
+    int col, line, length, type;
     char* name;
 
 };

@@ -5,9 +5,6 @@
  * Created on 26. Oktober 2012, 14:00
  */
 
-#include "State.h"
-#include "states/stateStart.h"
-#include "states/stateIdentifier.h"
 #include "Automat.h"
 
 /*
@@ -16,11 +13,13 @@
  */
 
 Automat::Automat() {
+	isToken = false;
+
     this->states = new State[STATES];
     this->states[0] = new stateStart();
     this->states[1] = new stateIdentifier();
     
-    this->current = this->states;
+    this->currentState = this->states;
 }
 
 Automat::~Automat() {
@@ -28,15 +27,55 @@ Automat::~Automat() {
 }
 /*
  * Funktion zum setzen des aktuellen Zustandes.
- * @param *nextState Pointer auf den aktuellen Zustand.
+ * @param nextState Pointer to the next State.
  */
-void Automat::setState(State *nextState) {
-    this->current = nextState;    
+void Automat::setState(State* nextState) {
+    currentState = nextState;
 }
 
+/*
+ * Reads a character and return an autoContainer with information about the Token.
+ * @param c Character that the machine has to read.
+ * @return autoContainer Contents information about the Token.
+ */
 void Automat::read(char c){
-	current->readChar(this, c);
+	currentContainer = currentState->readChar(this, currentContainer, c);
 }
+
+/*
+ * Function signals if a Token was found.
+ * @return bool True if a new Token was found. False if there is no new Token.
+ */
+bool Automat::hasToken(){
+	return isToken;
+}
+
+/*
+ * Function get called if a Token is found/finished.
+ */
+void Automat::setTokenFound(){
+	isToken = true;
+}
+
+/*
+ * Return a pointer to the autoContainer of the actuel found Token. If actually no Token was found,
+ * the function returns an Null-Pointer.
+ * @return autoContainer Pointer to the autoContainer of the Token.
+ */
+autoContainer* Automat::getCurrentContainer(){
+	if(isToken){
+		lastContainer = currentContainer;
+		isToken = false;
+		currentContainer = 0;
+		return lastContainer;
+	}
+	return 0;
+}
+
+autoContainer* Automat::getLastContainer(){
+	return lastContainer;
+}
+
 /*
 void Automat::increaseLine(){
 	line++;

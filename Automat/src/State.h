@@ -14,10 +14,12 @@
 
 #ifndef STATE_H
 #define	STATE_H
+
 #include "autoContainer.h"
-class Automat;
+#include "Automat.h"
 
 class State {
+
 public:
     State();
     void startState(State* states, int arrayLength);
@@ -30,7 +32,7 @@ public:
      * @param c Der einzulesende char.
      * @return Info-Container, s. autoContainer-Doku
      */
-    virtual autoContainer* readChar(Automat* autom, char c);
+    virtual autoContainer* readChar(Automat* autom, autoContainer* con, char c);
 
 
 private:

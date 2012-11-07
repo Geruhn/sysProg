@@ -7,9 +7,12 @@
 
 #ifndef Automat_H_
 #define Automat_H_
-//#include "State.h"
-//#include "states/stateStart.h"
-//#include "states/stateIdentifier.h"
+
+#include "State.h"
+#include "states/stateStart.h"
+#include "states/stateIdentifier.h"
+#include "autoContainer.h"
+
 /**
  * The state machine class "Automat" starts with creating every state that is
  * needed to identify every possible token and errors. After that all the 
@@ -24,10 +27,12 @@ class Automat {
     //friend class State;
 
 private:
-    //int line, col,length;
+	bool isToken;
     const int STATES = 2;
-    State *current;
-    State *states;
+    State *currentState;
+    State* states;
+    autoContainer *currentContainer, *lastContainer;
+
 public:/*
     void increaseLine();
     void increaseCol();
@@ -42,6 +47,10 @@ public:/*
     virtual ~Automat();
     void setState(State* nextState);
     void read(char c);
+    bool hasToken();
+    void setTokenFound();
+    autoContainer* getCurrentContainer();
+    autoContainer* getLastContainer();
 };
 
 #endif /* Automat_H_ */

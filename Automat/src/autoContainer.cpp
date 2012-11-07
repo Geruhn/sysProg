@@ -7,3 +7,51 @@
 
 #include "autoContainer.h"
 
+autoContainer::autoContainer(){
+	line = col = length = 1;
+	type = 0;
+}
+
+autoContainer::autoContainer(int line, int col){
+	this->line = line;
+	this->col = col;
+	length = 0;
+	type = 0;
+}
+
+int autoContainer::getCol(){
+	return col;
+}
+
+int autoContainer::getLine(){
+	return line;
+}
+
+int autoContainer::getLength(){
+	return length;
+}
+
+int autoContainer::getType(){
+	return type;
+}
+
+char* autoContainer::getName(){
+	return name;
+}
+
+void autoContainer::increaseCol(){
+	col++;
+	length++;
+}
+
+void autoContainer::increaseLine(){
+	col = 1;
+	line++;
+	length++;
+}
+
+void autoContainer::setType(int type){
+	this->type = type;
+}
+
+
