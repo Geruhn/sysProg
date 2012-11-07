@@ -9,67 +9,48 @@ LIBDIR = lib
 
 SHAREDLIB = ../sharedlib
 
-## hier alle Object Files eintragen
-## darauf achten, dass letzte Zeile ohne "\" eingetragen wird
-
-OBJS = $(OBJDIR)/Automat.o \
-	$(OBJDIR)/TestAutomat.o  \
-	$(OBJDIR)/State.o  \
-	$(OBJDIR)/states/stateStart.o \
-	$(OBJDIR)/states/stateIdentifier.o #\
-	#$(OBJDIR)/xx1.o \
-	#$(OBJDIR)/xxn.o
-
-## hier alle Object Files eintragen, die in der shared library enthalten sein sollen 
-OBJSFORAUTOMATLIB =  \
-	$(LIBDIR)/Automat.o #\
-
 
 #
 #		Targets zum Bauen des Tests
 #
-.PHONY: clean cleanAutomat all
 
-makeTestAutomat: $(OBJS)
-	g++ -g $^ -o $(BINDIR)/AutomatTest
+# Linken der Object-files
+makeTestAutomat: $(OBJDIR)/Automat.o $(OBJDIR)/TestAutomat.o  ## hier alle Object Files eintragen
+	g++ -g $(OBJDIR)/Automat.o $(OBJDIR)/TestAutomat.o -o $(BINDIR)/AutomatTest
 	
-# $^ liste der abhaengigkeiten
 
+# compilieren der Source-Files
 
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp 
+$(OBJDIR)/Automat.o :  $(SRCDIR)/Automat.cpp 
 	@echo "g++ $*.cpp"
-	g++ -g  -c -Wall  -o $@  $<
-
-# 
-# $@ name des object files
-# $< erste abhaengigkeit
+	g++ -g  -c -Wall $(SRCDIR)/Automat.cpp -o $(OBJDIR)/Automat.o  
 
 
-# loeschen aller files im verzeichnis $(OBJDIR)
+$(OBJDIR)/TestAutomat.o :  $(SRCDIR)/TestAutomat.cpp 
+	@echo "g++ $*.cpp"
+	g++ -g  -c -Wall $(SRCDIR)/TestAutomat.cpp  -o $(OBJDIR)/TestAutomat.o  
+
+
+
+# loeschen aller files im verzeichnis $(OBJDIR) und $(LIBDIR) und neu bauen
 
 cleanAutomat:
 	rm -rf $(OBJDIR)/*
 	rm -rf $(LIBDIR)/*
-	#rm -f $(OBJDIR)/states/*
-	#rm -f $(LIBDIR)/states/*
-	#$(MAKE) TestAutomat
-	mkdir $(OBJDIR)/states
-	mkdir $(LIBDIR)/states
+	$(MAKE) makeTestAutomat
 	
 	
 #
 # erstellen der shared library
 #
 
-AutomatLib:$(OBJSFORAUTOMATLIB)
-		g++ -shared  -o $(SHAREDLIB)/libAutomat.so $^ 
+AutomatLib: $(LIBDIR)/Automat.o
+		g++ -shared $(LIBDIR)/Automat.o  -o $(SHAREDLIB)/libAutomat.so 
 
 	
-$(LIBDIR)/%.o :  $(SRCDIR)/%.cpp 
+$(LIBDIR)/Automat.o :  $(SRCDIR)/Automat.cpp 
 #	@mkdir -p `dirname $(OBJDIR)/$*.o`
 	@echo "g++ $*.cpp"
-	g++ -g  -c -fPIC  -o $@  $<
+	g++ -g  -c -fPIC  $(SRCDIR)/Automat.cpp -o $(LIBDIR)/Automat.o   
 
-clean: cleanAutomat
-	
-all: AutomatLib	
+
