@@ -29,8 +29,17 @@ Automat::~Automat() {
  * Funktion zum setzen des aktuellen Zustandes.
  * @param nextState Pointer to the next State.
  */
-void Automat::setState(State* nextState) {
-    currentState = nextState;
+void Automat::setState(char* nextState) {
+
+	switch(nextState)
+	{
+	 case "Identifier": currentState = states[1];
+	 	 	 	 	 	 break;
+
+	 default: currentState = states[0];
+	 	 	  break;
+
+	}
 }
 
 /*
@@ -57,7 +66,6 @@ bool Automat::hasToken(){
 void Automat::setTokenFound(int type){
 	isToken = true;
 	currentContainer->setType(type);
-
 }
 
 /*
@@ -78,34 +86,3 @@ autoContainer* Automat::getCurrentContainer(){
 autoContainer* Automat::getLastContainer(){
 	return lastContainer;
 }
-
-/*
-void Automat::increaseLine(){
-	line++;
-}
-void Automat::increaseCol(){
-	col++;
-}
-
-void Automat::increaseLength(){
-	length++;
-}
-void Automat::decreaseLine(){
-	line++;
-}
-void Automat::decreaseCol(){
-	col++;
-}
-
-void Automat::decreaseLength(){
-	length++;
-}
-
-void Automat::resetCol(){
-	col=0;
-}
-
-void Automat::resetLength(){
-	length=0;
-}
-*/

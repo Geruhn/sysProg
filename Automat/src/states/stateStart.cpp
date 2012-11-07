@@ -24,10 +24,10 @@ autoContainer* stateStart::readChar(Automat* autom, autoContainer* con, char c) 
     }
     if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
             con->increaseCol();
-            //autom->setState(iwie in stateIdentifier gehen);
+            autom->setState("Identifier");
             return con;
     }
-    if( c == '\n'){
+    if( c == '\n' || c == 32){ //Für Leerzeichen und Zeilenumbrüche
     	con->increaseLine();
     	autom->setTokenFound(0);
     	return con;

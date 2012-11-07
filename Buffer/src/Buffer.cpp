@@ -90,7 +90,7 @@ void Buffer::ungetChar() {
 
 void Buffer::openFile() {
 	//cout << endl << "in Buffer::openFile()" << endl;
-	fdRe = open(sourceFile, O_DIRECT);
+	fdRe = open(sourceFile, O_DIRECT,0 777);
 	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
 	}
@@ -98,7 +98,8 @@ void Buffer::openFile() {
 
 void Buffer::createFile() {
 	cout << endl << "in Buffer::createFile" << endl;
-	fdWr = creat(sourceFile, O_DIRECT);
+	fdWr = creat(sourceFile, O_DIRECT,S_IRWXO);
+	//fdWr = open(sourceFile, )
 	if(fdWr != -1){
 		isFileOpen = true;
 	}else{
@@ -107,11 +108,10 @@ void Buffer::createFile() {
 }
 
 void Buffer::fillBuffer() {
-	//cout << endl << "in Buffer::fillBuffer()" << endl;
 	if (isLeft) {
-		read(fdRe, baseLeft, 512); //evtl noch hochzählen also ein vielfaches von 512, für die nächsten 512 zeichen -Max
+		read(fdRe, baseLeft, 512);
 	} else {
-		read(fdRe, baseRight, 512); //siehe oben
+		read(fdRe, baseRight, 512);
 	}
 }
 

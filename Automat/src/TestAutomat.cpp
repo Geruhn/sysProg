@@ -11,6 +11,9 @@ int main (int argc, char* argv[]){
 	while(inBuffer->hasNext()){
 		if(automat->hasToken()){
 			con = automat->getCurrentContainer();
+			if(con->getType() != 0){
+				inBuffer->ungetChar();
+			}
 			for(int i = 0; i < con->getLength(); i++){
 				inBuffer->ungetChar();
 			}

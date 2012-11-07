@@ -13,6 +13,7 @@
 #include "states/stateIdentifier.h"
 #include "autoContainer.h"
 
+
 /**
  * The state machine class "Automat" starts with creating every state that is
  * needed to identify every possible token and errors. After that all the 
@@ -24,7 +25,6 @@
  * - Andy
  */
 class Automat {
-    //friend class State;
 
 private:
 	bool isToken;
@@ -33,22 +33,15 @@ private:
     State* states;
     autoContainer *currentContainer, *lastContainer;
 
-public:/*
-    void increaseLine();
-    void increaseCol();
-    void increaseLength();
-    void decreaseLine();
-    void decreaseCol();
-    void decreaseLength();
-    void resetCol();
-    void resetLength();*/
-
+public:
     void Automat();
     virtual ~Automat();
-    void setState(State* nextState);
+
+    void setTokenFound(int type);
+    void setState(char* nextState);
     void read(char c);
     bool hasToken();
-    void setTokenFound(int type);
+
     autoContainer* getCurrentContainer();
     autoContainer* getLastContainer();
 };
