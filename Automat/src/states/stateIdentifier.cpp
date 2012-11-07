@@ -1,5 +1,5 @@
 /* 
- * File:   z1.cpp
+ * File:   stateIdentifier.cpp
  * Author: Andy Perdana
  * 
  * Created on 30. Oktober 2012, 11:36
@@ -17,7 +17,7 @@ autoContainer* stateIdentifier::readChar(Automat* autom, autoContainer* con, cha
 		con->increaseCol();
 	}
 	else{
-		//iwie beim scanner ungetChar machen.
+		//iwie beim buffer ungetChar machen.
 		//autom->setState(iwie in startzustand gehen)
 	}
     return 0;

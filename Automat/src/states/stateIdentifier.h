@@ -1,5 +1,5 @@
 /* 
- * File:   z1.h
+ * File:   stateIdentifier.h
  * Author: Andy Perdana
  * 
  * Created on 30. Oktober 2012, 11:36

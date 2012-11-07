@@ -48,7 +48,7 @@ public:/*
     void setState(State* nextState);
     void read(char c);
     bool hasToken();
-    void setTokenFound();
+    void setTokenFound(int type);
     autoContainer* getCurrentContainer();
     autoContainer* getLastContainer();
 };

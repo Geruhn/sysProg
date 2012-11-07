@@ -52,9 +52,12 @@ bool Automat::hasToken(){
 
 /*
  * Function get called if a Token is found/finished.
+ * @param type Type of the found Token.
  */
-void Automat::setTokenFound(){
+void Automat::setTokenFound(int type){
 	isToken = true;
+	currentContainer->setType(type);
+
 }
 
 /*

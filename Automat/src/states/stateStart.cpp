@@ -29,8 +29,7 @@ autoContainer* stateStart::readChar(Automat* autom, autoContainer* con, char c) 
     }
     if( c == '\n'){
     	con->increaseLine();
-    	con->setType(0);
-    	autom->setTokenFound();
+    	autom->setTokenFound(0);
     	return con;
     }
     return 0;
