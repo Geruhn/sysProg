@@ -15,59 +15,25 @@
  */
 
 class autoContainer {
-    friend class State;
-public:
+
+public: 
     autoContainer();
-    autoContainer(int line, int col, int length, int nameLength, char* name, int type) {
-        this->line = line;
-        this->col = col;
-        this->length = length;
-        this->nameLenght = nameLength;
-        this->name = new char[nameLength + 1];
-        for (int i = 0; i < this->nameLenght; i++) {
-            this->name[i] = name[i];
-        }
-        name[nameLength] = '\0';
-        if(type>0 || type<4) {
-            this->type = type;
-        } else {
-            this->type = 0;
-        }
-    };
+    autoContainer(int line, int col);
     virtual ~autoContainer();
-    void increaseCol() {
-        this->col++;
-    }
-    void increaseLine() {
-        this->line++;
-    }
-    void increaseLength() {
-        this->length++;
-    }
-    void increaseNameLength() {
-        this->nameLenght++;
-    }
-    int getCol() {
-        return this->col;
-    };
-    int getLine() {
-        return this->line;
-    };
-    int getLength() {
-        return this->length;
-    }
-    int getNameLength() {
-        return this->nameLenght;
-    }
-    int getType() {
-        return this->type;
-    };
-    char* getName() {
-        return this->name;
-    }
-    
+
+    int getCol();
+    int getLine();
+    int getType();
+    int getLength();
+    char* getName();
+
+    void increaseCol();
+    void increaseLine();
+
+    void setType(int type);
+
 private:
-    int col, line, length, nameLenght, type;
+    int col, line, length, type;
     char* name;
 
 };

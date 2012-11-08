@@ -1,15 +1,20 @@
 /*
- * Automat.h
- *
- *  Created on: Oct 26, 2012
- *      Author: Andy Perdana
+ * File: Automat.h
+ * Created on: Oct 26, 2012
+ * Author: Andy Perdana
  */
 
 #ifndef Automat_H_
 #define Automat_H_
-//#include "State.h"
-//#include "states/stateStart.h"
-//#include "states/stateIdentifier.h"
+
+#include "State.h"
+#include "states/stateStart.h"
+#include "states/stateIdentifier.h"
+#include "states/stateDigit.h"
+
+#include "autoContainer.h"
+
+
 /**
  * The state machine class "Automat" starts with creating every state that is
  * needed to identify every possible token and errors. After that all the 
@@ -21,27 +26,25 @@
  * - Andy
  */
 class Automat {
-    //friend class State;
 
 private:
-    //int line, col,length;
-    const static int STATES = 2;
-    State *current;
-    State *states;
-public:/*
-    void increaseLine();
-    void increaseCol();
-    void increaseLength();
-    void decreaseLine();
-    void decreaseCol();
-    void decreaseLength();
-    void resetCol();
-    void resetLength();*/
+    bool isToken;
+    const int STATES = 3;
+    State *currentState;
+    State* states;
+    autoContainer *currentContainer, *lastContainer;
 
+public:
     Automat();
     virtual ~Automat();
-    void setState(State* nextState);
+
+    void setTokenFound(int type);
+    void setState(char* nextState);
     void read(char c);
+    bool hasToken();
+
+    autoContainer* getCurrentContainer();
+    autoContainer* getLastContainer();
 };
 
 #endif /* Automat_H_ */

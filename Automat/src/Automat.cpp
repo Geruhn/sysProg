@@ -5,9 +5,6 @@
  * Created on 26. Oktober 2012, 14:00
  */
 
-#include "State.h"
-#include "states/stateStart.h"
-#include "states/stateIdentifier.h"
 #include "Automat.h"
 
 /*
@@ -20,15 +17,14 @@
  * Zustände ändert. Und ins Array eingespeichert werden.
  */
 Automat::Automat() {
-    this->states = new State[this->STATES];
-    (states + 0) = new stateStart();
-    (states + 1) = new stateIdentifier();
-    
-    this->current = this->states;
-    
-    for(int i = 0; i < STATES; i++) {
-        this->states[i].startState();
-    }
+    isToken = false;
+
+    this->states = new State[STATES];
+    this->states[0] = new stateStart();
+    this->states[1] = new stateIdentifier();
+    this->states[2] = new stateDigit();
+
+    this->currentState = this->states[0];
 }
 
 Automat::~Automat() {
@@ -36,42 +32,61 @@ Automat::~Automat() {
 }
 /*
  * Funktion zum setzen des aktuellen Zustandes.
- * @param *nextState Pointer auf den aktuellen Zustand.
+ * @param nextState Pointer to the next State.
  */
-void Automat::setState(State *nextState) {
-    this->current = nextState;    
+void Automat::setState(char* nextState) {
+
+	switch(nextState) {
+
+	 case "Identifier": currentState = states[1];
+	 	 	 	 	   break;
+	 case "Digit": currentState = state[2];
+				      break;
+	 default: currentState = states[0];
+	 	 	         break;
+	}
 }
 
-void Automat::read(char c){
-	current->readChar(this, c);
-}
 /*
-void Automat::increaseLine(){
-	line++;
-}
-void Automat::increaseCol(){
-	col++;
-}
-
-void Automat::increaseLength(){
-	length++;
-}
-void Automat::decreaseLine(){
-	line++;
-}
-void Automat::decreaseCol(){
-	col++;
+ * Reads a character and return an autoContainer with information about the Token.
+ * @param c Character that the machine has to read.
+ */
+void Automat::read(char c){
+	currentContainer = currentState->readChar(this, currentContainer, c);
 }
 
-void Automat::decreaseLength(){
-	length++;
+/*
+ * Function signals if a Token was found.
+ * @return bool True if a new Token was found. False if there is no new Token.
+ */
+bool Automat::hasToken(){
+	return isToken;
 }
 
-void Automat::resetCol(){
-	col=0;
+/*
+ * Function get called if a Token is found/finished.
+ * @param type Type of the found Token.
+ */
+void Automat::setTokenFound(int type){
+	isToken = true;
+	currentContainer->setType(type);
 }
 
-void Automat::resetLength(){
-	length=0;
+/*
+ * Return a pointer to the autoContainer of the actuel found Token. If actually no Token was found,
+ * the function returns an Null-Pointer.
+ * @return autoContainer Pointer to the autoContainer of the Token.
+ */
+autoContainer* Automat::getCurrentContainer(){
+	if(isToken){
+		lastContainer = currentContainer;
+		isToken = false;
+		currentContainer = 0;
+		return lastContainer;
+	}
+	return 0;
 }
-*/
+
+autoContainer* Automat::getLastContainer(){
+	return lastContainer;
+}

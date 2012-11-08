@@ -6,9 +6,8 @@
  Author: knad0001
  */
 
-//TODO geöffnetes File muss noch geschlossen werden.
-//TODO Ende der Datei erkennen um sie zu schließen.
-//TODO Da immer 512 Pakte übergeben werden muss wenn nicht mehr genug da Rest iwie gefüllt werden.
+//TODO upgetChar() sollte noch richtig getestet werden.
+//TODO
 
 /*
  * couts hinzugefügt zum debuggen - Reinsch
@@ -98,7 +97,8 @@ void Buffer::openFile() {
 
 void Buffer::createFile() {
 	cout << endl << "in Buffer::createFile" << endl;
-	fdWr = creat(sourceFile, O_DIRECT);
+	fdWr = creat(sourceFile, O_DIRECT,S_IRWXO);
+	//fdWr = open(sourceFile, )
 	if(fdWr != -1){
 		isFileOpen = true;
 	}else{
@@ -107,11 +107,10 @@ void Buffer::createFile() {
 }
 
 void Buffer::fillBuffer() {
-	//cout << endl << "in Buffer::fillBuffer()" << endl;
 	if (isLeft) {
-		read(fdRe, baseLeft, 512); //evtl noch hochzählen also ein vielfaches von 512, für die nächsten 512 zeichen -Max
+		read(fdRe, baseLeft, 512);
 	} else {
-		read(fdRe, baseRight, 512); //siehe oben
+		read(fdRe, baseRight, 512);
 	}
 }
 

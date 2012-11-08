@@ -39,3 +39,7 @@ void Scanner::runScanner() {
 
 }
 
+/*
+ * Wenn Scanner ein abgeschloßenes Token erhalten hat muss er beim Buffer die Funktion ungetChar() aufrufen, außer
+ *  es handel sich dabei um ein Leerzeichen oder Zeilenumbruch.(Type = 0)
+ */

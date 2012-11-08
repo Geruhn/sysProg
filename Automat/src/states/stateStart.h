@@ -12,8 +12,8 @@
 
 class stateStart:public State {
 public:
-    autoContainer* readChar(Automat* autom, char c);
     stateStart();
+    autoContainer* readChar(Automat* autom, autoContainer* con, char c);
 private:  
     autoContainer current;
 };

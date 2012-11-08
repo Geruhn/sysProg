@@ -25,43 +25,44 @@ OBJSFORBUFFERLIB = $(LIBDIR)/Buffer.o #\
 #		Targets zum Bauen des Tests
 #
 
-makeTestBuffer: BufferTest
+# Linken der Object-files
 
-
-BufferTest: $(OBJS)
-	g++ -g $^ -o $(BINDIR)/BufferTest
+makeTestBuffer: $(OBJDIR)/Buffer.o 	$(OBJDIR)/TestBuffer.o
+	g++ -g $(OBJDIR)/Buffer.o 	$(OBJDIR)/TestBuffer.o  -o $(BINDIR)/BufferTest
 	
-# $^ liste der abhaengigkeiten
 
+# compilieren der Source-files
 
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp 
+$(OBJDIR)/Buffer.o :  $(SRCDIR)/Buffer.cpp 
 	@echo "g++ $*.cpp"
-	g++ -g  -c -Wall  -o $@  $<
+	g++ -g  -c -Wall  -o $(OBJDIR)/Buffer.o  $(SRCDIR)/Buffer.cpp
 
-# 
-# $@ name des object files
-# $< erste abhaengigkeit
+$(OBJDIR)/TestBuffer.o :  $(SRCDIR)/TestBuffer.cpp 
+	@echo "g++ $*.cpp"
+	g++ -g  -c -Wall  -o $(OBJDIR)/TestBuffer.o  $(SRCDIR)/TestBuffer.cpp
 
 
-# loeschen aller files im verzeichnis $(OBJDIR)
+
+
+# loeschen aller files im verzeichnis $(OBJDIR) und$(LIBDIR) und neu bauen
 
 cleanBuffer:
 	rm -rf $(OBJDIR)/*
 	rm -rf $(LIBDIR)/*
-	$(MAKE) BufferTest
+	$(MAKE) makeTestBuffer
 	
 
 #	
 # erstellen der shared library
 #
 
-BufferLib:$(OBJSFORBUFFERLIB)
-		g++ -shared  -o $(SHAREDLIB)/libBuffer.so $^ 
+BufferLib: $(LIBDIR)/Buffer.o
+		g++ -shared  -o $(SHAREDLIB)/libBuffer.so $(LIBDIR)/Buffer.o 
 
 	
-$(LIBDIR)/%.o :  $(SRCDIR)/%.cpp 
+$(LIBDIR)/Buffer.o :  $(SRCDIR)/Buffer.cpp 
 #	@mkdir -p `dirname $(OBJDIR)/$*.o`
 	@echo "g++ $*.cpp"
-	g++ -g  -c -fPIC  -o $@  $<
+	g++ -g  -c -fPIC  -o $(LIBDIR)/Buffer.o  $(SRCDIR)/Buffer.cpp 
 
 	
