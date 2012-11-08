@@ -18,6 +18,7 @@ Automat::Automat() {
     this->states = new State[STATES];
     this->states[0] = new stateStart();
     this->states[1] = new stateIdentifier();
+    this->states[2] = new stateDigit();
     
     this->currentState = this->states;
 }

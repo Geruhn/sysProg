@@ -6,9 +6,8 @@
  Author: knad0001
  */
 
-//TODO geöffnetes File muss noch geschlossen werden.
-//TODO Ende der Datei erkennen um sie zu schließen.
-//TODO Da immer 512 Pakte übergeben werden muss wenn nicht mehr genug da Rest iwie gefüllt werden.
+//TODO upgetChar() sollte noch richtig getestet werden.
+//TODO
 
 /*
  * couts hinzugefügt zum debuggen - Reinsch
@@ -90,7 +89,7 @@ void Buffer::ungetChar() {
 
 void Buffer::openFile() {
 	//cout << endl << "in Buffer::openFile()" << endl;
-	fdRe = open(sourceFile, O_DIRECT,0 777);
+	fdRe = open(sourceFile, O_DIRECT);
 	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
 	}

@@ -1,8 +1,7 @@
 /*
- * Automat.h
- *
- *  Created on: Oct 26, 2012
- *      Author: Andy Perdana
+ * File: Automat.h
+ * Created on: Oct 26, 2012
+ * Author: Andy Perdana
  */
 
 #ifndef Automat_H_
@@ -11,6 +10,8 @@
 #include "State.h"
 #include "states/stateStart.h"
 #include "states/stateIdentifier.h"
+#include "states/stateDigit.h"
+
 #include "autoContainer.h"
 
 

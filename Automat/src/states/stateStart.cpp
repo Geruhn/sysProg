@@ -32,6 +32,12 @@ autoContainer* stateStart::readChar(Automat* autom, autoContainer* con, char c) 
     	autom->setTokenFound(0);
     	return con;
     }
+
+    if( c >= '0' && c <= '9'){
+    	con->increaseCol();
+    	autom->setState("Digit");
+    	return con;
+    }
     return 0;
 }
 
