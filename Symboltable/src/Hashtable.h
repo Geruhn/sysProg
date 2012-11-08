@@ -14,17 +14,18 @@ class Hashtable {
 	List<List<Pair<type>*> >* table;
 	int size;
 
-	//berechnet den Hashcode
-	int hashcode(char* key, int lengthLexem) {
+	//berechnet den Hashcode, key = lexem
+	int hashcode(char* key, int lexemLength) {
 		int result = 0;
-		for (int i = 0; i < lengthLexem; i++) {
+		for (int i = 0; i < lexemLength; i++) {
 			result += (result * 42 + key[i]);
 		}
-		return (result % this->size);
+		return (result % this->size); //Hash wird zurückgegeben --max
 	}
 
 public:
-// Konstruktor
+
+	//Konstruktor
 	Hashtable(int nsize) {
 		this->size = nsize;
 		table = new List<List<Pair<type>*> > [this->size];
@@ -35,11 +36,28 @@ public:
 		delete[] this->table;
 	}
 
-	bool put(char* key, type value, int lengthLexem) {
+	//initialisiert Symboltabelle mit Tokens, Folie 52 --max
+	void initSymbols() {
+		put("print", "PrintToken", 5);
+		put("read", "ReadToken", 4);
+	}
+
+	//
+	int put(char* key, type value, int lengthLexem) {
 		int index = hashcode(key, lengthLexem);
+		bool isLexemAlreadyExisting = false;
+
 		Pair<type>* pair;
 
-		//l�uft bis zum Index
+		isLexemAlreadyExisting = contains(key,lengthLexem);
+
+		// key/lexem schon vorhanden
+
+		// key/lexem noch nicht vorhanden
+		Pair<type>* p1 = new Pair<type>(key, value);
+
+
+		//läuft bis zum Index in der 1ten Liste
 		for (int i = 0; i < table[index].getSize(); i++) {
 			pair = table[index].getValueAt(i);
 
@@ -52,7 +70,8 @@ public:
 		//fügt den neuen Wert an die Liste hinten an -> false
 		Pair<type>* p1 = new Pair<type>(key, value);
 		table[index].addLast(p1);
-		return false;
+
+		return index;
 	}
 
 	type get(char* key, int lengthLexem) {
@@ -63,7 +82,7 @@ public:
 		for (int i = 0; i < table[index].getSize(); i++) {
 			pair = table[index].getValueAt(i);
 
-			//Wert bereits vorhanden -> Wert
+			//Wert bereits vorhanden ->  Wert
 			if (pair->key == key) {
 				return pair->value;
 			}
@@ -87,10 +106,13 @@ public:
 		return false;
 	}
 
-	bool contains(char* key, int lengthLexem) { //entspricht lookup
+	//gibt zurück ob das lexem in der 1ten Liste schon vorhanden ist
+	bool contains(char* key, int lengthLexem) {
+
 		int index = hashcode(key, lengthLexem);
 		Pair<type>* pair;
 
+		//durchlaufen bis zum index, falls vorhanden return true, sonst false
 		for (int i = 0; i < table[index].getSize(); i++) {
 			pair = table[index].getValueAt(i);
 			if (pair->key == key) {
