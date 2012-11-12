@@ -18,12 +18,15 @@
 Buffer::Buffer(char* source) {
 	bufferLength = 512;
 
-	leftSide = new char[bufferLength + 1];
-	rightSide = new char[bufferLength + 1];
+
 
 	//Speicher für die 2 Buffer holen
 	posix_memalign((void**) &(this->leftSide), 512, bufferLength);
 	posix_memalign((void**) &(this->rightSide), 512, bufferLength);
+
+	//Buffer im reservierten Speicher anlegen --max
+	leftSide = new char[bufferLength + 1];
+	rightSide = new char[bufferLength + 1];
 
 	eof = 10;
 	fdRe = fdWr = 0;
@@ -89,7 +92,7 @@ void Buffer::ungetChar() {
 
 void Buffer::openFile() {
 	//cout << endl << "in Buffer::openFile()" << endl;
-	fdRe = open(sourceFile, O_DIRECT);
+	fdRe = open(sourceFile, O_DIRECT|O_RDONLY|O_CREAT|O_TRUNC,S_IRWXU);
 	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
 	}
@@ -97,7 +100,7 @@ void Buffer::openFile() {
 
 void Buffer::createFile() {
 	cout << endl << "in Buffer::createFile" << endl;
-	fdWr = creat(sourceFile, O_DIRECT,S_IRWXO);
+	fdWr = creat(sourceFile, O_DIRECT|O_WRONLY);
 	//fdWr = open(sourceFile, )
 	if(fdWr != -1){
 		isFileOpen = true;
