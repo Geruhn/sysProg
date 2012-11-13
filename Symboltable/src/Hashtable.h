@@ -11,7 +11,7 @@ using namespace std;
 template<class type>
 class Hashtable {
 
-	List<List<Pair<type>*> >* table;
+	List<Pair<type>*>* table;
 	int size;
 
 	//berechnet den Hashcode, key = lexem
@@ -28,7 +28,7 @@ public:
 	//Konstruktor
 	Hashtable(int nsize) {
 		this->size = nsize;
-		table = new List<List<Pair<type>*> > [this->size];
+		table = new List<List<Pair<type>*>*> [this->size];
 	}
 
 	//Destruktor
@@ -42,20 +42,24 @@ public:
 		put("read", "ReadToken", 4);
 	}
 
-	//
+	//Fügt den Key in die Liste an.
+	//Sollte der Key schon vorhanden sein, wird er in der 2ten Liste hinten angehängt --max
 	int put(char* key, type value, int lengthLexem) {
+
+		//Errechneter Wert aus dem Key
 		int index = hashcode(key, lengthLexem);
+		//Key schon vorhanden?
 		bool isLexemAlreadyExisting = false;
-
-		Pair<type>* pair;
-
 		isLexemAlreadyExisting = contains(key, lengthLexem);
 
-		// key/lexem schon vorhanden
-
-		// key bzw. lexem noch nicht vorhanden
+		Pair<type>* pair;
 		Pair<type>* p1 = new Pair<type>(key, value);
 
+		if(!isLexemAlreadyExisting){
+
+			table[index].setValue()
+
+		}
 		//läuft bis zum Index in der 1ten Liste
 		for (int i = 0; i < table[index].getSize(); i++) {
 			pair = table[index].getValueAt(i);
@@ -65,6 +69,12 @@ public:
 				pair->value = value;
 				return true;
 			}
+
+			//wenn key schon vorhanden
+			if(pair->key == key){
+
+			}
+
 		}
 		//fügt den neuen Wert an die Liste hinten an -> false
 		Pair<type>* p1 = new Pair<type>(key, value);
@@ -105,7 +115,7 @@ public:
 		return false;
 	}
 
-	//gibt zurück ob das lexem in der 1ten Liste schon vorhanden ist
+	//Gibt zurück ob der Key in der 1ten Liste schon vorhanden ist --max
 	bool contains(char* key, int lengthLexem) {
 
 		int index = hashcode(key, lengthLexem);

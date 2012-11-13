@@ -40,7 +40,7 @@ void Automat::setState(char* nextState) {
 
 	 case "Identifier": currentState = states[1];
 	 	 	 	 	   break;
-	 case "Digit": currentState = state[2];
+	 case "Digit": currentState = states[2];
 				      break;
 	 default: currentState = states[0];
 	 	 	         break;

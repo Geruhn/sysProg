@@ -4,13 +4,13 @@
 template<class type>
 class Pair {
 public:
-	char* key;
-	type value;
-
 	Pair(char* key, type value) {
 		this->key = key;
 		this->value = value;
 	}
+private:
+	char* key;
+	type value;
 
 };
 

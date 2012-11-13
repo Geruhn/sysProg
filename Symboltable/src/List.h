@@ -62,7 +62,7 @@ public:
 	}
 
 	//gibt den Wert an der Index'ten Stelle zurück
-	type getValueAt(int index) {
+	List* getValueAt(int index) {
 		if (index <= this->size && index >= 0) {
 			return this->first->getValueAt(index, 0);
 		} else {
