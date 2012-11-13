@@ -15,3 +15,7 @@ Symboltable::Symboltable() {
 Symboltable::~Symboltable() {
 	// TODO Auto-generated destructor stub
 }
+
+void Symboltable::inster(char* lex, int type){
+	//hashtable -> put je nach typ
+}

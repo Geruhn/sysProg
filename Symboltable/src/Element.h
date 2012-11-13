@@ -3,7 +3,7 @@
 
 /**
  *Element der Liste
- *max
+ *
  */
 template<class type>
 class Element {

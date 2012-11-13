@@ -8,7 +8,6 @@
 
 //TODO upgetChar() sollte noch richtig getestet werden.
 //TODO
-
 /*
  * couts hinzugefügt zum debuggen - Reinsch
  */
@@ -17,8 +16,6 @@
 
 Buffer::Buffer(char* source) {
 	bufferLength = 512;
-
-
 
 	//Speicher für die 2 Buffer holen
 	posix_memalign((void**) &(this->leftSide), 512, bufferLength);
@@ -45,12 +42,12 @@ Buffer::~Buffer() {
 char Buffer::getChar() {
 	current = next; //nimm das zuletzt als nächstes Zeichen gesetzt, als neues aktuelles Zeichen -Reinsch
 
-	if(!isFileOpen){ // Wenn noch keine Datei geöffnet oder erstellt wurde. -Reinsch
+	if (!isFileOpen) { // Wenn noch keine Datei geöffnet oder erstellt wurde. -Reinsch
 		openFile();
 		fillBuffer();
 	}
 
-	if(*current == eof){ //Testen ob Datei zuende ist. -Reinsch
+	if (*current == eof) { //Testen ob Datei zuende ist. -Reinsch
 		isEOF = true;
 		close(fdRe);
 		return *current;
@@ -92,20 +89,21 @@ void Buffer::ungetChar() {
 
 void Buffer::openFile() {
 	//cout << endl << "in Buffer::openFile()" << endl;
-	fdRe = open(sourceFile, O_DIRECT|O_RDONLY|O_CREAT|O_TRUNC,S_IRWXU);
-	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
+	fdRe = open(sourceFile, O_DIRECT | O_CREAT | O_TRUNC, S_IRWXU);
+	if (fdRe != -1) { //öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
 	}
 }
 
 void Buffer::createFile() {
 	cout << endl << "in Buffer::createFile" << endl;
-	fdWr = creat(sourceFile, O_DIRECT|O_WRONLY);
+	fdWr = creat(sourceFile, O_DIRECT);
 	//fdWr = open(sourceFile, )
-	if(fdWr != -1){
+	if (fdWr != -1) {
 		isFileOpen = true;
-	}else{
-		cout << endl << "!!! FEHLER BEIM ERSTELLEN DER DATEI FD: " << fdWr << " !!!" << endl;
+	} else {
+		cout << endl << "!!! FEHLER BEIM ERSTELLEN DER DATEI FD: " << fdWr
+				<< " !!!" << endl;
 	}
 }
 
@@ -118,42 +116,42 @@ void Buffer::fillBuffer() {
 }
 
 //Bekommt einzelne Zeichen, speichert sie zwischen und schreibt sie wenn das Array voll ist in die Datei -Reinsch
-void Buffer::putChar(char c){
+void Buffer::putChar(char c) {
 	current = next;
 
-	if(!isFileOpen){
+	if (!isFileOpen) {
 		createFile();
 	}
 
-	if(c == eof){ //Letztes Zeiches
+	if (c == eof) { //Letztes Zeiches
 		*current = c; //Rest in Datei schreiben
-		if(isLeft){ //Schauen das Reihenfolge beim schreiben stimmt.
-			for(int i = 0; current != (baseLeft + (bufferLength - 1 - i)); i++){ //rest des Speichers mit Leerzeichen füllen
+		if (isLeft) { //Schauen das Reihenfolge beim schreiben stimmt.
+			for (int i = 0; current != (baseLeft + (bufferLength - 1 - i));
+					i++) { //rest des Speichers mit Leerzeichen füllen
 				*(baseLeft + (bufferLength - 1 - i)) = 32;
 			}
-			if(*(baseRight + (bufferLength - 1)) != NULL){
+			if (*(baseRight + (bufferLength - 1)) != NULL) {
 				write(fdWr, baseRight, bufferLength);
 			}
 			write(fdWr, baseLeft, bufferLength);
-		}
-		else{
-			for(int i = 0; current != (baseRight + (bufferLength - 1 - i)); i++){ //rest des Speichers mit Leerzeichen füllen
-							*(baseRight + (bufferLength - 1 - i)) = 32;
+		} else {
+			for (int i = 0; current != (baseRight + (bufferLength - 1 - i));
+					i++) { //rest des Speichers mit Leerzeichen füllen
+				*(baseRight + (bufferLength - 1 - i)) = 32;
 			}
-			if(*(baseLeft + (bufferLength -1)) != NULL ){
+			if (*(baseLeft + (bufferLength - 1)) != NULL) {
 				write(fdWr, baseLeft, bufferLength);
 			}
 			write(fdWr, baseRight, bufferLength);
 		}
 		cout << endl << "Close File" << endl;
-		if(close(fdWr) == -1){
+		if (close(fdWr) == -1) {
 			cout << "Fehler beim schließen der Datei";
 		}
-	}
-	else{
+	} else {
 		//Fülle so lange linkes Array bis es voll ist. Danach das Rechte. Ist das voll wird das Linke geschrieben usw.
-		if(current == baseLeft + (bufferLength -1)){
-			if(*baseRight != NULL){ //das kein leeres Array in Datei geschrieben wird
+		if (current == baseLeft + (bufferLength - 1)) {
+			if (*baseRight != NULL) { //das kein leeres Array in Datei geschrieben wird
 				write(fdWr, baseRight, bufferLength);
 			}
 			cout << "Linke Seite voll" << endl;
@@ -163,8 +161,8 @@ void Buffer::putChar(char c){
 			cout << *current;
 			return;
 		}
-		if(current == baseRight + (bufferLength -1)){
-			if(*baseLeft != NULL){ //das kein leeres Array in Datei geschrieben wird
+		if (current == baseRight + (bufferLength - 1)) {
+			if (*baseLeft != NULL) { //das kein leeres Array in Datei geschrieben wird
 				write(fdWr, baseLeft, bufferLength);
 			}
 			cout << "Rechte Seite voll" << endl;
@@ -176,15 +174,15 @@ void Buffer::putChar(char c){
 		}
 		next++;
 		*current = c;
-		cout <<  *current;
+		cout << *current;
 	}
 }
 
-bool Buffer::hasNext(){
+bool Buffer::hasNext() {
 	return !isEOF;
 }
 
-void Buffer::closeFiles(){ //schließt die geöffneten Dateien wieder -max
+void Buffer::closeFiles() { //schließt die geöffneten Dateien wieder -max
 	close(fdRe);
 	close(fdWr);
 }

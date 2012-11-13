@@ -49,13 +49,12 @@ public:
 
 		Pair<type>* pair;
 
-		isLexemAlreadyExisting = contains(key,lengthLexem);
+		isLexemAlreadyExisting = contains(key, lengthLexem);
 
 		// key/lexem schon vorhanden
 
-		// key/lexem noch nicht vorhanden
+		// key bzw. lexem noch nicht vorhanden
 		Pair<type>* p1 = new Pair<type>(key, value);
-
 
 		//läuft bis zum Index in der 1ten Liste
 		for (int i = 0; i < table[index].getSize(); i++) {
