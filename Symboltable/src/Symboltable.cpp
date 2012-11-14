@@ -18,16 +18,6 @@ Symboltable::~Symboltable() {
 
 void Symboltable::insert(char* lex, int type) {
 
-	switch (type) {
 
-	case 1: //word
-		break;
-	case 2: //value
-		break;
-	case 3: //symbol
-		break;
-	default: //fehler
-		break;
-	}
 
 }

@@ -28,7 +28,8 @@ public:
 	//Konstruktor
 	Hashtable(int nsize) {
 		this->size = nsize;
-		table = new List<List<Pair<type>*>*> [this->size];
+		//
+		table = new List<Pair<type>*>* [this->size];
 	}
 
 	//Destruktor
@@ -44,46 +45,36 @@ public:
 
 	//Fügt den Key in die Liste an.
 	//Sollte der Key schon vorhanden sein, wird er in der 2ten Liste hinten angehängt --max
-	int put(char* key, type value, int lengthLexem) {
+	Pair* put(char* lexem, type value, int lengthLexem) {
 
-		//Errechneter Wert aus dem Key
-		int index = hashcode(key, lengthLexem);
+		//Errechneter Wert aus dem Key/Lexem
+		int index = hashcode(lexem, lengthLexem);
+
+		//überflüssig
 		//Key schon vorhanden?
-		bool isLexemAlreadyExisting = false;
-		isLexemAlreadyExisting = contains(key, lengthLexem);
+		//bool isLexemAlreadyExisting = false;
+		//isLexemAlreadyExisting = contains(lexem, lengthLexem);
 
 		Pair<type>* pair;
-		Pair<type>* p1 = new Pair<type>(key, value);
+		Pair<type>* p1 = new Pair<type>(lexem, value);
 
-		if(!isLexemAlreadyExisting){
-
-			table[index].setValue()
-
-		}
-		//läuft bis zum Index in der 1ten Liste
+		//läuft bis zum Index in der Liste
 		for (int i = 0; i < table[index].getSize(); i++) {
 			pair = table[index].getValueAt(i);
-
-			//sollte der Wert schon vorhanden sein -> true
-			if (pair->key == key) {
-				pair->value = value;
-				return true;
-			}
-
-			//wenn key schon vorhanden
-			if(pair->key == key){
-
+			//sollte der Wert schon vorhanden sein -> Pointer auf das Info Objekt zurückgeben
+			if (pair->key == lexem) {
+				return pair;
 			}
 
 		}
-		//fügt den neuen Wert an die Liste hinten an -> false
-		Pair<type>* p1 = new Pair<type>(key, value);
+		//Nicht vorhanden, fügt den neuen Wert an die Liste an
+		Pair<type>* p1 = new Pair<type>(lexem, value);
 		table[index].addLast(p1);
-
-		return index;
+		return p1;
 	}
 
-	type get(char* key, int lengthLexem) {
+	//Gibt einen Pointer auf das Pair/Info
+	Pair* get(char* key, int lengthLexem) {
 		int index = hashcode(key, lengthLexem);
 		Pair<type>* pair;
 
@@ -93,11 +84,11 @@ public:
 
 			//Wert bereits vorhanden ->  Wert
 			if (pair->key == key) {
-				return pair->value;
+				return pair;
 			}
 		}
-		//Wert nicht vorhanden Fehlermeldung
-		throw "Key nicht vorhanden";
+		//Wert nicht dann vorhanden Fehlermeldung
+		return -1;
 	}
 
 	bool remove(char* key, int lengthLexem) {

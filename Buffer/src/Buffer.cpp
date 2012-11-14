@@ -89,7 +89,7 @@ void Buffer::ungetChar() {
 
 void Buffer::openFile() {
 	//cout << endl << "in Buffer::openFile()" << endl;
-	fdRe = open(sourceFile, O_DIRECT | O_CREAT | O_TRUNC, S_IRWXU);
+	fdRe = open(sourceFile, O_DIRECT);
 	if (fdRe != -1) { //öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
 	}
