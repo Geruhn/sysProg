@@ -13,6 +13,8 @@
         </df>
         <df name="src">
           <df name="states">
+            <in>stateDigit.cpp</in>
+            <in>stateDigit.h</in>
             <in>stateIdentifier.cpp</in>
             <in>stateIdentifier.h</in>
             <in>stateStart.cpp</in>
@@ -37,6 +39,9 @@
         </df>
       </df>
       <df name="Scanner">
+        <df name="debug">
+          <in>ScannerTest</in>
+        </df>
         <df name="lib">
         </df>
         <df name="src">
@@ -47,10 +52,13 @@
       </df>
       <df name="Symboltable">
         <df name="debug">
+          <in>SymboltableTest</in>
         </df>
         <df name="src">
-          <in>Symboltable.cpp</in>
-          <in>Symboltable.h</in>
+          <in>Element.h</in>
+          <in>Hashtable.h</in>
+          <in>List.h</in>
+          <in>Pair.h</in>
           <in>TestSymboltable.cpp</in>
         </df>
       </df>
@@ -96,10 +104,6 @@
       </item>
       <item path="Automat/src/TestAutomat.cpp" ex="true" tool="1" flavor2="0">
       </item>
-      <item path="Automat/src/states/stateStart.cpp" ex="true" tool="1" flavor2="0">
-      </item>
-      <item path="Automat/src/states/stateStart.h" ex="true" tool="3" flavor2="0">
-      </item>
       <item path="Buffer/src/Buffer.cpp" ex="true" tool="1" flavor2="0">
       </item>
       <item path="Buffer/src/Buffer.h" ex="true" tool="3" flavor2="0">
@@ -111,10 +115,6 @@
       <item path="Scanner/src/Scanner.h" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Scanner/src/TestScanner.cpp" ex="true" tool="1" flavor2="0">
-      </item>
-      <item path="Symboltable/src/Symboltable.cpp" ex="true" tool="1" flavor2="0">
-      </item>
-      <item path="Symboltable/src/Symboltable.h" ex="true" tool="3" flavor2="0">
       </item>
       <item path="Symboltable/src/TestSymboltable.cpp" ex="true" tool="1" flavor2="0">
       </item>

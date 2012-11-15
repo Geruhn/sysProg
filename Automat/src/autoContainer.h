@@ -17,8 +17,9 @@
 class autoContainer {
 
 public: 
-    autoContainer();
-    autoContainer(int line, int col);
+    //autoContainer();
+    //autoContainer(int line, int col);
+    autoContainer(int line, int col, int length, char c, int type);
     virtual ~autoContainer();
 
     int getCol();

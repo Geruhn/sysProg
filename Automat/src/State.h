@@ -22,17 +22,29 @@ class State {
 
 public:
     State();
-    void startState(State* states, int arrayLength);
-    //virtual State* mkState();
+    /**
+     * Eigene Umsetzung der startState in jedem Zustand, dann werden nur die 
+     * Pointer auf relevante Zustände abgespeichert.
+     * 
+     * @param states alle Zustände die der Automat kennt in einer fest 
+     *                  definierten Reihenfolge, wird diese im Automat geändert
+     *                  muss die Zuordnung in den betroffenen Zuständen 
+     *                  angepasst werden.
+     * @param arrayLength Die Menge aller Zustände, ist wichtig um nicht in 
+     *                          einen OutOfArray-Fehler zu produzieren.
+     */
+    virtual void startState(State* states, int arrayLength);
     virtual ~State();
     /**
      * Frägt vorm Einlesen eines chars, ob der Zustand schon startbereit ist 
      * (started == true), 
-     * @param autom Der zugehörige Automat
+     * @param autom Der zugehörige Automat, darüber kann dann die 
+     *                  getCurrentContainer() aufgerufen werden und es wird 
+     *                  immer der aktuellste Container
      * @param c Der einzulesende char.
      * @return Info-Container, s. autoContainer-Doku
      */
-    virtual autoContainer* readChar(Automat* autom, autoContainer* con, char c);
+    virtual autoContainer* readChar(Automat* autom, char c);
 
 
 private:

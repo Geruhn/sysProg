@@ -6,17 +6,30 @@
  */
 
 #include "autoContainer.h"
-
+/**
+ * Gibt's für den Standardkonstruktor irgendeine Verwendung? Der muss ja
+ * eigentlich immer sofort mit Daten bzgl Typ, c etc. gefüttert werden, oder? 
+ * So lange würde ich das auskommentiert lassen, damit's keiner nutzt.
+ * - Andy
+ */
+/*
 autoContainer::autoContainer(){
 	line = 1;
 	type = length = col = 0;
-}
+}*/
 
-autoContainer::autoContainer(int line, int col){
-	this->line = line;
-	this->col = col;
-	length = 0;
-	type = 0;
+autoContainer::autoContainer(int line, int col, int length, char c, int type){
+    this->line = line;
+    this->col = col;
+    this->length = length;
+    this->name = new char[2];
+    this->name[0] = c;
+    this->name[1] = '\0';
+    if(type>0 || type<4) {
+        this->type = type;
+    } else {
+        this->type = 0;
+    }
 }
 
 int autoContainer::getCol(){
@@ -47,7 +60,7 @@ void autoContainer::increaseCol(){
 void autoContainer::increaseLine(){
 	col = 1;
 	line++;
-	length++;
+	length = 0;
 }
 
 void autoContainer::setType(int type){

@@ -39,9 +39,14 @@ public:
     virtual ~Automat();
 
     void setTokenFound(int type);
-    void setState(char* nextState);
+    void setState(State* nextState);
     void read(char c);
-    bool hasToken();
+    /**
+     * Sollte es nicht geben, soll über die type-Variable des Containers heraus
+     * gefunden werden. Also wird sie jetzt auskommentiert. - Andy
+     * @return hasToken
+     */
+    //bool hasToken();
 
     autoContainer* getCurrentContainer();
     autoContainer* getLastContainer();

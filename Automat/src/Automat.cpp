@@ -17,14 +17,14 @@
  * Zustände ändert. Und ins Array eingespeichert werden.
  */
 Automat::Automat() {
-    isToken = false;
+    //isToken = false;
 
     this->states = new State[STATES];
     this->states[0] = new stateStart();
     this->states[1] = new stateIdentifier();
     this->states[2] = new stateDigit();
 
-    this->currentState = this->states[0];
+    this->currentState = this->states;
 }
 
 Automat::~Automat() {
@@ -32,19 +32,11 @@ Automat::~Automat() {
 }
 /*
  * Funktion zum setzen des aktuellen Zustandes.
+ * FYI: Erst ab Java7 ist es möglich switch-case mit einem String zu machen.
  * @param nextState Pointer to the next State.
  */
-void Automat::setState(char* nextState) {
-
-	switch(nextState) {
-
-	 case "Identifier": currentState = states[1];
-	 	 	 	 	   break;
-	 case "Digit": currentState = state[2];
-				      break;
-	 default: currentState = states[0];
-	 	 	         break;
-	}
+void Automat::setState(State* nextState) {
+    this->currentState = nextState;
 }
 
 /*
@@ -59,34 +51,31 @@ void Automat::read(char c){
  * Function signals if a Token was found.
  * @return bool True if a new Token was found. False if there is no new Token.
  */
+/*
 bool Automat::hasToken(){
 	return isToken;
 }
+ */
 
 /*
  * Function get called if a Token is found/finished.
  * @param type Type of the found Token.
  */
+/* Begründung s. hasToken.
 void Automat::setTokenFound(int type){
 	isToken = true;
 	currentContainer->setType(type);
 }
+*/
 
-/*
- * Return a pointer to the autoContainer of the actuel found Token. If actually no Token was found,
- * the function returns an Null-Pointer.
- * @return autoContainer Pointer to the autoContainer of the Token.
+/** 
+ * 
+ * @return Pointer to the current autoContainer
  */
 autoContainer* Automat::getCurrentContainer(){
-	if(isToken){
-		lastContainer = currentContainer;
-		isToken = false;
-		currentContainer = 0;
-		return lastContainer;
-	}
-	return 0;
+    return currentContainer;
 }
 
 autoContainer* Automat::getLastContainer(){
-	return lastContainer;
+    return lastContainer;
 }
