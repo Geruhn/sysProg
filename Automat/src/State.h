@@ -16,7 +16,7 @@
 #define	STATE_H
 
 #include "autoContainer.h"
-#include "Automat.h"
+//#include "Automat.h"
 
 class State {
 
@@ -33,7 +33,7 @@ public:
      * @param arrayLength Die Menge aller Zustände, ist wichtig um nicht in 
      *                          einen OutOfArray-Fehler zu produzieren.
      */
-    virtual void startState(State* states, int arrayLength);
+    virtual void startState(State* states, int arrayLength) = 0;
     virtual ~State();
     /**
      * Frägt vorm Einlesen eines chars, ob der Zustand schon startbereit ist 
@@ -44,17 +44,17 @@ public:
      * @param c Der einzulesende char.
      * @return Info-Container, s. autoContainer-Doku
      */
-    virtual autoContainer* readChar(Automat* autom, char c);
+    virtual autoContainer* readChar(Automat* autom, char c) = 0;
 
 
 private:
-    State* states;
-    int arrayLength;
+    //virtual State* states;
+    //virtual int arrayLength;
     /**
      * Gibt an, ob der Zustand schon startbereit ist, ist dies nicht so, soll
      * die readChar-Funktion einen Fehler werfen.
      */
-    bool started;
+    //virtual bool started;
 };
 
 #endif	/* STATE_H */

@@ -13,6 +13,7 @@
 #include "states/stateDigit.h"
 
 #include "autoContainer.h"
+//#include "../../Scanner/src/Scanner.h"
 
 
 /**
@@ -28,19 +29,22 @@
 class Automat {
 
 private:
-    bool isToken;
+    //bool isToken;
     const int STATES = 3;
     State *currentState;
-    State* states;
+    State *states;
     autoContainer *currentContainer, *lastContainer;
+//    Scanner scanner;
 
 public:
     Automat();
     virtual ~Automat();
 
-    void setTokenFound(int type);
+    //void setTokenFound(int type);
     void setState(State* nextState);
-    void read(char c);
+    void read(const char* c);
+    void ungetChar(const char* c);
+    void ungetChar(const char* chars, int arrayLength);
     /**
      * Sollte es nicht geben, soll über die type-Variable des Containers heraus
      * gefunden werden. Also wird sie jetzt auskommentiert. - Andy

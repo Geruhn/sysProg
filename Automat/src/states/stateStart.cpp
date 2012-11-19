@@ -8,36 +8,66 @@
 
 //#include "../State.h"
 #include "stateStart.h"
-
+#include "../autoContainer.h"
+#include "src/Automat.h"
+//type = 0
 stateStart::stateStart() {
 
 }
-
-autoContainer* stateStart::readChar(Automat* autom, autoContainer* con, char c) {
-    if(con == 0) { //testen, ob wir am anfang der Datei sind, dann defualt Konstuktor sonst letzten autoContainer nach aktueller zeile etc fragen
-    	if(autom->getLastContainer() == 0){
-    		con = new autoContainer();
-    	}
-    	else{
-    		con = new autoContainer(autom->getLastContainer()->getLine(), autom->getLastContainer()->getCol());
-    	}
+/**
+ * Wird vom Automaten aufgerufen über currentState->readChar(), d.h. dem Automat
+ * ist nicht bewusst, welcher Zustand nun liest.
+ * @param autom Pointer auf aufrufenden Automaten, dadurch wird immer der Weg 
+ *                      zurück gefunden
+ * @param c der einzulesende Char
+ * @return 
+ */
+autoContainer* stateStart::readChar(Automat* autom, const char* c) {
+    autoContainer* current;
+    
+    // @if: Unterscheidung, ob der letzte autoContainer vorhanden ist
+    if(autom->getCurrentContainer() == 0) {
+        current = new autoContainer();
+    } else {
+        current = autom->getCurrentContainer();
     }
-    if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
-            con->increaseCol();
-            autom->setState("Identifier");
-            return con;
+    
+    //@if: Unterscheidung, welcher Übergang jetzt genommen wird.
+    if( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
+        current->increaseCol();
+        current->setType(1);
+        autom->setState(states+1); //Identifier
+    } else if( c == '\n'){ //Für Zeilenumbrüche
+        if(current->getType() == 0) {
+            current->increaseLine();
+            current->setType(4);                  //new Line
+        } else {
+            autom->ungetChar(c);
+        }
+    } else if(c == 32) { //Für Leerzeichen
+        if(current->getType() == 0) {
+            current->increaseCol();
+            current->setType(5);
+        } else {
+            autom->ungetChar(c);
+        }
+    } else if( c >= '0' && c <= '9'){
+    	current->increaseCol();
+        current->setType(2);
+    	autom->setState(states+2);
     }
-    if( c == '\n' || c == 32){ //Für Leerzeichen und Zeilenumbrüche
-    	con->increaseLine();
-    	autom->setTokenFound(0);
-    	return con;
-    }
-
-    if( c >= '0' && c <= '9'){
-    	con->increaseCol();
-    	autom->setState("Digit");
-    	return con;
-    }
-    return 0;
+    
+    return current;
 }
 
+
+void stateStart::startState(State* states, int arrayLength) {
+    if(!(this->started)) {
+        this->arrayLength = arrayLength;
+        this->states = new State[arrayLength];
+        for(int i = 0; i < arrayLength; i++) {
+            this->states[i] = states[i];
+        }
+        started = true;
+    }
+}

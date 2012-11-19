@@ -25,6 +25,10 @@ Automat::Automat() {
     this->states[2] = new stateDigit();
 
     this->currentState = this->states;
+    
+    for(int i = 0; i < this->STATES; i++) {
+        (states+i)->startState(states, STATES);
+    }
 }
 
 Automat::~Automat() {
@@ -43,8 +47,17 @@ void Automat::setState(State* nextState) {
  * Reads a character and return an autoContainer with information about the Token.
  * @param c Character that the machine has to read.
  */
-void Automat::read(char c){
-	currentContainer = currentState->readChar(this, currentContainer, c);
+void Automat::read(const char* c){
+	this->currentContainer = this->currentState->readChar(this, c);
+}
+
+void Automat::ungetChar(const char* c) {
+    this->ungetChar(c, 1);
+}
+void Automat::ungetChar(const char* chars, int arrayLength) {
+    for(int i = 0; i < arrayLength; i++) {
+        //this->scanner->ungetChar((chars + i)*);
+    }
 }
 
 /*

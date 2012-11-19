@@ -8,9 +8,9 @@
 #ifndef SCANNER_H_
 #define SCANNER_H_
 
-#include"Buffer.h"
-#include"Automat.h"
-#include"Hashtable.h"
+#include"../../Buffer/src/Buffer.h"
+#include"../../Automat/src/Automat.h"
+#include"../../Symboltable/src/Hashtable.h"
 
 class Scanner {
 public:

@@ -8,14 +8,18 @@
 #ifndef STATEIDENTIFIER_H
 #define	STATEIDENTIFIER_H
 
-#include "../State.h"
-#include "stateStart.h"
+//#include "../State.h"
+//#include "stateStart.h"
 
 class stateIdentifier:public State {
 public:
-    autoContainer* readChar(Automat* autom, autoContainer* con, char c);
-private:
     stateIdentifier();
+    void startState(State* states, int arrayLength);
+    autoContainer* readChar(Automat* autom, const char* c);
+private:
+    State* states;
+    int arrayLength;
+    bool started;
 };
 
 #endif	/* STATEIDENTIFIER_H */

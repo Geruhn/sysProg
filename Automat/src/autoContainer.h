@@ -10,16 +10,16 @@
 
 /*
  * The variable type indicates if the container contains an identifier or a key
- * word (=1), a value (=2), a symbol (=3) of if a failure occured and the 
- * automat tried to submit something unknown (=0). 
+ * word (=1), a value (=2), a symbol (=3), a new line (=4), a blankspace, the automat tried 
+ * to submit something yet unidentified (=0) or an error (=-1). 
  */
 
 class autoContainer {
-
 public: 
-    //autoContainer();
+    autoContainer();
+    autoContainer(autoContainer* old);
     //autoContainer(int line, int col);
-    autoContainer(int line, int col, int length, char c, int type);
+    //autoContainer(int line, int col, int length, char c, int type);
     virtual ~autoContainer();
 
     int getCol();

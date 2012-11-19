@@ -7,17 +7,26 @@
 
 #include "autoContainer.h"
 /**
- * Gibt's für den Standardkonstruktor irgendeine Verwendung? Der muss ja
- * eigentlich immer sofort mit Daten bzgl Typ, c etc. gefüttert werden, oder? 
- * So lange würde ich das auskommentiert lassen, damit's keiner nutzt.
- * - Andy
+ * Einzige Verwendung, wenn es noch keinen Container gab.
  */
-/*
-autoContainer::autoContainer(){
-	line = 1;
-	type = length = col = 0;
-}*/
 
+autoContainer::autoContainer(){
+    line = 1;
+    type = length = col = 0;
+}
+
+autoContainer::autoContainer(autoContainer* old) {
+    this->line = old->line;
+    this->col = old->col;
+    this->type = old->type;
+    this->length = old->length;
+    this->name = new char[this->length + 1];
+    for (int i = 0; i < this->length; i++) {
+        this->(name + i) = old->(name + i);
+    }
+    this->(name + length) = '\0';
+}
+/*
 autoContainer::autoContainer(int line, int col, int length, char c, int type){
     this->line = line;
     this->col = col;
@@ -31,7 +40,7 @@ autoContainer::autoContainer(int line, int col, int length, char c, int type){
         this->type = 0;
     }
 }
-
+*/
 int autoContainer::getCol(){
 	return col;
 }
@@ -63,6 +72,11 @@ void autoContainer::increaseLine(){
 	length = 0;
 }
 
+/**
+ * Setzt die Typ-Variante um, so dass feststellbar ist, welches Lexem in diesem
+ * Container abgespeichert ist.
+ * @param type s. autoContainer.h für Aufschlüsselung aller möglichen Typen
+ */
 void autoContainer::setType(int type){
 	this->type = type;
 }

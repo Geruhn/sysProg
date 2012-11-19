@@ -49,16 +49,16 @@ $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp
 # loeschen aller files im verzeichnis $(OBJDIR)
 
 cleanAutomat:
-	rm -rf $(OBJDIR)/*
-	rm -rf $(LIBDIR)/*
+	rm -rf $(OBJDIR)
+	rm -rf $(LIBDIR)
 	#rm -f $(OBJDIR)/states/*
 	#rm -f $(LIBDIR)/states/*
 	#$(MAKE) TestAutomat
 	#Legt alle Ordner wieder an, nachdem sie gelöscht wurden.
-	mkdir $(OBJDIR)
-	mkdir $(LIBDIR)
-	mkdir $(OBJDIR)/states
-	mkdir $(LIBDIR)/states
+	#mkdir $(OBJDIR)
+	#mkdir $(LIBDIR)
+	mkdir -p $(OBJDIR)/states
+	mkdir -p $(LIBDIR)/states
 	
 	
 #

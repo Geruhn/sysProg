@@ -40,7 +40,6 @@
       </df>
       <df name="Scanner">
         <df name="debug">
-          <in>ScannerTest</in>
         </df>
         <df name="lib">
         </df>
@@ -52,7 +51,6 @@
       </df>
       <df name="Symboltable">
         <df name="debug">
-          <in>SymboltableTest</in>
         </df>
         <df name="src">
           <in>Element.h</in>
