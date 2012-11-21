@@ -16,7 +16,7 @@
 #define	STATE_H
 
 #include "autoContainer.h"
-//#include "Automat.h"
+#include "Automat.h"
 
 class State {
 

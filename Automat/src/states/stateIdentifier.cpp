@@ -13,23 +13,37 @@ stateIdentifier::stateIdentifier() {
 
 }
 
+/**
+ * Wird vom Automaten aufgerufen über currentState->readChar(), d.h. dem Automat
+ * ist nicht bewusst, welcher Zustand nun liest.
+ * @param autom Pointer auf aufrufenden Automaten, dadurch wird immer der Weg 
+ *                      zurück gefunden
+ * @param c der einzulesende Char
+ * 
+ * @return den Pointer auf den aktualisierten autoContainer
+ */
 autoContainer* stateIdentifier::readChar(Automat* autom, const char* c) {
-	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) || (c >=  '0' && c <= '9')){
-		con->increaseCol();
-		return con;
-	}
-	if(c == '\n' | c == 32){
-//		autom->setTokenFound(1);
-		autom->setState("Start");
-	}
-	else{//error
-		con->increaseCol();
-//		autom->setTokenFound(-1);
-		autom->setState("Start");
-	}
-    return 0;
+    autoContainer* current;
+    
+    // @if: Unterscheidung, ob der letzte autoContainer vorhanden ist
+    if(autom->getCurrentContainer() == 0) {
+        current = new autoContainer();
+    } else {
+        current = autom->getCurrentContainer();
+    }
+    
+    //Übergänge einfügen
+    
+    return current;
 }
 
 void stateIdentifier::startState(State* states, int arrayLength) {
-    
+    if(!(this->started)) {
+        this->arrayLength = arrayLength;
+        this->states = new State[arrayLength];
+        for(int i = 0; i < arrayLength; i++) {
+            this->states[i] = states[i];
+        }
+        started = true;
+    }
 }

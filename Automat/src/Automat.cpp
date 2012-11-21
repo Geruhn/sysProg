@@ -20,11 +20,11 @@ Automat::Automat() {
     //isToken = false;
 
     this->states = new State[STATES];
-    this->states[0] = new stateStart();
-    this->states[1] = new stateIdentifier();
-    this->states[2] = new stateDigit();
+    this->states[0] = (State) new stateStart();
+    this->states[1] = (State) new stateIdentifier();
+    this->states[2] = (State) new stateDigit();
 
-    this->currentState = this->states;
+    this->currentState = (State) this->states;
     
     for(int i = 0; i < this->STATES; i++) {
         (states+i)->startState(states, STATES);
@@ -48,7 +48,7 @@ void Automat::setState(State* nextState) {
  * @param c Character that the machine has to read.
  */
 void Automat::read(const char* c){
-	this->currentContainer = this->currentState->readChar(this, c);
+    this->currentContainer = this->currentState->readChar(this, c);
 }
 
 void Automat::ungetChar(const char* c) {

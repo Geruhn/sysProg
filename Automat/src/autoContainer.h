@@ -10,8 +10,9 @@
 
 /*
  * The variable type indicates if the container contains an identifier or a key
- * word (=1), a value (=2), a symbol (=3), a new line (=4), a blankspace, the automat tried 
- * to submit something yet unidentified (=0) or an error (=-1). 
+ * word (=1), a value (=2), a symbol (=3), a new line (=4), a blankspace (=5), 
+ * the automat tried  * to submit something yet unidentified (=0) or an error 
+ * (=-1). 
  */
 
 class autoContainer {

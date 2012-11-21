@@ -9,18 +9,21 @@
 //#include "../State.h"
 #include "stateStart.h"
 #include "../autoContainer.h"
-#include "src/Automat.h"
+//#include "src/Automat.h"
+
 //type = 0
 stateStart::stateStart() {
 
 }
+
 /**
  * Wird vom Automaten aufgerufen über currentState->readChar(), d.h. dem Automat
  * ist nicht bewusst, welcher Zustand nun liest.
  * @param autom Pointer auf aufrufenden Automaten, dadurch wird immer der Weg 
  *                      zurück gefunden
  * @param c der einzulesende Char
- * @return 
+ * 
+ * @return den Pointer auf den aktualisierten autoContainer
  */
 autoContainer* stateStart::readChar(Automat* autom, const char* c) {
     autoContainer* current;
