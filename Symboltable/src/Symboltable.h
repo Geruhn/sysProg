@@ -14,7 +14,7 @@ class Symboltable {
 public:
 	Symboltable();
 	virtual ~Symboltable();
-	void insert(char* lex, int type);
+	char* insert(char* lex, int type);
 };
 
 #endif /* SYMBOLTABLE_H_ */

@@ -1,15 +1,16 @@
 /*
- * Buffer.h
- *
- *  Created on: Sep 26, 2012
- *      Author: knad0001
- */
+* Buffer.h
+*
+* Created on: Sep 26, 2012
+* Author: knad0001
+*/
 
 #ifndef BUFFER_H_
 #define BUFFER_H_
 
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 //nur zum Testen eingefügt -Reinsch

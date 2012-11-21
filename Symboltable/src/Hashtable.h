@@ -17,11 +17,28 @@ class Hashtable {
 
 	//berechnet den Hashcode, key = lexem
 	int hashcode(char* key, int lexemLength) {
+		//old hashfunction
+//		int result = 0;
+//		for (int i = 0; i < lexemLength; i++) {
+//			result += (result * 42 + key[i]);
+//		}
+//		return (result % this->size); //Hash wird zurückgegeben --max
+
+//new hashfunction f(a ...an) = (16 c1 + 8 c n + n) mod m
 		int result = 0;
-		for (int i = 0; i < lexemLength; i++) {
-			result += (result * 42 + key[i]);
+		char* positionString;
+		positionString = key;
+
+		//erstes Zeichen
+		result = result + (16 * *positionString);
+		//letztes Zeichen, falls lexem > 1
+		if(lexemLength > 1){
+			positionString += lexemLength - 1;
+			result = result + (8 * &positionString);
 		}
-		return (result % this->size); //Hash wird zurückgegeben --max
+		result+=lexemLength;
+
+		return (result % this->size); //Hash wird zurückgegeben;
 	}
 
 public:
