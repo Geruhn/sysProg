@@ -12,7 +12,7 @@
 #include "Symboltable.h"
 
 Symboltable::Symboltable() {
-	// TODO Auto-generated constructor stub
+	ht = new Hashtable<autoContainer*>(1000);
 
 }
 
@@ -20,15 +20,14 @@ Symboltable::~Symboltable() {
 	// TODO Auto-generated destructor stub
 }
 
-char* Symboltable::insert(char* lex, int type) {
+autoContainer* Symboltable::insert(char* lex, autoContainer* autoc) {
 
-	Hashtable<int>* hashtable = new Hashtable<int>(1000);
-	char* returnValuePointer;
+	return ht->insert(lex,autoc->length);
 
-	//Länge aus Infocontainer rausholen und insert mitgeben
-	returnValuePointer = hashtable->insert(lex,type,2);
+}
 
-	//Pointer auf Position des gespeicherten Lexems und Types
-	return returnValuePointer;
+autoContainer* Symboltable::get(char* lex, autoContainer* type) {
+
+	ht->get(lex, type);
 
 }

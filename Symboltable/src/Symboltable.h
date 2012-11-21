@@ -9,12 +9,19 @@
 #define SYMBOLTABLE_H_
 
 #include "Hashtable.h"
+#include"../../Automat/src/autoContainer.h"
+#include "Pair.h"
+#include "List.h"
+#include "Element.h"
 
 class Symboltable {
 public:
 	Symboltable();
 	virtual ~Symboltable();
-	char* insert(char* lex, int type);
+	autoContainer* insert(char* lex, autoContainer* autoc);
+	autoContainer* get(char* lex, autoContainer* type);
+
+	Hashtable<autoContainer*>* ht ;
 };
 
 #endif /* SYMBOLTABLE_H_ */

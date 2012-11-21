@@ -8,7 +8,7 @@ class Pair {
 
 public:
 
-	char* key;
+	char* lexem;
 	TType type;
 
 	/*
@@ -39,7 +39,7 @@ public:
 	 */
 
 	Pair(char* key, TType type) {
-		this->key = key;
+		this->lexem = key;
 		this->type = type;
 	}
 

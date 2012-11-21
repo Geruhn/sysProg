@@ -3,143 +3,120 @@
 
 #include "Pair.h"
 #include "List.h"
+#include <string.h>
 
-//TODO liste in liste implementieren um doppelte Elemente nicht überschreiben zu müssen
-//TODO hashfunktion ändern
+
+//TODO string durch char* ersetzen
+//char* muss 0 terminiert sein! sonst key enthält char* und länge des char*
+
+
 
 using namespace std;
 
-template<class TType>
+template <class TType>
 class Hashtable {
+  List<Pair<TType>* >* table;
+  int size;
 
-	List<Pair<TType>*>* table;
-	int size;
+  //berechnet den Hashcode, key = lexem
+  	int hashcode(char* key) {
 
-	//berechnet den Hashcode, key = lexem
-	int hashcode(char* key, int lexemLength) {
-		//old hashfunction
-//		int result = 0;
-//		for (int i = 0; i < lexemLength; i++) {
-//			result += (result * 42 + key[i]);
-//		}
-//		return (result % this->size); //Hash wird zurückgegeben --max
+  		size_t lexemLength = strlen(key);;
 
-//new hashfunction f(a ...an) = (16 c1 + 8 c n + n) mod m
-		int result = 0;
-		char* positionString;
-		positionString = key;
+  		//hashfunction f(a ...an) = (16 c1 + 8 c n + n) mod m
+  		int result = 0;
+  		char* positionString;
+  		positionString = key;
 
-		//erstes Zeichen
-		result = result + (16 * (*positionString));
-		//letztes Zeichen, falls lexem > 1
-		if(lexemLength > 1){
-			positionString += lexemLength - 1;
-			result = result + (8 * (*positionString));
-		}
-		result+=lexemLength;
+  		//erstes Zeichen
+  		result = result + (16 * (*positionString));
+  		//letztes Zeichen, falls lexem > 1
+  		if (lexemLength > 1) {
+  			positionString += lexemLength - 1;
+  			result = result + (8 * (*positionString));
+  		}
+  		result += lexemLength;
 
-		return (result % this->size); //Hash wird zurückgegeben;
-	}
+  		//Hash wird zurückgegeben
+  		return (result % this->size);
+  	}
 
 public:
+// Konstruktor
+  Hashtable(int nsize) {
+	  this->size = nsize;
+	  table = new List<Pair<TType>* >[size];
+  }
 
-	//Konstruktor
-	//table ist ein Array der Größe size. Jedes Arrayelement enthält eine Liste.
-	//die Liste wiederrum enthölt Paare(char*/type)
-	Hashtable(int nsize) {
-		this->size = nsize;
-		table = new List<Pair<TType>*>[this->size];
-	}
+  //Destruktor
+  ~Hashtable() {
+	  delete[] table;
+  }
 
-	//Destruktor
-	~Hashtable() {
-		delete[] this->table;
-	}
+  bool put(char* key, TType value){
+	  int index = hashcode(key);
+	  Pair<TType>* pair;
 
-	//initialisiert Symboltabelle mit Tokens, Folie 52 --max
-	void initSymbols() {
-		insert("print", "PrintToken", 5);
-		insert("read", "ReadToken", 4);
-	}
+	  //läuft bis zum Index
+	  for(int i = 0; i < table[index].getSize(); i++){
+		 pair = table[index].getValueAt(i);
 
-	//Fügt den Key in die Liste an.
-	//Sollte der Key schon vorhanden sein, wird er in der 2ten Liste hinten angehängt --max
-	char* insert(char* lexem, TType value, int lengthLexem) {
+		 //sollte der Wert schon vorhanden sein -> true
+		 if(pair->key == key){
+			pair->value = value;
+			return true;
+		 }
+	  }
+	  //fülgt den neuen Wert an die Liste hinten an -> false
+	  Pair<TType>* p1=new Pair<TType>(key, value);
+	  table[index].addLast(p1);
+	  return false;
+  }
 
-		//Errechneter Wert aus dem Key/Lexem
-		int index = hashcode(lexem, lengthLexem);
+  TType get(char* key) {
+	  int index = hashcode(key);
+	  Pair<TType>* pair;
 
-		//überflüssig
-		//Key schon vorhanden?
-		//bool isLexemAlreadyExisting = false;
-		//isLexemAlreadyExisting = contains(lexem, lengthLexem);
+	  //Läuft die Liste durch bis zum index wo der Wert liegen sollte
+	  for(int i = 0; i < table[index].getSize(); i++) {
+		 pair = table[index].getValueAt(i);
 
-		Pair<TType>* pair;
-		Pair<TType>* p1 = new Pair<TType>(lexem, value);
+		 //Wert bereits vorhanden -> Wert
+		 if(pair->key == key) {
+			 return pair->value;
+		 }
+	  }
+	  //Wert nicht vorhanden Fehlermeldung
+	  throw "Key nicht vorhanden";
+  }
 
-		//läuft bis zum Index in der Liste
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
-			//sollte der Wert schon vorhanden sein -> Pointer auf das Info Objekt zurückgeben
-			if (pair->key == lexem) {
-				return pair;
-			}
+  bool remove(char* key) {
+	  int index = hashcode(key);
+	  Pair<TType>* pair;
 
-		}
-		//Nicht vorhanden, fügt den neuen Wert an die Liste an
-		table[index].addLast(p1);
-		return p1;
-	}
+	  for(int i = 0; i < table[index].getSize(); i++) {
+		 pair = table[index].getValueAt(i);
 
-	//Gibt einen Pointer auf das Pair/Info
-	char* get(char* key, int lengthLexem) {
-		int index = hashcode(key, lengthLexem);
-		Pair<TType>* pair;
+		 if(pair->key == key) {
+			 table[index].remove(i);
+			 return true;
+		 }
+	  }
+	  return false;
+  }
 
-		//Läuft die Liste durch bis zum index wo der Wert liegen sollte
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
+  bool contains(char* key) { //entspricht lookup
+	  int index = hashcode(key);
+	  Pair<TType>* pair;
 
-			//Wert bereits vorhanden ->  Wert
-			if (pair->key == key) {
-				return pair;
-			}
-		}
-		//Wert nicht dann vorhanden Fehlermeldung
-		return -1;
-	}
-
-	// Wird eigentlich nicht benötigt --max
-//	bool remove(char* key, int lengthLexem) {
-//		int index = hashcode(key, lengthLexem);
-//		Pair<type>* pair;
-//
-//		for (int i = 0; i < table[index].getSize(); i++) {
-//			pair = table[index].getValueAt(i);
-//
-//			if (pair->key == key) {
-//				table[index].remove(i);
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-
-	//Gibt zurück ob der Key in der 1ten Liste schon vorhanden ist --max
-	bool contains(char* key, int lengthLexem) {
-
-		int index = hashcode(key, lengthLexem);
-		Pair<TType>* pair;
-
-		//durchlaufen bis zum index, falls vorhanden return true, sonst false
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
-			if (pair->key == key) {
-				return true;
-			}
-		}
-		return false;
-	}
-
+	  for(int i = 0; i < table[index].getSize(); i++) {
+		 pair = table[index].getValueAt(i);
+		 if(pair->key == key) {
+			return true;
+		 }
+	  }
+	  return false;
+  }
 };
-#endif  //__HASHTABLE__INCLUDED__
+
+#endif // __HASHTABLE__INCLUDED__
