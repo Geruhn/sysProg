@@ -61,14 +61,22 @@ public:
 		this->size++;
 	}
 
+	//Müll
+//	List* getValueAt(int index) {
+//		if (index <= this->size && index >= 0) {
+//			return this->getValueAt(index, 0);
+//		} else {
+//			throw "List::getValueAt bad index";
+//		}
+//	}
 	//gibt den Wert an der Index'ten Stelle zurück
-	List* getValueAt(int index) {
-		if (index <= this->size && index >= 0) {
-			return this->first->getValueAt(index, 0);
-		} else {
-			throw "List::getValueAt bad index";
+	TType getValueAt(int index){
+			if (index <= this->size && index >= 0) {
+				return this->first->getValueAt(index,0);
+			} else {
+				throw "List::getValueAt bad index";
+			}
 		}
-	}
 
 	//löscht das Element an der Stelle des Index'es
 	void remove(int index) {

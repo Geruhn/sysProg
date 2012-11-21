@@ -22,11 +22,11 @@ Symboltable::~Symboltable() {
 
 char* Symboltable::insert(char* lex, int type) {
 
-	Hashtable<int> hashtable = new Hashtable(1000);
+	Hashtable<int>* hashtable = new Hashtable<int>(1000);
 	char* returnValuePointer;
 
 	//Länge aus Infocontainer rausholen und insert mitgeben
-	returnValuePointer = hashtable.insert(lex,type,2);
+	returnValuePointer = hashtable->insert(lex,type,2);
 
 	//Pointer auf Position des gespeicherten Lexems und Types
 	return returnValuePointer;

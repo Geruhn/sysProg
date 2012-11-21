@@ -30,11 +30,11 @@ class Hashtable {
 		positionString = key;
 
 		//erstes Zeichen
-		result = result + (16 * *positionString);
+		result = result + (16 * (*positionString));
 		//letztes Zeichen, falls lexem > 1
 		if(lexemLength > 1){
 			positionString += lexemLength - 1;
-			result = result + (8 * &positionString);
+			result = result + (8 * (*positionString));
 		}
 		result+=lexemLength;
 
@@ -48,7 +48,7 @@ public:
 	//die Liste wiederrum enthölt Paare(char*/type)
 	Hashtable(int nsize) {
 		this->size = nsize;
-		table = new List<Pair<TType>*>*[this->size];
+		table = new List<Pair<TType>*>[this->size];
 	}
 
 	//Destruktor

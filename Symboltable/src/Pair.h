@@ -4,10 +4,12 @@
 template<class TType>
 class Pair {
 
-	char* key;
-	TType type;
+
 
 public:
+
+	char* key;
+	TType type;
 
 	/*
 	 * Type | Symbol/Token
