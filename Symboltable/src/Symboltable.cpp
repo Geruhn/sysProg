@@ -18,6 +18,7 @@ Symboltable::~Symboltable() {
 
 void Symboltable::insert(char* lex, int type) {
 
-
+	//Hashtable* hashtable = new Hashtable(1000);
+	//hashtable->insert(lex,3,type);
 
 }

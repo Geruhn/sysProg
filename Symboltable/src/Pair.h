@@ -1,8 +1,12 @@
 #ifndef __PAIR__INCLUDED__
 #define __PAIR__INCLUDED__
 
-template<class type>
+template<class TType>
 class Pair {
+
+	char* key;
+	TType type;
+
 public:
 
 	/*
@@ -32,14 +36,11 @@ public:
 	 *
 	 */
 
-	Pair(char* key, type type) {
+	Pair(char* key, TType type) {
 		this->key = key;
 		this->type = type;
 	}
-private:
-	char* key;
-	type type;
 
 };
 
-#endif  __PAIR__INCLUDED__
+#endif  //__PAIR__INCLUDED__

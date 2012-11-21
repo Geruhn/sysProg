@@ -5,13 +5,14 @@
 #include "List.h"
 
 //TODO liste in liste implementieren um doppelte Elemente nicht überschreiben zu müssen
+//TODO hashfunktion ändern
 
 using namespace std;
 
-template<class type>
+template<class TType>
 class Hashtable {
 
-	List<Pair<type>*>* table;
+	List<Pair<TType>*>* table;
 	int size;
 
 	//berechnet den Hashcode, key = lexem
@@ -26,10 +27,11 @@ class Hashtable {
 public:
 
 	//Konstruktor
+	//table ist ein Array der Größe size. Jedes Arrayelement enthält eine Liste.
+	//die Liste wiederrum enthölt Paare(char*/type)
 	Hashtable(int nsize) {
 		this->size = nsize;
-		//
-		table = new List<Pair<type>*>* [this->size];
+		table = new List<Pair<TType>*>*[this->size];
 	}
 
 	//Destruktor
@@ -39,13 +41,13 @@ public:
 
 	//initialisiert Symboltabelle mit Tokens, Folie 52 --max
 	void initSymbols() {
-		put("print", "PrintToken", 5);
-		put("read", "ReadToken", 4);
+		insert("print", "PrintToken", 5);
+		insert("read", "ReadToken", 4);
 	}
 
 	//Fügt den Key in die Liste an.
 	//Sollte der Key schon vorhanden sein, wird er in der 2ten Liste hinten angehängt --max
-	Pair* put(char* lexem, type value, int lengthLexem) {
+	char* insert(char* lexem, TType value, int lengthLexem) {
 
 		//Errechneter Wert aus dem Key/Lexem
 		int index = hashcode(lexem, lengthLexem);
@@ -55,8 +57,8 @@ public:
 		//bool isLexemAlreadyExisting = false;
 		//isLexemAlreadyExisting = contains(lexem, lengthLexem);
 
-		Pair<type>* pair;
-		Pair<type>* p1 = new Pair<type>(lexem, value);
+		Pair<TType>* pair;
+		Pair<TType>* p1 = new Pair<TType>(lexem, value);
 
 		//läuft bis zum Index in der Liste
 		for (int i = 0; i < table[index].getSize(); i++) {
@@ -68,15 +70,14 @@ public:
 
 		}
 		//Nicht vorhanden, fügt den neuen Wert an die Liste an
-		Pair<type>* p1 = new Pair<type>(lexem, value);
 		table[index].addLast(p1);
 		return p1;
 	}
 
 	//Gibt einen Pointer auf das Pair/Info
-	Pair* get(char* key, int lengthLexem) {
+	char* get(char* key, int lengthLexem) {
 		int index = hashcode(key, lengthLexem);
-		Pair<type>* pair;
+		Pair<TType>* pair;
 
 		//Läuft die Liste durch bis zum index wo der Wert liegen sollte
 		for (int i = 0; i < table[index].getSize(); i++) {
@@ -91,26 +92,27 @@ public:
 		return -1;
 	}
 
-	bool remove(char* key, int lengthLexem) {
-		int index = hashcode(key, lengthLexem);
-		Pair<type>* pair;
-
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
-
-			if (pair->key == key) {
-				table[index].remove(i);
-				return true;
-			}
-		}
-		return false;
-	}
+	// Wird eigentlich nicht benötigt --max
+//	bool remove(char* key, int lengthLexem) {
+//		int index = hashcode(key, lengthLexem);
+//		Pair<type>* pair;
+//
+//		for (int i = 0; i < table[index].getSize(); i++) {
+//			pair = table[index].getValueAt(i);
+//
+//			if (pair->key == key) {
+//				table[index].remove(i);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
 	//Gibt zurück ob der Key in der 1ten Liste schon vorhanden ist --max
 	bool contains(char* key, int lengthLexem) {
 
 		int index = hashcode(key, lengthLexem);
-		Pair<type>* pair;
+		Pair<TType>* pair;
 
 		//durchlaufen bis zum index, falls vorhanden return true, sonst false
 		for (int i = 0; i < table[index].getSize(); i++) {
@@ -123,4 +125,4 @@ public:
 	}
 
 };
-#endif  __HASHTABLE__INCLUDED__
+#endif  //__HASHTABLE__INCLUDED__
