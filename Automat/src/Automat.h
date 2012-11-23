@@ -29,7 +29,6 @@
 class Automat {
 
 private:
-    //bool isToken;
     const int STATES = 3;
     State *currentState;
     State *states;
@@ -38,7 +37,7 @@ private:
 
 public:
     Automat();
-    virtual ~Automat();
+//    virtual ~Automat();
 
     //void setTokenFound(int type);
     void setState(State* nextState);

@@ -16,12 +16,12 @@
 #define	STATE_H
 
 #include "autoContainer.h"
-#include "Automat.h"
-
+//#include "Automat.h"
+class Automat;
 class State {
 
 public:
-    State();
+//    virtual State() = 0;
     /**
      * Eigene Umsetzung der startState in jedem Zustand, dann werden nur die 
      * Pointer auf relevante Zustände abgespeichert.
@@ -34,7 +34,7 @@ public:
      *                          einen OutOfArray-Fehler zu produzieren.
      */
     virtual void startState(State* states, int arrayLength) = 0;
-    virtual ~State();
+    virtual ~State(){};
     /**
      * Frägt vorm Einlesen eines chars, ob der Zustand schon startbereit ist 
      * (started == true), 
@@ -44,7 +44,7 @@ public:
      * @param c Der einzulesende char.
      * @return Info-Container, s. autoContainer-Doku
      */
-    virtual autoContainer* readChar(Automat* autom, char c) = 0;
+    virtual autoContainer* readChar(Automat* autom, const char c) = 0;
 
 
 private:

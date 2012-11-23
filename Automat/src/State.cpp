@@ -6,10 +6,6 @@
  */
 
 #include "State.h"
-
-State::State() {
-    
-}
 /*
 void State::startState(State* states, int arrayLength) {
     if(!(this->started)) {
@@ -22,5 +18,3 @@ void State::startState(State* states, int arrayLength) {
     }
 }
 */
-State::~State() {
-}
