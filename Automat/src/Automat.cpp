@@ -6,7 +6,7 @@
  */
 
 #include "Automat.h"
-
+#include "State.h"
 /*
  * Current soll Pointer sein. Zustand legt neuen Zustand in demensprechenden Übergang fest und gibt dem Automaten per setState()
  * einen Pointer auf den neuen Zustand der in Current gespeichert wird zum weiterarbeiten.

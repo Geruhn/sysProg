@@ -23,7 +23,7 @@ stateDigit::stateDigit() {
  * 
  * @return den Pointer auf den aktualisierten autoContainer
  */
-autoContainer* stateDigit::readChar(Automat* autom, const char* c) {
+autoContainer* stateDigit::readChar(AutomatInterface* autom, const char* c) {
     autoContainer* current;
     
     // @if: Unterscheidung, ob der letzte autoContainer vorhanden ist

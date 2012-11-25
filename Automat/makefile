@@ -13,6 +13,7 @@ SHAREDLIB = ../sharedlib
 ## darauf achten, dass letzte Zeile ohne "\" eingetragen wird
 
 OBJS = $(OBJDIR)/Automat.o \
+	$(OBJDIR)/AutomatInterface.o  \
 	$(OBJDIR)/TestAutomat.o  \
 	$(OBJDIR)/State.o  \
 	$(OBJDIR)/states/stateStart.o \

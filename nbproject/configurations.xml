@@ -22,6 +22,8 @@
           </df>
           <in>Automat.cpp</in>
           <in>Automat.h</in>
+          <in>AutomatInterface.cpp</in>
+          <in>AutomatInterface.h</in>
           <in>State.cpp</in>
           <in>State.h</in>
           <in>TestAutomat.cpp</in>

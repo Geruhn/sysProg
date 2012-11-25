@@ -25,7 +25,7 @@ stateStart::stateStart() {
  * 
  * @return den Pointer auf den aktualisierten autoContainer
  */
-autoContainer* stateStart::readChar(Automat* autom, const char* c) {
+autoContainer* stateStart::readChar(AutomatInterface* autom, const char* c) {
     autoContainer* current;
     
     // @if: Unterscheidung, ob der letzte autoContainer vorhanden ist

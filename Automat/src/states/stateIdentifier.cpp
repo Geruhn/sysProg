@@ -22,7 +22,7 @@ stateIdentifier::stateIdentifier() {
  * 
  * @return den Pointer auf den aktualisierten autoContainer
  */
-autoContainer* stateIdentifier::readChar(Automat* autom, const char* c) {
+autoContainer* stateIdentifier::readChar(AutomatInterface* autom, const char* c) {
     autoContainer* current;
     
     // @if: Unterscheidung, ob der letzte autoContainer vorhanden ist

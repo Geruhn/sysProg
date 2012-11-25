@@ -8,6 +8,8 @@
 #ifndef STATEDIGIT_H
 #define	STATEDIGIT_H
 
+#include "../autoContainer.h"
+#include "../AutomatInterface.h"
 #include "../State.h"
 //#include "stateStart.h"
 
@@ -15,7 +17,7 @@ class stateDigit:public State {
 public:
     stateDigit();
     void startState(State* states, int arrayLength);
-    autoContainer* readChar(Automat* autom, const char* c);
+    autoContainer* readChar(AutomatInterface* autom, const char* c);
 private:
     State* states;
     int arrayLength;

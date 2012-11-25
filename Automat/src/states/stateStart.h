@@ -8,13 +8,16 @@
 #ifndef STATESTART_H
 #define	STATESTART_H
 
+#include "../autoContainer.h"
+#include "../AutomatInterface.h"
+#include "../State.h"
 //#include "stateIdentifier.h"
 
 class stateStart:public State {
 public:
     stateStart();
     void startState(State* states, int arrayLength);
-    autoContainer* readChar(Automat* autom, const char* c);
+    autoContainer* readChar(AutomatInterface* autom, const char* c);
 private:  
     //autoContainer current;
     State* states;

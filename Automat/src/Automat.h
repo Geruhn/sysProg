@@ -26,7 +26,7 @@
  * possible, that the container will be a part of the info in the symbol table.
  * - Andy
  */
-class Automat {
+class Automat:public AutomatInterface {
 
 private:
     const int STATES = 3;
@@ -37,7 +37,7 @@ private:
 
 public:
     Automat();
-//    virtual ~Automat();
+    virtual ~Automat();
 
     //void setTokenFound(int type);
     void setState(State* nextState);
