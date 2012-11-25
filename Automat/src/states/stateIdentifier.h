@@ -16,12 +16,13 @@
 class stateIdentifier:public State {
 public:
     stateIdentifier();
-    void startState(State* states, int arrayLength);
-    autoContainer* readChar(AutomatInterface* autom, const char* c);
+    void startState(AutomatInterface* autom, State* states, int arrayLength);
+    autoContainer* readChar(const char* c);
 private:
     State* states;
     int arrayLength;
     bool started;
+    AutomatInterface autom;
 };
 
 #endif	/* STATEIDENTIFIER_H */

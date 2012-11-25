@@ -22,14 +22,14 @@ stateIdentifier::stateIdentifier() {
  * 
  * @return den Pointer auf den aktualisierten autoContainer
  */
-autoContainer* stateIdentifier::readChar(AutomatInterface* autom, const char* c) {
+autoContainer* stateIdentifier::readChar(const char* c) {
     autoContainer* current;
     
     // @if: Unterscheidung, ob der letzte autoContainer vorhanden ist
-    if(autom->getCurrentContainer() == 0) {
+    if(this->autom->getCurrentContainer() == 0) {
         current = new autoContainer();
     } else {
-        current = autom->getCurrentContainer();
+        current = this->autom->getCurrentContainer();
     }
     
     //Übergänge einfügen
@@ -37,7 +37,8 @@ autoContainer* stateIdentifier::readChar(AutomatInterface* autom, const char* c)
     return current;
 }
 
-void stateIdentifier::startState(State* states, int arrayLength) {
+void stateIdentifier::startState(AutomatInterface* autom, State* states, int arrayLength) {
+    this->autom = autom;
     if(!(this->started)) {
         this->arrayLength = arrayLength;
         this->states = new State[arrayLength];

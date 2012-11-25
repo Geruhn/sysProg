@@ -7,6 +7,7 @@
 
 #include "stateDigit.h"
 #include "../autoContainer.h"
+#include "../AutomatInterface.h"
 
 //type = 2
 stateDigit::stateDigit() {
@@ -23,14 +24,14 @@ stateDigit::stateDigit() {
  * 
  * @return den Pointer auf den aktualisierten autoContainer
  */
-autoContainer* stateDigit::readChar(AutomatInterface* autom, const char* c) {
+autoContainer* stateDigit::readChar(const char* c) {
     autoContainer* current;
     
     // @if: Unterscheidung, ob der letzte autoContainer vorhanden ist
-    if(autom->getCurrentContainer() == 0) {
+    if(this->autom->getCurrentContainer() == 0) {
         current = new autoContainer();
     } else {
-        current = autom->getCurrentContainer();
+        current = this->autom->getCurrentContainer();
     }
 
     //Übergänge einfügen
@@ -38,7 +39,8 @@ autoContainer* stateDigit::readChar(AutomatInterface* autom, const char* c) {
     return current;
 }
 
-void stateDigit::startState(State* states, int arrayLength) {
+void stateDigit::startState(AutomatInterface* autom, State* states, int arrayLength) {
+    this->autom = autom;
     if(!(this->started)) {
         this->arrayLength = arrayLength;
         this->states = new State[arrayLength];

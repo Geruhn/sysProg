@@ -7,9 +7,6 @@
 
 #ifndef AUTOMATINTERFACE_H
 #define	AUTOMATINTERFACE_H
-
-#include "State.h"
-
 /**
  * Wird gebraucht um den Fehler durch die Inkludierung von Automat.h in State 
  * und State.h in Automat. 
@@ -17,7 +14,6 @@
  */
 class AutomatInterface {
 public:
-    virtual void setState(State* nextState) = 0;
     virtual void read(const char* c) = 0;
     virtual void ungetChar(const char* c) = 0;
     virtual void ungetChar(const char* chars, int arrayLength) = 0;

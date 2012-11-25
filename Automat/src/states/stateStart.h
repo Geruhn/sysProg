@@ -16,14 +16,14 @@
 class stateStart:public State {
 public:
     stateStart();
-    void startState(State* states, int arrayLength);
-    autoContainer* readChar(AutomatInterface* autom, const char* c);
+    void startState(AutomatInterface* autom, State* states, int arrayLength);
+    autoContainer* readChar(const char* c);
 private:  
     //autoContainer current;
     State* states;
     int arrayLength;
     bool started;
-    
+    AutomatInterface autom;    
 };
 
 #endif	/* STATESTART_H*/

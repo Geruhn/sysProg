@@ -33,7 +33,7 @@ public:
      * @param arrayLength Die Menge aller Zustände, ist wichtig um nicht in 
      *                          einen OutOfArray-Fehler zu produzieren.
      */
-    virtual void startState(State* states, int arrayLength) = 0;
+    virtual void startState(AutomatInterface* autom, State* states, int arrayLength) = 0;
     virtual ~State() = 0;
     /**
      * Frägt vorm Einlesen eines chars, ob der Zustand schon startbereit ist 
@@ -44,7 +44,7 @@ public:
      * @param c Der einzulesende char.
      * @return Info-Container, s. autoContainer-Doku
      */
-    virtual autoContainer* readChar(AutomatInterface* autom, const char* c) = 0;
+    virtual autoContainer* readChar(const char* c) = 0;
 
 
 private:

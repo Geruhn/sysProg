@@ -5,7 +5,7 @@
  * Created on 26. Oktober 2012, 14:00
  */
 
-#include "State.h"
+//#include "State.h"
 /*
 void State::startState(State* states, int arrayLength) {
     if(!(this->started)) {
