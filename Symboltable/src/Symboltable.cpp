@@ -22,12 +22,17 @@ Symboltable::~Symboltable() {
 
 autoContainer* Symboltable::insert(char* lex, autoContainer* autoc) {
 
-	return ht->insert(lex,autoc->length);
+	autoContainer* returnValue;
+	bool putReturn;
+	putReturn = ht->put(lex, autoc);
+	if(putReturn){
+		returnValue = ht->get(lex);
+	}
+	return returnValue;
 
 }
 
 autoContainer* Symboltable::get(char* lex, autoContainer* type) {
 
-	ht->get(lex, type);
-
+	return ht->get(lex);
 }

@@ -19,14 +19,14 @@ class Hashtable {
   int size;
 
   //berechnet den Hashcode, key = lexem
-  	int hashcode(char* key) {
+  	int hashcode(char* lexem) {
 
-  		size_t lexemLength = strlen(key);;
+  		size_t lexemLength = strlen(lexem);;
 
   		//hashfunction f(a ...an) = (16 c1 + 8 c n + n) mod m
   		int result = 0;
   		char* positionString;
-  		positionString = key;
+  		positionString = lexem;
 
   		//erstes Zeichen
   		result = result + (16 * (*positionString));
@@ -53,8 +53,8 @@ public:
 	  delete[] table;
   }
 
-  bool put(char* key, TType value){
-	  int index = hashcode(key);
+  bool put(char* lexem, TType type){
+	  int index = hashcode(lexem);
 	  Pair<TType>* pair;
 
 	  //läuft bis zum Index
@@ -62,19 +62,20 @@ public:
 		 pair = table[index].getValueAt(i);
 
 		 //sollte der Wert schon vorhanden sein -> true
-		 if(pair->key == key){
-			pair->value = value;
+		 if(pair->lexem == lexem){
+			pair->type = type;
+
 			return true;
 		 }
 	  }
 	  //fülgt den neuen Wert an die Liste hinten an -> false
-	  Pair<TType>* p1=new Pair<TType>(key, value);
+	  Pair<TType>* p1=new Pair<TType>(lexem, type);
 	  table[index].addLast(p1);
 	  return false;
   }
 
-  TType get(char* key) {
-	  int index = hashcode(key);
+  TType get(char* lexem) {
+	  int index = hashcode(lexem);
 	  Pair<TType>* pair;
 
 	  //Läuft die Liste durch bis zum index wo der Wert liegen sollte
@@ -82,22 +83,23 @@ public:
 		 pair = table[index].getValueAt(i);
 
 		 //Wert bereits vorhanden -> Wert
-		 if(pair->key == key) {
-			 return pair->value;
+		 if(pair->lexem == lexem) {
+			 return pair->type;
 		 }
 	  }
 	  //Wert nicht vorhanden Fehlermeldung
 	  throw "Key nicht vorhanden";
   }
 
-  bool remove(char* key) {
-	  int index = hashcode(key);
+  //wird nicht benötigt
+  bool remove(char* lexem) {
+	  int index = hashcode(lexem);
 	  Pair<TType>* pair;
 
 	  for(int i = 0; i < table[index].getSize(); i++) {
 		 pair = table[index].getValueAt(i);
 
-		 if(pair->key == key) {
+		 if(pair->lexem == lexem) {
 			 table[index].remove(i);
 			 return true;
 		 }
@@ -105,13 +107,13 @@ public:
 	  return false;
   }
 
-  bool contains(char* key) { //entspricht lookup
-	  int index = hashcode(key);
+  bool contains(char* lexem) { //entspricht lookup
+	  int index = hashcode(lexem);
 	  Pair<TType>* pair;
 
 	  for(int i = 0; i < table[index].getSize(); i++) {
 		 pair = table[index].getValueAt(i);
-		 if(pair->key == key) {
+		 if(pair->lexem == lexem) {
 			return true;
 		 }
 	  }

@@ -38,8 +38,8 @@ public:
 	 *
 	 */
 
-	Pair(char* key, TType type) {
-		this->lexem = key;
+	Pair(char* lexem, TType type) {
+		this->lexem = lexem;
 		this->type = type;
 	}
 
