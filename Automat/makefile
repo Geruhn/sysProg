@@ -55,8 +55,8 @@ cleanAutomat:
 	#rm -f $(LIBDIR)/states/*
 	#$(MAKE) TestAutomat
 	#Legt alle Ordner wieder an, nachdem sie gelöscht wurden.
-	#mkdir $(OBJDIR)
-	#mkdir $(LIBDIR)
+	mkdir $(OBJDIR)
+	mkdir $(LIBDIR)
 	mkdir -p $(OBJDIR)/states
 	mkdir -p $(LIBDIR)/states
 	
