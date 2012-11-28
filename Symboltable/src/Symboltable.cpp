@@ -24,15 +24,14 @@ autoContainer* Symboltable::insert(char* lex, autoContainer* autoc) {
 
 	autoContainer* returnValue;
 	bool putReturn;
-	putReturn = ht->put(lex, autoc);
-	if(putReturn){
-		returnValue = ht->get(lex);
-	}
+	ht->put(lex, autoc);
+	returnValue = ht->get(lex);
+	delete autoc;
 	return returnValue;
 
 }
 
-autoContainer* Symboltable::get(char* lex, autoContainer* type) {
+autoContainer* Symboltable::get(char* lex, autoContainer* autoc) {
 
 	return ht->get(lex);
 }
