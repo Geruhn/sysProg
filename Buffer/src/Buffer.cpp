@@ -1,17 +1,17 @@
-﻿/*
- * Buffer.cpp
- *
- *  Created on: Sep 26, 2012
- *
- Author: knad0001
- */
+/*
+* Buffer.cpp
+*
+* Created on: Sep 26, 2012
+*
+Author: knad0001
+*/
 
 //TODO upgetChar() sollte noch richtig getestet werden.
 //TODO
 
 /*
- * couts hinzugefügt zum debuggen - Reinsch
- */
+* couts hinzugefügt zum debuggen - Reinsch
+*/
 
 #include "Buffer.h"
 
@@ -21,7 +21,7 @@ Buffer::Buffer(char* source) {
 	leftSide = new char[bufferLength + 1];
 	rightSide = new char[bufferLength + 1];
 
-	//Speicher für die 2 Buffer holen
+//Speicher für die 2 Buffer holen
 	posix_memalign((void**) &(this->leftSide), 512, bufferLength);
 	posix_memalign((void**) &(this->rightSide), 512, bufferLength);
 
@@ -72,7 +72,7 @@ char Buffer::getChar() {
 	//Fehlerfall - Zeiger befindet sich außerhalb des Speicherbereichs der Arrays - Reinsch
 	cout << endl << "!!! ZEIGER AUSERHALB DES SPEICHERBEREICHES !!!" << endl;
 	return '\n';
-}
+	}
 
 void Buffer::ungetChar() {
 	if (current == baseRight) { //current steht am anfang von rechts -max
@@ -88,7 +88,7 @@ void Buffer::ungetChar() {
 }
 
 void Buffer::openFile() {
-	//cout << endl << "in Buffer::openFile()" << endl;
+	cout << endl << "in Buffer::openFile()" << endl;
 	fdRe = open(sourceFile, O_DIRECT);
 	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
@@ -97,8 +97,7 @@ void Buffer::openFile() {
 
 void Buffer::createFile() {
 	cout << endl << "in Buffer::createFile" << endl;
-	fdWr = creat(sourceFile, O_DIRECT,S_IRWXO);
-	//fdWr = open(sourceFile, )
+	fdWr = creat(sourceFile, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if(fdWr != -1){
 		isFileOpen = true;
 	}else{
@@ -128,16 +127,16 @@ void Buffer::putChar(char c){
 			for(int i = 0; current != (baseLeft + (bufferLength - 1 - i)); i++){ //rest des Speichers mit Leerzeichen füllen
 				*(baseLeft + (bufferLength - 1 - i)) = 32;
 			}
-			if(*(baseRight + (bufferLength - 1)) != NULL){
+			if(*(baseRight + (bufferLength - 1)) != 0){
 				write(fdWr, baseRight, bufferLength);
 			}
 			write(fdWr, baseLeft, bufferLength);
 		}
 		else{
 			for(int i = 0; current != (baseRight + (bufferLength - 1 - i)); i++){ //rest des Speichers mit Leerzeichen füllen
-							*(baseRight + (bufferLength - 1 - i)) = 32;
+				*(baseRight + (bufferLength - 1 - i)) = 32;
 			}
-			if(*(baseLeft + (bufferLength -1)) != NULL ){
+			if(*(baseLeft + (bufferLength -1)) != 0 ){
 				write(fdWr, baseLeft, bufferLength);
 			}
 			write(fdWr, baseRight, bufferLength);
@@ -150,7 +149,7 @@ void Buffer::putChar(char c){
 	else{
 		//Fülle so lange linkes Array bis es voll ist. Danach das Rechte. Ist das voll wird das Linke geschrieben usw.
 		if(current == baseLeft + (bufferLength -1)){
-			if(*baseRight != NULL){ //das kein leeres Array in Datei geschrieben wird
+			if(*baseRight != 0 ){ //das kein leeres Array in Datei geschrieben wird
 				write(fdWr, baseRight, bufferLength);
 			}
 			cout << "Linke Seite voll" << endl;
@@ -161,7 +160,7 @@ void Buffer::putChar(char c){
 			return;
 		}
 		if(current == baseRight + (bufferLength -1)){
-			if(*baseLeft != NULL){ //das kein leeres Array in Datei geschrieben wird
+			if(*baseLeft != 0){ //das kein leeres Array in Datei geschrieben wird
 				write(fdWr, baseLeft, bufferLength);
 			}
 			cout << "Rechte Seite voll" << endl;
@@ -173,7 +172,7 @@ void Buffer::putChar(char c){
 		}
 		next++;
 		*current = c;
-		cout <<  *current;
+		cout << *current;
 	}
 }
 

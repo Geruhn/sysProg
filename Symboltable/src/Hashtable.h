@@ -3,102 +3,122 @@
 
 #include "Pair.h"
 #include "List.h"
+#include <string.h>
 
-//TODO liste in liste implementieren um doppelte Elemente nicht überschreiben zu müssen
+
+//TODO string durch char* ersetzen
+//char* muss 0 terminiert sein! sonst key enthält char* und länge des char*
+
+
 
 using namespace std;
 
-template<class type>
+template <class TType>
 class Hashtable {
+  List<Pair<TType>* >* table;
+  int size;
 
-	List<List<Pair<type>*> >* table;
-	int size;
+  //berechnet den Hashcode, key = lexem
+  	int hashcode(char* lexem) {
 
-	//berechnet den Hashcode
-	int hashcode(char* key, int lengthLexem) {
-		int result = 0;
-		for (int i = 0; i < lengthLexem; i++) {
-			result += (result * 42 + key[i]);
-		}
-		return (result % this->size);
-	}
+  		size_t lexemLength = strlen(lexem);;
+
+  		//hashfunction f(a ...an) = (16 c1 + 8 c n + n) mod m
+  		int result = 0;
+  		char* positionString;
+  		positionString = lexem;
+
+  		//erstes Zeichen
+  		result = result + (16 * (*positionString));
+  		//letztes Zeichen, falls lexem > 1
+  		if (lexemLength > 1) {
+  			positionString += lexemLength - 1;
+  			result = result + (8 * (*positionString));
+  		}
+  		result += lexemLength;
+
+  		//Hash wird zurückgegeben
+  		return (result % this->size);
+  	}
 
 public:
 // Konstruktor
-	Hashtable(int nsize) {
-		this->size = nsize;
-		table = new List<List<Pair<type>*> > [this->size];
-	}
+  Hashtable(int nsize) {
+	  this->size = nsize;
+	  table = new List<Pair<TType>* >[size];
+  }
 
-	//Destruktor
-	~Hashtable() {
-		delete[] this->table;
-	}
+  //Destruktor
+  ~Hashtable() {
+	  delete[] table;
+  }
 
-	bool put(char* key, type value, int lengthLexem) {
-		int index = hashcode(key, lengthLexem);
-		Pair<type>* pair;
+  bool put(char* lexem, TType type){
+	  int index = hashcode(lexem);
+	  Pair<TType>* pair;
 
-		//l�uft bis zum Index
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
+	  //läuft bis zum Index
+	  for(int i = 0; i < table[index].getSize(); i++){
+		 pair = table[index].getValueAt(i);
 
-			//sollte der Wert schon vorhanden sein -> true
-			if (pair->key == key) {
-				pair->value = value;
-				return true;
-			}
-		}
-		//fügt den neuen Wert an die Liste hinten an -> false
-		Pair<type>* p1 = new Pair<type>(key, value);
-		table[index].addLast(p1);
-		return false;
-	}
+		 //sollte der Wert schon vorhanden sein -> true
+		 if(pair->lexem == lexem){
+			pair->type = type;
 
-	type get(char* key, int lengthLexem) {
-		int index = hashcode(key, lengthLexem);
-		Pair<type>* pair;
+			return true;
+		 }
+	  }
+	  //fülgt den neuen Wert an die Liste hinten an -> false
+	  Pair<TType>* p1=new Pair<TType>(lexem, type);
+	  table[index].addLast(p1);
+	  return false;
+  }
 
-		//Läuft die Liste durch bis zum index wo der Wert liegen sollte
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
+  TType get(char* lexem) {
+	  int index = hashcode(lexem);
+	  Pair<TType>* pair;
 
-			//Wert bereits vorhanden -> Wert
-			if (pair->key == key) {
-				return pair->value;
-			}
-		}
-		//Wert nicht vorhanden Fehlermeldung
-		throw "Key nicht vorhanden";
-	}
+	  //Läuft die Liste durch bis zum index wo der Wert liegen sollte
+	  for(int i = 0; i < table[index].getSize(); i++) {
+		 pair = table[index].getValueAt(i);
 
-	bool remove(char* key, int lengthLexem) {
-		int index = hashcode(key, lengthLexem);
-		Pair<type>* pair;
+		 //Wert bereits vorhanden -> Wert
+		 if(pair->lexem == lexem) {
+			 return pair->type;
+		 }
+	  }
+	  //Wert nicht vorhanden Fehlermeldung
+	  throw "Key nicht vorhanden";
+  }
 
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
+  //wird nicht benötigt
+  bool remove(char* lexem) {
+	  int index = hashcode(lexem);
+	  Pair<TType>* pair;
 
-			if (pair->key == key) {
-				table[index].remove(i);
-				return true;
-			}
-		}
-		return false;
-	}
+	  for(int i = 0; i < table[index].getSize(); i++) {
+		 pair = table[index].getValueAt(i);
 
-	bool contains(char* key, int lengthLexem) { //entspricht lookup
-		int index = hashcode(key, lengthLexem);
-		Pair<type>* pair;
+		 if(pair->lexem == lexem) {
+			 table[index].remove(i);
+			 return true;
+		 }
+	  }
+	  return false;
+  }
 
-		for (int i = 0; i < table[index].getSize(); i++) {
-			pair = table[index].getValueAt(i);
-			if (pair->key == key) {
-				return true;
-			}
-		}
-		return false;
-	}
+  bool contains(char* lexem) { //entspricht lookup
+	  int index = hashcode(lexem);
+	  Pair<TType>* pair;
 
+	  for(int i = 0; i < table[index].getSize(); i++) {
+		 pair = table[index].getValueAt(i);
+		 if(pair->lexem == lexem) {
+			return true;
+		 }
+	  }
+	  return false;
+  }
 };
-#endif  __HASHTABLE__INCLUDED__
+
+#endif // __HASHTABLE__INCLUDED__

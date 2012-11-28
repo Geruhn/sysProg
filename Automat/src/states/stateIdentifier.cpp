@@ -1,9 +1,9 @@
-/* 
- * File:   stateIdentifier.cpp
- * Author: Andy Perdana
- * 
- * Created on 30. Oktober 2012, 11:36
- */
+/*
+* File: stateIdentifier.cpp
+* Author: Andy Perdana
+*
+* Created on 30. Oktober 2012, 11:36
+*/
 
 #include "./stateIdentifier.h"
 
@@ -13,7 +13,7 @@ stateIdentifier::stateIdentifier() {
 }
 
 autoContainer* stateIdentifier::readChar(Automat* autom, autoContainer* con, char c) {
-	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) || (c >=  '0' && c <= '9')){
+	if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) || (c >= '0' && c <= '9')){
 		con->increaseCol();
 		return con;
 	}

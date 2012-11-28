@@ -2,8 +2,9 @@
 
 int main(int argc, char **argv) {
 
-	Scanner* scanner = new Scanner();
-	scanner->runScanner();
+	Scanner* scanner;
+
+	scanner = new Scanner();
 
 }
 

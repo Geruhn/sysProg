@@ -1,9 +1,9 @@
 /*
- * File:   autoContainer.cpp
- * Author: Andy Perdana
- *
- * Created on 28. Oktober 2012, 14:08
- */
+* File: autoContainer.cpp
+* Author: Andy Perdana
+*
+* Created on 28. Oktober 2012, 14:08
+*/
 
 #include "autoContainer.h"
 
@@ -35,9 +35,11 @@ int autoContainer::getType(){
 	return type;
 }
 
+/*
 char* autoContainer::getName(){
 	return name;
 }
+*/
 
 void autoContainer::increaseCol(){
 	col++;
@@ -51,6 +53,6 @@ void autoContainer::increaseLine(){
 }
 
 void autoContainer::setType(int type){
-	this->type = type;
+this->type = type;
 }
 

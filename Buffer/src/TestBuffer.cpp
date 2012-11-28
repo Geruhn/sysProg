@@ -1,8 +1,8 @@
 #include "Buffer.h"
 
 int main(int argc, char **argv) {
-	char stringInput[] = "../lib/text.txt";
-	char stringOutput[] = "../lib/writeFile.txt";
+	char stringInput[] = "../readFile.txt";
+	char stringOutput[] = "../writeFile.txt";
 	Buffer* inBuffer = new Buffer(stringInput);
 	Buffer* outBuffer = new Buffer(stringOutput);
 

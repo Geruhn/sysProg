@@ -7,12 +7,12 @@
  * max
  *
  */
-template<class type>
+template<class TType>
 class List {
 private:
 	int size;
-	Element<type>* first; //Zeiger auf das erste Element
-	Element<type>* last; //Zeiger auf das letzte Element
+	Element<TType>* first; //Zeiger auf das erste Element
+	Element<TType>* last; //Zeiger auf das letzte Element
 
 public:
 
@@ -32,8 +32,8 @@ public:
 	}
 
 	//Fügt ein Element an den Anfang der Liste an
-	void addFirst(type value) {
-		Element<type>* newElement = new Element<type>(value);
+	void addFirst(TType value) {
+		Element<TType>* newElement = new Element<TType>(value);
 
 		if (this->first != 0) {
 			this->first->setPreviousElement(newElement);
@@ -47,8 +47,8 @@ public:
 	}
 
 	//Fügt ein Element am Ende der Liste an
-	void addLast(type value) {
-		Element<type>* newElement = new Element<type>(value);
+	void addLast(TType value) {
+		Element<TType>* newElement = new Element<TType>(value);
 
 		if (this->last != 0) {
 			this->last->setNextElement(newElement);
@@ -61,14 +61,22 @@ public:
 		this->size++;
 	}
 
+	//Müll
+//	List* getValueAt(int index) {
+//		if (index <= this->size && index >= 0) {
+//			return this->getValueAt(index, 0);
+//		} else {
+//			throw "List::getValueAt bad index";
+//		}
+//	}
 	//gibt den Wert an der Index'ten Stelle zurück
-	type getValueAt(int index) {
-		if (index <= this->size && index >= 0) {
-			return this->first->getValueAt(index, 0);
-		} else {
-			throw "List::getValueAt bad index";
+	TType getValueAt(int index){
+			if (index <= this->size && index >= 0) {
+				return this->first->getValueAt(index,0);
+			} else {
+				throw "List::getValueAt bad index";
+			}
 		}
-	}
 
 	//löscht das Element an der Stelle des Index'es
 	void remove(int index) {
@@ -100,7 +108,7 @@ public:
 	}
 
 	//setzt einen neuen Wert an der Stelle index
-	void setValue(int index, type value) {
+	void setValue(int index, TType value) {
 		if ((index >= 0) && (index <= this->size)) {
 			this->first->setValue(index, 0, value);
 
@@ -108,4 +116,4 @@ public:
 	}
 };
 
-#endif  __LIST__H__
+#endif  //__LIST__H__

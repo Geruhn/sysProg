@@ -3,12 +3,13 @@
 #include "autoContainer.h"
 
 int main (int argc, char* argv[]){
-	Automat* automat = new Automat();
-	Buffer* inBuffer = new Buffer("../readFile.txt");
-	Buffer* outBuffer = new Buffer("../wirteFile.txt");
-	autoContainer* con = new autoContainer();
+Automat* automat = new Automat();
+Buffer* inBuffer = new Buffer("../readFile.txt");
+Buffer* outBuffer = new Buffer("../wirteFile.txt");
+autoContainer* con = new autoContainer();
 
 	while(inBuffer->hasNext()){
+
 		if(automat->hasToken()){
 			con = automat->getCurrentContainer();
 			if(con->getType() != 0){

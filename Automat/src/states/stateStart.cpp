@@ -1,9 +1,9 @@
-/* 
- * File:   stateStart.cpp
- * Author: Andy Perdana
- * 
- * Created on 26. Oktober 2012, 14:15
- */
+/*
+* File: stateStart.cpp
+* Author: Andy Perdana
+*
+* Created on 26. Oktober 2012, 14:15
+*/
 
 
 //#include "../State.h"
@@ -14,7 +14,8 @@ stateStart::stateStart() {
 }
 
 autoContainer* stateStart::readChar(Automat* autom, autoContainer* con, char c) {
-    if(con == 0) { //testen, ob wir am anfang der Datei sind, dann defualt Konstuktor sonst letzten autoContainer nach aktueller zeile etc fragen
+	//testen, ob wir am anfang der Datei sind, dann defualt Konstuktor sonst letzten autoContainer nach aktueller zeile etc fragen
+    if(con == 0) {
     	if(autom->getLastContainer() == 0){
     		con = new autoContainer();
     	}
@@ -22,17 +23,19 @@ autoContainer* stateStart::readChar(Automat* autom, autoContainer* con, char c) 
     		con = new autoContainer(autom->getLastContainer()->getLine(), autom->getLastContainer()->getCol());
     	}
     }
+    //Für Identifier
     if ( ((c >= 'A') && (c <= 'Z')) || ((c >= 'a') && (c <= 'z')) ){
             con->increaseCol();
             autom->setState("Identifier");
             return con;
     }
-    if( c == '\n' || c == 32){ //Für Leerzeichen und Zeilenumbrüche
+    //Für Leerzeichen und Zeilenumbrüche
+    if( c == '\n' || c == 32){
     	con->increaseLine();
     	autom->setTokenFound(0);
     	return con;
     }
-
+    //Für Zahlen
     if( c >= '0' && c <= '9'){
     	con->increaseCol();
     	autom->setState("Digit");

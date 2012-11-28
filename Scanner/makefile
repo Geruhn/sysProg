@@ -25,29 +25,27 @@ OBJSFORSCANNERLIB =  \
 
 
 
-
-makeTestScanner: $(OBJS)
-	g++ -g $^ -L../sharedlib  -lAutomat  -lBuffer -lSymboltable -o $(BINDIR)/ScannerTest
+# linken der Object-files under shared libraries
+makeTestScanner: $(OBJDIR)/Scanner.o $(OBJDIR)/TestScanner.o
+	g++ -g $(OBJDIR)/Scanner.o $(OBJDIR)/TestScanner.o -L../sharedlib  -lAutomat  -lBuffer -lSymboltable -o $(BINDIR)/ScannerTest
 	
 	
 	
-# $^ liste der abhaengigkeiten
-
-
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp 
+# compilieren der source-files
+$(OBJDIR)/Scanner.o :  $(SRCDIR)/Scanner.cpp 
 	@echo "g++ $*.cpp"
-	g++ -g  -c -Wall  -o $@  $<
+	g++ -g  -c -Wall  -o $(OBJDIR)/Scanner.o  $(SRCDIR)/Scanner.cpp
 
-# 
-# $@ name des object files
-# $< erste abhaengigkeit
+$(OBJDIR)/TestScanner.o :  $(SRCDIR)/TestScanner.cpp 
+	@echo "g++ $*.cpp"
+	g++ -g  -c -Wall  -o $(OBJDIR)/TestScanner.o  $(SRCDIR)/TestScanner.cpp
 
 
-# loeschen aller files im verzeichnis $(OBJDIR)
+# loeschen aller files im verzeichnis $(OBJDIR) und $(LIBDIR) und neu bauen
 
 cleanScanner:
 	rm -rf $(OBJDIR)/*
-	
+	$(MAKE) makeTestScanner
 	
 ## erstellen der shared library
 
