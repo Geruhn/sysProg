@@ -29,6 +29,7 @@ autoContainer* Symboltable::insert(char* lex, autoContainer* autoc) {
 	delete autoc;
 	return returnValue;
 
+
 }
 
 
