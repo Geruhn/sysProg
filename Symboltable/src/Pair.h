@@ -4,8 +4,6 @@
 template<class TType>
 class Pair {
 
-
-
 public:
 
 	char* lexem;
