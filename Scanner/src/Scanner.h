@@ -12,7 +12,6 @@
 #include "Automat.h"
 #include "Token.h"
 #include "Symboltable.h"
-
 class Scanner {
 
 private:

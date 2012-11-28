@@ -8,8 +8,8 @@
 #ifndef STATEIDENTIFIER_H
 #define STATEIDENTIFIER_H
 
-#include "../State.h"
-#include "stateStart.h"
+//#include "../State.h"
+//#include "stateStart.h"
 
 class stateIdentifier:public State {
 public:

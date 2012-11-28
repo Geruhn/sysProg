@@ -10,7 +10,7 @@
 State::State() {
 
 }
-
+/*
 void State::startState(State* states, int arrayLength) {
     if(!(this->started)) {
         this->arrayLength = arrayLength;
@@ -21,6 +21,6 @@ void State::startState(State* states, int arrayLength) {
         started = true;
     }
 }
-
+*/
 State::~State() {
 }

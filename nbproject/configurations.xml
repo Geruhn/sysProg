@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="Systemnahes Programmieren" root=".">
+      <df name="Automat">
+        <df name="debug">
+          <df name="states">
+          </df>
+        </df>
+        <df name="lib">
+          <df name="states">
+          </df>
+        </df>
+        <df name="src">
+          <df name="states">
+            <in>stateDigit.cpp</in>
+            <in>stateDigit.h</in>
+            <in>stateIdentifier.cpp</in>
+            <in>stateIdentifier.h</in>
+            <in>stateStart.cpp</in>
+            <in>stateStart.h</in>
+          </df>
+          <in>Automat.cpp</in>
+          <in>Automat.h</in>
+          <in>State.cpp</in>
+          <in>State.h</in>
+          <in>TestAutomat.cpp</in>
+          <in>autoContainer.cpp</in>
+          <in>autoContainer.h</in>
+        </df>
+      </df>
+      <df name="Buffer">
+        <df name="debug">
+        </df>
+        <df name="src">
+          <in>Buffer.cpp</in>
+          <in>Buffer.h</in>
+          <in>TestBuffer.cpp</in>
+        </df>
+      </df>
+      <df name="Scanner">
+        <df name="debug">
+        </df>
+        <df name="lib">
+        </df>
+        <df name="src">
+          <in>Scanner.cpp</in>
+          <in>Scanner.h</in>
+          <in>TestScanner.cpp</in>
+        </df>
+      </df>
+      <df name="Symboltable">
+        <df name="debug">
+        </df>
+        <df name="src">
+          <in>Element.h</in>
+          <in>Hashtable.h</in>
+          <in>List.h</in>
+          <in>Pair.h</in>
+          <in>TestSymboltable.cpp</in>
+        </df>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>Automat</pElem>
+            </incDir>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="Automat/src/Automat.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Automat/src/State.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="Automat/src/State.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Automat/src/TestAutomat.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="Buffer/src/Buffer.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="Buffer/src/Buffer.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Buffer/src/TestBuffer.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="Scanner/src/Scanner.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="Scanner/src/Scanner.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="Scanner/src/TestScanner.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="Symboltable/src/TestSymboltable.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

@@ -8,7 +8,9 @@
 
 //#include "../State.h"
 #include "stateStart.h"
-
+#include "../autoContainer.h"
+#include "src/Automat.h"
+//type = 0
 stateStart::stateStart() {
 
 }
@@ -40,7 +42,20 @@ autoContainer* stateStart::readChar(Automat* autom, autoContainer* con, char c) 
     	con->increaseCol();
     	autom->setState("Digit");
     	return con;
+
     }
-    return 0;
+    
+    return current;
 }
 
+
+void stateStart::startState(State* states, int arrayLength) {
+    if(!(this->started)) {
+        this->arrayLength = arrayLength;
+        this->states = new State[arrayLength];
+        for(int i = 0; i < arrayLength; i++) {
+            this->states[i] = states[i];
+        }
+        started = true;
+    }
+}

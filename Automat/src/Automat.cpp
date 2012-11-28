@@ -17,14 +17,18 @@
 * Zustände ändert. Und ins Array eingespeichert werden.
 */
 Automat::Automat() {
-    isToken = false;
+    //isToken = false;
 
     this->states = new State[STATES];
     this->states[0] = new stateStart();
     this->states[1] = new stateIdentifier();
     //this->states[2] = new stateDigit();
 
-    this->currentState = this->states[0];
+    this->currentState = this->states;
+    
+    for(int i = 0; i < this->STATES; i++) {
+        (states+i)->startState(states, STATES);
+    }
 }
 
 Automat::~Automat() {
@@ -53,23 +57,6 @@ void Automat::setState(char* nextState) {
 */
 void Automat::read(char c){
 	currentContainer = currentState->readChar(this, currentContainer, c);
-}
-
-/*
-* Function signals if a Token was found.
-* @return bool True if a new Token was found. False if there is no new Token.
-*/
-bool Automat::hasToken(){
-	return isToken;
-}
-
-/*
-* Function get called if a Token is found/finished.
-* @param type Type of the found Token.
-*/
-void Automat::setTokenFound(int type){
-	isToken = true;
-	currentContainer->setType(type);
 }
 
 /*
