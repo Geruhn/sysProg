@@ -19,9 +19,9 @@ public:
 	Symboltable();
 	virtual ~Symboltable();
 	autoContainer* insert(char* lex, autoContainer* autoc);
-	autoContainer* get(char* lex, autoContainer* type);
+	autoContainer* get(char* lex, autoContainer* autoc);
+	Hashtable<autoContainer*>* ht;
 
-	Hashtable<autoContainer*>* ht ;
 };
 
 #endif /* SYMBOLTABLE_H_ */
