@@ -14,6 +14,12 @@
  */
 class AutomatInterface {
 public:
+    enum enumState {
+        start,
+        identifier,
+        digit
+        
+    };
     virtual void read(const char* c) = 0;
     virtual void ungetChar(const char* c) = 0;
     virtual void ungetChar(const char* chars, int arrayLength) = 0;

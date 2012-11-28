@@ -17,7 +17,7 @@
 
 #include "autoContainer.h"
 #include "AutomatInterface.h"
-//class Automat;
+
 class State {
 
 public:
