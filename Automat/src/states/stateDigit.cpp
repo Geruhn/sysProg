@@ -6,8 +6,6 @@
  */
 
 #include "stateDigit.h"
-#include "../autoContainer.h"
-#include "../AutomatInterface.h"
 
 //type = 2
 stateDigit::stateDigit() {
@@ -39,11 +37,10 @@ autoContainer* stateDigit::readChar(const char* c) {
     return current;
 }
 
-void stateDigit::startState(AutomatInterface* autom, State* states, int arrayLength) {
-    this->autom = autom;
+void stateDigit::startState(StateInterface* states, int arrayLength) {
     if(!(this->started)) {
         this->arrayLength = arrayLength;
-        this->states = new State[arrayLength];
+        this->states = new StateInterface[arrayLength];
         for(int i = 0; i < arrayLength; i++) {
             this->states[i] = states[i];
         }

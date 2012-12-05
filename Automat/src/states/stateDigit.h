@@ -9,20 +9,19 @@
 #define	STATEDIGIT_H
 
 #include "../autoContainer.h"
-#include "../AutomatInterface.h"
-#include "../State.h"
-//#include "stateStart.h"
+#include "../Automat.h"
+#include "../StateInterface.h"
 
-class stateDigit:public State {
+class stateDigit:public StateInterface {
 public:
     stateDigit();
-    void startState(AutomatInterface* autom, State* states, int arrayLength);
+    void startState(StateInterface* states, int arrayLength);
     autoContainer* readChar(const char* c);
 private:
-    State* states;
+    StateInterface* states;
     int arrayLength;
     bool started;
-    AutomatInterface autom;
+    automatRegister* autom;
 };
 
 #endif	/* STATEIDENTIFIER_H */

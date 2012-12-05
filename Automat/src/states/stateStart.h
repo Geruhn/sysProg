@@ -9,21 +9,19 @@
 #define	STATESTART_H
 
 #include "../autoContainer.h"
-#include "../AutomatInterface.h"
-#include "../State.h"
-//#include "stateIdentifier.h"
+#include "../Automat.h"
+#include "../StateInterface.h"
 
-class stateStart:public State {
+class stateStart:public StateInterface {
 public:
     stateStart();
-    void startState(AutomatInterface* autom, State* states, int arrayLength);
+    void startState(StateInterface* states, int arrayLength);
     autoContainer* readChar(const char* c);
-private:  
-    //autoContainer current;
-    State* states;
+private:
+    StateInterface* states;
     int arrayLength;
     bool started;
-    AutomatInterface autom;    
+    automatRegister* autom;    
 };
 
 #endif	/* STATESTART_H*/

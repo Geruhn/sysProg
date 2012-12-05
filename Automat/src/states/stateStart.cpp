@@ -8,8 +8,6 @@
 
 //#include "../State.h"
 #include "stateStart.h"
-#include "../autoContainer.h"
-#include "src/AutomatInterface.h"
 
 //type = 0
 stateStart::stateStart() {
@@ -64,11 +62,11 @@ autoContainer* stateStart::readChar(const char* c) {
 }
 
 
-void stateStart::startState(AutomatInterface* autom, State* states, int arrayLength) {
+void stateStart::startState(StateInterface* states, int arrayLength) {
     this->autom = autom;
     if(!(this->started)) {
         this->arrayLength = arrayLength;
-        this->states = new State[arrayLength];
+        this->states = new StateInterface[arrayLength];
         for(int i = 0; i < arrayLength; i++) {
             this->states[i] = states[i];
         }

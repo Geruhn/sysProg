@@ -7,12 +7,12 @@
 #ifndef Automat_H_
 #define Automat_H_
 
-#include "State.h"
-#include "states/stateStart.h"
-#include "states/stateIdentifier.h"
-#include "states/stateDigit.h"
+//#include "states/stateStart.h"
+//#include "states/stateIdentifier.h"
+//#include "states/stateDigit.h"
 
 #include "autoContainer.h"
+#include "StateInterface.h"
 //#include "../../Scanner/src/Scanner.h"
 
 
@@ -26,13 +26,14 @@
  * possible, that the container will be a part of the info in the symbol table.
  * - Andy
  */
-class Automat:public AutomatInterface {
+class Automat {
 
 private:
-    const int STATES = 3;
-    State *currentState;
-    State *states;
-    autoContainer *currentContainer, *lastContainer;
+    int STATES = 3;
+    StateInterface* currentState;
+    StateInterface* states;
+    autoContainer* currentContainer,* lastContainer;
+    automatRegister* reg;
 //    Scanner scanner;
 
 public:
@@ -40,7 +41,7 @@ public:
     virtual ~Automat();
 
     //void setTokenFound(int type);
-    void setState(State* nextState);
+    void setState(StateInterface* nextState);
     void read(const char* c);
     void ungetChar(const char* c);
     void ungetChar(const char* chars, int arrayLength);
