@@ -8,38 +8,42 @@
 #include "Scanner.h"
 
 Scanner::Scanner() {
-	// TODO Auto-generated constructor stub
 
+	char stringInput[] = "../readFile.txt";
+	char stringOutput[] = "../writeFile.txt";
+
+	automat = new Automat();
+	inBuffer = new Buffer(stringInput);
+	outBuffer = new Buffer(stringOutput);
 }
 
 Scanner::~Scanner() {
 	// TODO Auto-generated destructor stub
+	delete automat;
+	delete inBuffer;
+	delete outBuffer;
+	delete symbolTable;
+}
+//Methode wird vom Automat nur aufgerufen, wenn ein Token abgeschlossen wurde.
+//Deshalb wird das Token einfach in der ungetChar()- Methode erstellt
+void Scanner::ungetChar(){
+	inBuffer->ungetChar();
+	createToken();
 }
 
-void Scanner::runScanner() {
-
-	void* autoContainer; //zeiger auf den container, container enthält informationen über zeile,spalte identifier -max
-
-	char zeichen;
-	char stringInput[] = "../lib/inputFile.txt";
-	char stringOutput[] = "../lib/outputFile.txt";
-
-	Buffer* buffer = new Buffer(stringInput);
-	Automat* automat = new Automat();
-	Symboltable* symbolTable = new Symboltable();
-	Hashtable* hashTable = new Hashtable(10000);
-	Buffer bufferz = new Buffer(stringInput);
-
-	while (!buffer->isEOF) { //holt die Zeichen aus dem Buffer und gibt sie dem automaten, anschließend wirds in die symboltabelle gepackt -max
-
-		autoContainer = automat->read(buffer->getChar()); //autocontainer enthält informationen über die zeile, spalte, identifier -max
-		//symbloTable->add(autoContainer/lexem);
-
+Token Scanner::nextToken(){
+	while(inBuffer->hasNext() & hasToken ){
+		automat->read(inBuffer->getChar());
 	}
-
+	return currentToken();
 }
 
-/*
- * Wenn Scanner ein abgeschloßenes Token erhalten hat muss er beim Buffer die Funktion ungetChar() aufrufen, außer
- *  es handel sich dabei um ein Leerzeichen oder Zeilenumbruch.(Type = 0)
- */
+void Scanner::createToken(){
+	currentToken = new Token(this->automat->getCurrentContainer()->getType(),
+							 this->automat->getCurrentContainer()->getLine(),
+							 this->automat->getCurrentContainer()->getCol(),
+							 this->symbolTable->insert(
+									 this->automat->getCurrentContainer()->getName(),
+									 this->automat->getCurrentContainer()));
+	hasToken = true;
+}

@@ -12,38 +12,35 @@ SHAREDLIB = ../sharedlib
 ## hier alle Object Files eintragen
 ## darauf achten, dass letzte Zeile ohne "\" eingetragen wird
 
-OBJS = 	$(OBJDIR)/Hashtable.o \
-		$(OBJDIR)/Element.o \
-		$(OBJDIR)/Pair.o \
-		$(OBJDIR)/List.o \
-		$(OBJDIR)/TestSymboltable.o
+OBJS = $(OBJDIR)/Symboltable.o \
+	$(OBJDIR)/TestSymboltable.o
 	#$(OBJDIR)/xx1.o \
 	#$(OBJDIR)/xxn.o
 
 OBJSFORSYMBOLTABLELIB =  \
-	$(LIBDIR)/Hashtable.o #\
+	$(LIBDIR)/Symboltable.o #\
 
 
 #
 #		Targets zum Bauen des Tests
 #
 
-makeTestSymboltable: SymboltableTest
+# Linken der Object-Files
+makeTestSymboltable: $(OBJDIR)/Symboltable.o $(OBJDIR)/TestSymboltable.o
+	g++ -g $(OBJDIR)/Symboltable.o $(OBJDIR)/TestSymboltable.o -o $(BINDIR)/SymboltableTest
 
-
-SymboltableTest: $(OBJS)
-	g++ -g $^ -o $(BINDIR)/SymboltableTest
 	
-	# $^ liste der abhaengigkeiten
+# compilieren der Source-files
 
-
-$(OBJDIR)/%.o :  $(SRCDIR)/%.cpp 
+$(OBJDIR)/Symboltable.o :  $(SRCDIR)/Symboltable.cpp 
 	@echo "g++ $*.cpp"
-	g++ -g  -c -Wall  -o $@  $<
+	g++ -g  -c -Wall  -o $(OBJDIR)/Symboltable.o  $(SRCDIR)/Symboltable.cpp
 
-# 
-# $@ name des object files
-# $< erste abhaengigkeit
+
+$(OBJDIR)/TestSymboltable.o :  $(SRCDIR)/TestSymboltable.cpp 
+	@echo "g++ $*.cpp"
+	g++ -g  -c -Wall  -o $(OBJDIR)/TestSymboltable.o  $(SRCDIR)/TestSymboltable.cpp
+
 
 
 # loeschen aller files im verzeichnis $(OBJDIR)
@@ -51,19 +48,19 @@ $(OBJDIR)/%.o :  $(SRCDIR)/%.cpp
 cleanSymboltable:
 	rm -rf $(OBJDIR)/*
 	rm -rf $(LIBDIR)/*
-	$(MAKE) SymboltableTest
+	$(MAKE) makeTestSymboltable
 	
 #	
 # erstellen der shared library
 #
 
-SymboltableLib:$(OBJSFORSYMBOLTABLELIB)
-		g++ -shared  -o $(SHAREDLIB)/libSymboltable.so $^ 
+SymboltableLib:$(LIBDIR)/Symboltable.o
+		g++ -shared  -o $(SHAREDLIB)/libSymboltable.so $(LIBDIR)/Symboltable.o 
 
 	
-$(LIBDIR)/%.o :  $(SRCDIR)/%.cpp 
+$(LIBDIR)/Symboltable.o :  $(SRCDIR)/Symboltable.cpp 
 #	@mkdir -p `dirname $(OBJDIR)/$*.o`
 	@echo "g++ $*.cpp"
-	g++ -g  -c -fPIC  -o $@  $<
+	g++ -g  -c -fPIC  -o $(LIBDIR)/Symboltable.o  $(SRCDIR)/Symboltable.cpp 
 
 	

@@ -50,3 +50,5 @@ Aufbau der Targets
 #		-c			Kompilieren ohne zu linken. 
 #		-g 			debugging infos erzeugen
 #		-o file     object-file file erzeugen 
+#
+#       -fPIC		position independant code wichtig für shared library

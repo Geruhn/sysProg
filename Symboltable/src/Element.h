@@ -5,14 +5,14 @@
  *Element der Liste
  *
  */
-template<class type>
+template<class TType>
 class Element {
 public:
-	type value;
+	TType value;
 	Element* next;
 	Element* previous;
 
-	Element(type value) {
+	Element(TType value) {
 		this->value = value;
 		this->next = 0;
 		this->previous = 0;
@@ -38,7 +38,7 @@ public:
 		return this->previous;
 	}
 
-	type getValueAt(int index, int offset) {
+	TType getValueAt(int index, int offset) {
 		if (index == offset) {
 			return this->value;
 		} else {
@@ -59,7 +59,7 @@ public:
 		}
 	}
 
-	void setValue(int index, int offset, type value) {
+	void setValue(int index, int offset, TType value) {
 		if (index == offset) {
 			this->value = value;
 		} else {
@@ -67,4 +67,4 @@ public:
 		}
 	}
 };
-#endif  __ELEMENT__H__
+#endif  //__ELEMENT__H__
