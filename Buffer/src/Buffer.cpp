@@ -88,8 +88,12 @@ void Buffer::ungetChar() {
 }
 
 void Buffer::openFile() {
+
 	cout << endl << "in Buffer::openFile()" << endl;
-	fdRe = open(sourceFile, O_DIRECT);
+	cout << sourceFile << endl;
+
+	fdRe = open(sourceFile, O_DIRECT | O_RDONLY );
+
 	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
 	}
@@ -97,7 +101,7 @@ void Buffer::openFile() {
 
 void Buffer::createFile() {
 	cout << endl << "in Buffer::createFile" << endl;
-	fdWr = creat(sourceFile, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	fdWr = creat(sourceFile, O_WRONLY | O_TRUNC | S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if(fdWr != -1){
 		isFileOpen = true;
 	}else{

@@ -23,7 +23,6 @@ Symboltable::~Symboltable() {
 autoContainer* Symboltable::insert(char* lex, autoContainer* autoc) {
 
 	autoContainer* returnValue;
-	bool putReturn;
 	ht->put(lex, autoc);
 	returnValue = ht->get(lex);
 	delete autoc;
