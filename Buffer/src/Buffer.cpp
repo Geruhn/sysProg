@@ -92,7 +92,7 @@ void Buffer::openFile() {
 	cout << endl << "in Buffer::openFile()" << endl;
 	cout << sourceFile << endl;
 
-	fdRe = open(sourceFile, O_DIRECT | O_RDONLY );
+	fdRe = open(sourceFile,O_RDONLY );
 
 	if(fdRe != -1){	//öffnen der Datei hat geklappt. setze isFileOpen auf true
 		isFileOpen = true;
@@ -184,7 +184,8 @@ bool Buffer::hasNext(){
 	return !isEOF;
 }
 
-void Buffer::closeFiles(){ //schließt die geöffneten Dateien wieder -max
-	close(fdRe);
-	close(fdWr);
-}
+//momentan überflüssig
+//void Buffer::closeFiles(){ //schließt die geöffneten Dateien wieder -max
+//	close(fdRe);
+//	close(fdWr);
+//}
