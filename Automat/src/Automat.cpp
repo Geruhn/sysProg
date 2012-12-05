@@ -49,28 +49,19 @@ Automat::~Automat() {
  * Reads a character and return an autoContainer with information about the Token.
  * @param c Character that the machine has to read.
  */
-void Automat::read(const char* c){
-    switch(currentState) {
-        case 0:
-            break;
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            break;
-        case 6:
-            break
-        default:
-            break;
-    }
-    
+void Automat::read(const char* c){    
     switch(states[currentState]) {
         case start:
+            break;
+        case identifier:
+            break;
+        case digit:
+            break;
+        case newLine:
+            break;
+        case blank:
+            break;
+        default:
             break;
             
     }
