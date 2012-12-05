@@ -24,6 +24,7 @@ Automat::~Automat() {
  * @param c Character that the machine has to read.
  */
 void Automat::read(const char* c){    
+    int nextState;
     switch(states[currentState]) {
         case start:
             break;
@@ -37,8 +38,8 @@ void Automat::read(const char* c){
             break;
         default:
             break;
-            
     }    
+    currentState = nextState;
 }
 
 /** 
@@ -46,15 +47,9 @@ void Automat::read(const char* c){
  * @return Pointer to the current autoContainer
  */
 autoContainer* Automat::getCurrentContainer(){
-	if(isToken){
-		lastContainer = currentContainer;
-		isToken = false;
-		currentContainer = 0;
-		return lastContainer;
-	}
-	return 0;
+    return currentContainer;
 }
 
 autoContainer* Automat::getLastContainer(){
-		return lastContainer;
+    return lastContainer;
 }
