@@ -7,12 +7,7 @@
 #ifndef Automat_H_
 #define Automat_H_
 
-//#include "states/stateStart.h"
-//#include "states/stateIdentifier.h"
-//#include "states/stateDigit.h"
-
 #include "autoContainer.h"
-#include "StateInterface.h"
 //#include "../../Scanner/src/Scanner.h"
 
 
@@ -30,30 +25,27 @@ class Automat {
 
 private:
     int STATES = 3;
-    StateInterface* currentState;
-    StateInterface* states;
+    int currentState;
     autoContainer* currentContainer,* lastContainer;
-    automatRegister* reg;
 //    Scanner scanner;
 
 public:
     Automat();
     virtual ~Automat();
 
-    //void setTokenFound(int type);
-    void setState(StateInterface* nextState);
     void read(const char* c);
     void ungetChar(const char* c);
     void ungetChar(const char* chars, int arrayLength);
-    /**
-     * Sollte es nicht geben, soll über die type-Variable des Containers heraus
-     * gefunden werden. Also wird sie jetzt auskommentiert. - Andy
-     * @return hasToken
-     */
-    //bool hasToken();
 
     autoContainer* getCurrentContainer();
     autoContainer* getLastContainer();
+    enum states {
+        start,
+        identifier,
+        digit,
+        newLine,
+        blank
+    };
 };
 
 #endif /* Automat_H_ */

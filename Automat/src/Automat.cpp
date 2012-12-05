@@ -6,7 +6,7 @@
  */
 
 #include "Automat.h"
-#include "StateInterface.h"
+//#include "StateInterface.h"
 /*
  * Current soll Pointer sein. Zustand legt neuen Zustand in demensprechenden Übergang fest und gibt dem Automaten per setStateInterface()
  * einen Pointer auf den neuen Zustand der in Current gespeichert wird zum weiterarbeiten.
@@ -17,19 +17,20 @@
  * Zustände ändert. Und ins Array eingespeichert werden.
  */
 Automat::Automat() {
+    currentState = 0;
     //isToken = false;
 
-    this->reg = new automatRegister(this);
-    this->states = new StateInterface[STATES];
-    this->states[0] = (StateInterface*) new stateStart();
-    this->states[1] = (StateInterface*) new stateIdentifier();
-    this->states[2] = (StateInterface*) new stateDigit();
-
-    this->currentState = (StateInterface*) this->states;
-    
-    for(int i = 0; i < this->STATES; i++) {
-        (states+i)->startState(states, STATES);
-    }
+//    this->reg = new automatRegister(this);
+//    this->states = new StateInterface[STATES];
+//    this->states[0] = (StateInterface*) new stateStart();
+//    this->states[1] = (StateInterface*) new stateIdentifier();
+//    this->states[2] = (StateInterface*) new stateDigit();
+//
+//    this->currentState = (StateInterface*) this->states;
+//    
+//    for(int i = 0; i < this->STATES; i++) {
+//        (states+i)->startState(states, STATES);
+//    }
 }
 
 Automat::~Automat() {
@@ -40,16 +41,41 @@ Automat::~Automat() {
  * FYI: Erst ab Java7 ist es möglich switch-case mit einem String zu machen.
  * @param nextState Pointer to the next State.
  */
-void Automat::setState(StateInterface* nextState) {
-    this->currentState = nextState;
-}
+//void Automat::setState(StateInterface* nextState) {
+//    this->currentState = nextState;
+//}
 
 /*
  * Reads a character and return an autoContainer with information about the Token.
  * @param c Character that the machine has to read.
  */
 void Automat::read(const char* c){
-    this->currentContainer = this->currentState->readChar(c);
+    switch(currentState) {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break
+        default:
+            break;
+    }
+    
+    switch(states[currentState]) {
+        case start:
+            break;
+            
+    }
+//    this->currentContainer = this->currentState->readChar(c);
+    
 }
 
 void Automat::ungetChar(const char* c) {
